@@ -1,0 +1,129 @@
+// -----------------------------------------------------------------------------
+// Typography
+//
+// XD type inventory, in order of frequency:
+//   Noto Sans Regular 16   — body (253 runs)
+//   Noto Serif Regular 45  — all H1 and H2 (42 runs)
+//   Noto Serif Bold 25     — card titles / H3 (35 runs)
+//   Noto Sans Bold 17      — sub-labels, e.g. DAY PATIENT VISITORS (29 runs)
+//   Noto Sans Bold 16      — inline emphasis (27 runs)
+//   Noto Sans Regular 15   — footer and fine print (7 runs)
+//   Noto Sans Italic 17    — exactly two runs, both "- Patient 2025"
+// -----------------------------------------------------------------------------
+
+h1,
+h2,
+h3,
+h4,
+.h1,
+.h2,
+.h3 {
+	color: var(--c-heading);
+	font-family: var(--ff-heading);
+	font-weight: 400;
+	line-height: var(--lh-heading);
+	text-wrap: balance;
+}
+
+h1,
+.h1 {
+	font-size: var(--fs-h1);
+}
+
+h2,
+.h2 {
+	font-size: var(--fs-h2);
+}
+
+h3,
+.h3 {
+	font-size: var(--fs-h3);
+	font-weight: 700;
+}
+
+h4 {
+	font-size: var(--fs-label);
+	font-weight: 700;
+}
+
+p {
+	text-wrap: pretty;
+}
+
+p + p {
+	margin-top: 1em;
+}
+
+// Small caps eyebrow above the hero headline: "WELCOME TO THE PARK PRIVATE
+// HOSPITAL". Olive in the design, not green.
+.eyebrow {
+	display: block;
+	margin-bottom: var(--sp-sm);
+	color: var(--c-olive);
+	font-family: var(--ff-body);
+	font-size: var(--fs-eyebrow);
+	font-weight: 700;
+	letter-spacing: var(--ls-eyebrow);
+	text-transform: uppercase;
+}
+
+// Bold sans sub-heading inside a text block, e.g. "EVALUATION OF CREDENTIALING
+// APPLICATIONS" or "CHILDREN AGED 12 YEARS AND UNDER".
+.sub-label {
+	display: block;
+	margin-bottom: var(--sp-2xs);
+	color: var(--c-green);
+	font-family: var(--ff-body);
+	font-size: var(--fs-label);
+	font-weight: 700;
+	line-height: 1.35;
+}
+
+.lede {
+	font-size: var(--fs-label);
+}
+
+.text-small {
+	font-size: var(--fs-small);
+}
+
+// The design's only italic. Scoped tightly so it cannot leak.
+.testimonial__attribution {
+	font-style: italic;
+}
+
+// Long-form copy coming out of Gutenberg. Kept deliberately plain: the design
+// has no styled tables, pull quotes or drop caps anywhere.
+.rich-text {
+	> * + * {
+		margin-top: 1em;
+	}
+
+	h2,
+	h3 {
+		margin-top: 1.6em;
+	}
+
+	ul,
+	ol {
+		margin: 1em 0;
+		padding-left: 1.25em;
+	}
+
+	li + li {
+		margin-top: 0.4em;
+	}
+
+	a {
+		color: var(--c-green);
+		text-decoration: underline;
+
+		&:hover {
+			color: var(--c-green-dark);
+		}
+	}
+
+	strong {
+		font-weight: 700;
+	}
+}

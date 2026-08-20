@@ -1,0 +1,36 @@
+// -----------------------------------------------------------------------------
+// Breakpoints
+//
+// Mobile-first: every mixin is a min-width query. There are no mobile artboards
+// in the design, so these are our own — chosen around where the XD layouts
+// actually stop working rather than around device names.
+// -----------------------------------------------------------------------------
+
+$bp: (
+	sm: 480px,
+	md: 768px,
+	lg: 1024px,
+	xl: 1440px,
+);
+
+@mixin from($name) {
+	@if map-has-key($bp, $name) {
+		@media (min-width: map-get($bp, $name)) {
+			@content;
+		}
+	} @else {
+		@error "Unknown breakpoint `#{$name}`. Available: #{map-keys($bp)}.";
+	}
+}
+
+// Upper-bound query. Used sparingly — only where a desktop-only treatment has
+// to be actively unwound, such as the overlapping Vision/Mission cards.
+@mixin upto($name) {
+	@if map-has-key($bp, $name) {
+		@media (max-width: map-get($bp, $name) - 0.02px) {
+			@content;
+		}
+	} @else {
+		@error "Unknown breakpoint `#{$name}`. Available: #{map-keys($bp)}.";
+	}
+}

@@ -1,0 +1,81 @@
+// -----------------------------------------------------------------------------
+// Design tokens
+//
+// Every value here was read out of the Adobe XD source, not measured off the
+// exported PNGs. The PNGs were rendered on a machine that did not have the
+// brand fonts installed, so they show a substituted sans in place of Noto Serif
+// and italicise almost everything — neither is in the design. Treat the XD as
+// the source of truth for type, colour and spacing; use the PNGs for layout
+// only.
+// -----------------------------------------------------------------------------
+
+:root {
+	// --- Brand palette (XD fill values, by frequency of use) ---
+	--c-green: #386c5f; // Headings, cards, buttons, map roads.
+	--c-brown: #483932; // Body copy.
+	--c-olive: #4d5b31; // Accents, eyebrows, icon strokes.
+	--c-cream: #f7fbea; // Alternating section background.
+	--c-white: #ffffff;
+
+	// Derived tints. Not in the XD, but needed for hover and focus states that
+	// a static design cannot express.
+	--c-green-dark: #2c554a;
+	--c-green-light: #4a8375;
+	--c-cream-deep: #eef4dc;
+	--c-rule: rgba(72, 57, 50, 0.18); // Hairline dividers under list items.
+
+	// Semantic aliases — components reference these, never the raw names, so a
+	// palette change stays a one-line edit.
+	--c-text: var(--c-brown);
+	--c-heading: var(--c-green);
+	--c-bg: var(--c-white);
+	--c-bg-alt: var(--c-cream);
+	--c-on-dark: var(--c-white);
+	--c-focus: var(--c-olive);
+
+	// --- Typography ---
+	--ff-heading: "Noto Serif", Georgia, "Times New Roman", serif;
+	--ff-body: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+	// The XD canvas is 1920 wide with a 45px H1 — small for its canvas. We build
+	// to a 1440 container, so holding the absolute sizes keeps the proportion the
+	// designer intended rather than shrinking everything by 25%.
+	--fs-h1: clamp(2.125rem, 1.55rem + 1.9vw, 2.8125rem); // 34 → 45px
+	--fs-h2: clamp(1.875rem, 1.42rem + 1.5vw, 2.8125rem); // 30 → 45px
+	--fs-h3: clamp(1.375rem, 1.25rem + 0.4vw, 1.5625rem); // 22 → 25px
+	--fs-label: clamp(1rem, 0.96rem + 0.13vw, 1.0625rem); // 16 → 17px
+	--fs-body: clamp(0.9375rem, 0.91rem + 0.1vw, 1rem); // 15 → 16px
+	--fs-small: 0.9375rem; // 15px
+	--fs-eyebrow: 0.8125rem; // 13px, letterspaced.
+
+	--lh-heading: 1.22;
+	--lh-body: 1.65;
+	--ls-eyebrow: 0.08em;
+
+	// --- Spacing ---
+	--sp-3xs: 0.25rem;
+	--sp-2xs: 0.5rem;
+	--sp-xs: 0.75rem;
+	--sp-sm: 1rem;
+	--sp-md: 1.5rem;
+	--sp-lg: 2.5rem;
+	--sp-xl: 4rem;
+	--sp-2xl: 6rem;
+	--sp-section: clamp(3.5rem, 2.4rem + 4.5vw, 7rem);
+
+	// --- Layout ---
+	--container: 1440px;
+	--container-narrow: 1100px;
+	--gutter: clamp(1.25rem, 0.6rem + 2.8vw, 5rem);
+
+	// --- Effects ---
+	--radius: 0;
+	--shadow-card: 0 2px 18px rgba(72, 57, 50, 0.08);
+	--transition: 0.3s ease-out; // Matches the XD dropdown interaction exactly.
+	--transition-fast: 0.18s ease-out;
+
+	// --- Stacking ---
+	--z-dropdown: 60;
+	--z-header: 100;
+	--z-overlay: 200;
+}

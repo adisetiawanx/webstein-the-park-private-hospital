@@ -1,0 +1,12 @@
+// -----------------------------------------------------------------------------
+// The Park Private Hospital
+//
+// Compiles to /style.css. Run `npm run watch` while developing, `npm run build`
+// before committing. The compiled file is versioned so the theme works on a
+// server that has never seen node.
+// -----------------------------------------------------------------------------
+
+@use "abstracts/tokens";
+@use "base/fonts";
+@use "base/reset";
+@use "base/typography";
