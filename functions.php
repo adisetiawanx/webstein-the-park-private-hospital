@@ -16,3 +16,5 @@ define( 'TPPH_URI', get_template_directory_uri() );
 
 require_once TPPH_DIR . '/inc/setup.php';
 require_once TPPH_DIR . '/inc/enqueue.php';
+require_once TPPH_DIR . '/inc/template-tags.php';
+require_once TPPH_DIR . '/inc/optimisation.php';
