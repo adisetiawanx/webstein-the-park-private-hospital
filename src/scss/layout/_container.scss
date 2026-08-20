@@ -1,0 +1,22 @@
+// -----------------------------------------------------------------------------
+// Container
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/mixins" as m;
+
+.container {
+	@include m.container;
+}
+
+// Long-form reading measure — Post Operative Care, Credentialing, Safety and
+// Quality, and the stub pages all use this.
+.container--narrow {
+	@include m.container(var(--container-narrow));
+}
+
+// Edge-to-edge, for the full-bleed photo bands and the map.
+.container--full {
+	width: 100%;
+	max-width: none;
+	padding-inline: 0;
+}

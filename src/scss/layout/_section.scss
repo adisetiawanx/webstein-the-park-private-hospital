@@ -1,0 +1,91 @@
+// -----------------------------------------------------------------------------
+// Section
+//
+// The design alternates white and cream bands down every page. Cream bands
+// carry a large, very low-contrast tree watermark bleeding off the left edge.
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+
+.section {
+	position: relative;
+	padding-block: var(--sp-section);
+}
+
+.section--tight {
+	padding-block: calc(var(--sp-section) * 0.6);
+}
+
+.section--flush-top {
+	padding-top: 0;
+}
+
+.section--flush-bottom {
+	padding-bottom: 0;
+}
+
+.section--cream {
+	background-color: var(--c-bg-alt);
+}
+
+.section--green {
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+
+	h1,
+	h2,
+	h3 {
+		color: var(--c-on-dark);
+	}
+}
+
+// Decorative tree watermark. Hidden from assistive tech and dropped on small
+// viewports, where it only competes with the copy for space.
+.section__ornament {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	z-index: 0;
+	width: min(30vw, 420px);
+	transform: translateY(-50%);
+	opacity: 0.5;
+	pointer-events: none;
+	user-select: none;
+
+	@include bp.upto(lg) {
+		display: none;
+	}
+}
+
+.section__ornament--right {
+	right: 0;
+	left: auto;
+	transform: translateY(-50%) scaleX(-1);
+}
+
+.section > .container,
+.section > .container--narrow {
+	position: relative;
+	z-index: 1;
+}
+
+// Section heading block: centred heading with an optional intro line beneath,
+// as on "Our Services" and "Current Vacancies".
+.section__head {
+	margin-bottom: var(--sp-xl);
+	text-align: center;
+
+	p {
+		max-width: 62ch;
+		margin-inline: auto;
+		margin-top: var(--sp-sm);
+	}
+}
+
+.section__head--left {
+	text-align: left;
+
+	p {
+		margin-inline: 0;
+	}
+}

@@ -6,6 +6,8 @@
 // actually stop working rather than around device names.
 // -----------------------------------------------------------------------------
 
+@use "sass:map";
+
 $bp: (
 	sm: 480px,
 	md: 768px,
@@ -14,23 +16,23 @@ $bp: (
 );
 
 @mixin from($name) {
-	@if map-has-key($bp, $name) {
-		@media (min-width: map-get($bp, $name)) {
+	@if map.has-key($bp, $name) {
+		@media (min-width: map.get($bp, $name)) {
 			@content;
 		}
 	} @else {
-		@error "Unknown breakpoint `#{$name}`. Available: #{map-keys($bp)}.";
+		@error "Unknown breakpoint `#{$name}`. Available: #{map.keys($bp)}.";
 	}
 }
 
 // Upper-bound query. Used sparingly — only where a desktop-only treatment has
 // to be actively unwound, such as the overlapping Vision/Mission cards.
 @mixin upto($name) {
-	@if map-has-key($bp, $name) {
-		@media (max-width: map-get($bp, $name) - 0.02px) {
+	@if map.has-key($bp, $name) {
+		@media (max-width: map.get($bp, $name) - 0.02px) {
 			@content;
 		}
 	} @else {
-		@error "Unknown breakpoint `#{$name}`. Available: #{map-keys($bp)}.";
+		@error "Unknown breakpoint `#{$name}`. Available: #{map.keys($bp)}.";
 	}
 }
