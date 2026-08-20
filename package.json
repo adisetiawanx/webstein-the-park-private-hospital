@@ -1,0 +1,18 @@
+{
+  "name": "the-park-private-hospital",
+  "version": "1.0.0",
+  "description": "Custom WordPress theme for The Park Private Hospital",
+  "private": true,
+  "scripts": {
+    "watch": "sass --watch --style=expanded src/scss/main.scss style.css",
+    "build": "sass --style=compressed --no-source-map src/scss/main.scss style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0"
+  },
+  "browserslist": [
+    "> 0.5%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

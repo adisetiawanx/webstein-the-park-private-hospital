@@ -1,0 +1,30 @@
+# Design source — large binaries, not needed to build the theme
+assets/exported design png/
+assets/images/
+assets/logos/
+*.xd
+*.eps
+*.psd
+
+# Raw design exports staged for Media Library upload
+.upload-staging/
+
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Sass
+.sass-cache/
+*.css.map
+src/scss/.sass-cache/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Local WP artefacts
+*.log
