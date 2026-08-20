@@ -15,3 +15,4 @@ define( 'TPPH_DIR', get_template_directory() );
 define( 'TPPH_URI', get_template_directory_uri() );
 
 require_once TPPH_DIR . '/inc/setup.php';
+require_once TPPH_DIR . '/inc/enqueue.php';
