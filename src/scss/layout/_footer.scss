@@ -1,0 +1,88 @@
+// -----------------------------------------------------------------------------
+// Site footer
+//
+// The footer band is #eafbed, a pale mint — measurably different from the
+// #f7fbea cream used for alternating sections, so it gets its own token rather
+// than being approximated.
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+
+.site-footer {
+	background-color: var(--c-mint);
+	color: var(--c-olive);
+	padding-block: var(--sp-xl);
+	font-size: var(--fs-small);
+}
+
+.site-footer__inner {
+	display: grid;
+	gap: var(--sp-lg) var(--sp-md);
+	grid-template-columns: 1fr;
+
+	@include bp.from(md) {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	@include bp.from(lg) {
+		// Logo sits alone on the left, the two lists share the right half —
+		// the proportions in every artboard.
+		grid-template-columns: 1.7fr 1fr 1fr;
+		gap: var(--sp-xl);
+	}
+}
+
+.site-footer__brand {
+	@include bp.from(md) {
+		grid-column: 1 / -1;
+	}
+
+	@include bp.from(lg) {
+		grid-column: auto;
+	}
+
+	img {
+		width: clamp(150px, 12vw, 205px);
+		height: auto;
+	}
+}
+
+.site-footer__heading {
+	margin-bottom: var(--sp-md);
+	color: var(--c-olive);
+	font-family: var(--ff-body);
+	font-size: var(--fs-small);
+	font-weight: 400;
+}
+
+.site-footer__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-xs);
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.site-footer__line {
+	margin-bottom: var(--sp-xs);
+
+	a {
+		text-decoration: none;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.site-footer__address {
+	margin-top: var(--sp-md);
+	font-style: normal; // The design is upright; only the testimonial is italic.
+	line-height: 1.55;
+}

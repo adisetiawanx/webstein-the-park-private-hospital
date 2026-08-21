@@ -15,6 +15,7 @@
 	--c-brown: #483932; // Body copy.
 	--c-olive: #4d5b31; // Accents, eyebrows, icon strokes.
 	--c-cream: #f7fbea; // Alternating section background.
+	--c-mint: #eafbed;  // Footer band. Measurably greener than the cream.
 	--c-white: #ffffff;
 
 	// Derived tints. Not in the XD, but needed for hover and focus states that
@@ -32,6 +33,7 @@
 	--c-bg-alt: var(--c-cream);
 	--c-on-dark: var(--c-white);
 	--c-focus: var(--c-olive);
+	--c-ornament: #e3e7d9; // Tree watermark over the cream bands.
 
 	// --- Typography ---
 	--ff-heading: "Noto Serif", Georgia, "Times New Roman", serif;

@@ -18,6 +18,7 @@ Tags:        healthcare, hospital, custom-theme
   --c-brown: #483932;
   --c-olive: #4d5b31;
   --c-cream: #f7fbea;
+  --c-mint: #eafbed;
   --c-white: #ffffff;
   --c-green-dark: #2c554a;
   --c-green-light: #4a8375;
@@ -29,6 +30,7 @@ Tags:        healthcare, hospital, custom-theme
   --c-bg-alt: var(--c-cream);
   --c-on-dark: var(--c-white);
   --c-focus: var(--c-olive);
+  --c-ornament: #e3e7d9;
   --ff-heading: "Noto Serif", Georgia, "Times New Roman", serif;
   --ff-body: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --fs-h1: clamp(2.125rem, 1.55rem + 1.9vw, 2.8125rem);
@@ -743,4 +745,79 @@ p + p {
 
 body.nav-open {
   overflow: hidden;
+}
+
+.site-footer {
+  background-color: var(--c-mint);
+  color: var(--c-olive);
+  padding-block: var(--sp-xl);
+  font-size: var(--fs-small);
+}
+
+.site-footer__inner {
+  display: grid;
+  gap: var(--sp-lg) var(--sp-md);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .site-footer__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1024px) {
+  .site-footer__inner {
+    grid-template-columns: 1.7fr 1fr 1fr;
+    gap: var(--sp-xl);
+  }
+}
+
+@media (min-width: 768px) {
+  .site-footer__brand {
+    grid-column: 1/-1;
+  }
+}
+@media (min-width: 1024px) {
+  .site-footer__brand {
+    grid-column: auto;
+  }
+}
+.site-footer__brand img {
+  width: clamp(150px, 12vw, 205px);
+  height: auto;
+}
+
+.site-footer__heading {
+  margin-bottom: var(--sp-md);
+  color: var(--c-olive);
+  font-family: var(--ff-body);
+  font-size: var(--fs-small);
+  font-weight: 400;
+}
+
+.site-footer__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-xs);
+}
+.site-footer__list a {
+  text-decoration: none;
+}
+.site-footer__list a:hover {
+  text-decoration: underline;
+}
+
+.site-footer__line {
+  margin-bottom: var(--sp-xs);
+}
+.site-footer__line a {
+  text-decoration: none;
+}
+.site-footer__line a:hover {
+  text-decoration: underline;
+}
+
+.site-footer__address {
+  margin-top: var(--sp-md);
+  font-style: normal;
+  line-height: 1.55;
 }
