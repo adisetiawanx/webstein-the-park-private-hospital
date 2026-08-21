@@ -21,6 +21,25 @@
 	position: absolute;
 	inset: 0;
 	z-index: 0;
+
+	// The artboard washes the photograph towards white, heavily on the left
+	// where the headline sits. It is what makes green type readable over a
+	// photograph at all, so it is part of the design rather than a nicety —
+	// and it is what keeps this text above the AA contrast threshold.
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(
+				100deg,
+				rgba(255, 255, 255, 0.92) 0%,
+				rgba(255, 255, 255, 0.78) 26%,
+				rgba(255, 255, 255, 0.34) 52%,
+				rgba(255, 255, 255, 0.12) 74%,
+				rgba(255, 255, 255, 0.06) 100%
+			);
+	}
 }
 
 .hero__image {
@@ -40,7 +59,11 @@
 .hero__content {
 	// Text sits over the left of the frame and is centre-aligned within its own
 	// column — unusual, but that is what the artboard does.
-	max-width: 40ch;
+	//
+	// Sized in rem, not ch: a ch max-width resolves against the body font size,
+	// not the 45px heading, which collapsed this to ~320px and broke the
+	// headline over six lines instead of four.
+	max-width: clamp(18rem, 42vw, 38.75rem);
 	text-align: center;
 
 	@include bp.from(lg) {
@@ -132,7 +155,7 @@
 	display: grid;
 	gap: var(--sp-lg) var(--sp-md);
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-	margin-bottom: var(--sp-xl);
+	margin-bottom: var(--sp-2xl);
 
 	@include bp.from(sm) {
 		grid-template-columns: repeat(3, minmax(0, 1fr));

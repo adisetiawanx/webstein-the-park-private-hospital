@@ -172,6 +172,12 @@
 		align-items: center;
 		border-bottom: 1px solid var(--c-rule);
 	}
+
+	@include bp.from(lg) {
+		// Without this the chevron button wraps below its link.
+		display: flex;
+		align-items: center;
+	}
 }
 
 .nav__link {
@@ -222,8 +228,12 @@
 }
 
 .nav__chevron {
+	// Both axes stated explicitly. As a flex child with height:auto the SVG
+	// collapsed to zero height and the chevron never drew, even though the
+	// button still took up its width.
+	flex: 0 0 auto;
 	width: 11px;
-	height: auto;
+	height: 8px;
 	transition: transform var(--transition-fast);
 }
 
