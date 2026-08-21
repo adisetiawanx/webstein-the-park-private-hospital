@@ -1,0 +1,310 @@
+// -----------------------------------------------------------------------------
+// Site header
+//
+// White, sticky, logo left and navigation right, with the Make a Payment button
+// pinned to the far right. Identical across all thirteen artboards.
+//
+// Submenus open on hover on desktop, matching interactions.json in the XD
+// (hover, auto-animate, 300ms, ease-out). Hover is not keyboard operable and
+// does not exist on touch, so each parent also carries a real toggle button.
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+@use "../abstracts/mixins" as m;
+
+:root {
+	--header-height: 72px;
+
+	@include bp.from(lg) {
+		--header-height: 88px;
+	}
+}
+
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: var(--z-header);
+	background-color: var(--c-white);
+	border-bottom: 1px solid transparent;
+	transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+// Added by JS once the page has scrolled, so the bar separates from the content
+// beneath it without drawing a permanent rule the design does not have.
+.site-header.is-stuck {
+	border-bottom-color: var(--c-rule);
+	box-shadow: 0 1px 14px rgba(72, 57, 50, 0.07);
+}
+
+.site-header__inner {
+	@include m.container;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--sp-md);
+	min-height: var(--header-height);
+}
+
+.site-header__brand {
+	flex: 0 0 auto;
+	display: block;
+	line-height: 0;
+
+	img {
+		width: clamp(150px, 12vw, 205px);
+		height: auto;
+	}
+}
+
+// --- Burger -----------------------------------------------------------------
+
+.site-header__burger {
+	position: relative;
+	flex: 0 0 auto;
+	width: 44px; // Minimum comfortable touch target.
+	height: 44px;
+	margin-right: calc(var(--sp-2xs) * -1);
+
+	@include bp.from(lg) {
+		display: none;
+	}
+}
+
+.site-header__burger-bars {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 24px;
+	height: 2px;
+	background-color: var(--c-green);
+	transform: translate(-50%, -50%);
+	transition: background-color var(--transition-fast);
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: var(--c-green);
+		transition: transform var(--transition-fast);
+	}
+
+	&::before {
+		top: -7px;
+	}
+
+	&::after {
+		top: 7px;
+	}
+}
+
+// Bars collapse into a cross while the menu is open.
+.site-header__burger[aria-expanded="true"] .site-header__burger-bars {
+	background-color: transparent;
+
+	&::before {
+		transform: translateY(7px) rotate(45deg);
+	}
+
+	&::after {
+		transform: translateY(-7px) rotate(-45deg);
+	}
+}
+
+// --- Navigation -------------------------------------------------------------
+
+.nav {
+	@include bp.upto(lg) {
+		position: fixed;
+		top: var(--header-height);
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: var(--z-overlay);
+		display: flex;
+		flex-direction: column;
+		gap: var(--sp-md);
+		padding: var(--sp-md) var(--gutter) var(--sp-2xl);
+		background-color: var(--c-white);
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		transform: translateX(100%);
+		visibility: hidden;
+		transition: transform var(--transition), visibility var(--transition);
+	}
+
+	@include bp.from(lg) {
+		display: flex;
+		align-items: center;
+		gap: clamp(1rem, 1.6vw, 2rem);
+	}
+}
+
+.nav.is-open {
+	@include bp.upto(lg) {
+		transform: translateX(0);
+		visibility: visible;
+	}
+}
+
+.nav__list {
+	@include bp.upto(lg) {
+		display: flex;
+		flex-direction: column;
+	}
+
+	@include bp.from(lg) {
+		display: flex;
+		align-items: center;
+		gap: clamp(0.9rem, 1.5vw, 1.9rem);
+	}
+}
+
+.nav__item {
+	position: relative;
+
+	@include bp.upto(lg) {
+		display: grid;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		border-bottom: 1px solid var(--c-rule);
+	}
+}
+
+.nav__link {
+	display: block;
+	padding-block: var(--sp-sm);
+	color: var(--c-green);
+	font-size: var(--fs-eyebrow);
+	font-weight: 400;
+	letter-spacing: 0.05em;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+	transition: color var(--transition-fast);
+
+	@include bp.upto(lg) {
+		font-size: var(--fs-label);
+		letter-spacing: 0.02em;
+	}
+
+	&:hover {
+		color: var(--c-green-dark);
+	}
+}
+
+.nav__item.is-current > .nav__link {
+	font-weight: 700;
+}
+
+// --- Submenu ----------------------------------------------------------------
+
+.nav__toggle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	color: var(--c-green);
+
+	@include bp.from(lg) {
+		width: auto;
+		height: auto;
+		margin-left: 0.35em;
+		vertical-align: middle;
+		// Desktop opens on hover; the button stays in the accessibility tree for
+		// keyboard users but must not disturb the inline rhythm.
+		pointer-events: auto;
+	}
+}
+
+.nav__chevron {
+	width: 11px;
+	height: auto;
+	transition: transform var(--transition-fast);
+}
+
+.nav__toggle[aria-expanded="true"] .nav__chevron {
+	transform: rotate(180deg);
+}
+
+.nav__submenu {
+	@include bp.upto(lg) {
+		grid-column: 1 / -1;
+		display: none;
+		padding-bottom: var(--sp-sm);
+		padding-left: var(--sp-sm);
+	}
+
+	@include bp.from(lg) {
+		position: absolute;
+		top: 100%;
+		left: -1rem;
+		z-index: var(--z-dropdown);
+		min-width: 15rem;
+		padding: var(--sp-2xs) var(--sp-md) var(--sp-sm);
+		background-color: var(--c-green);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-6px);
+		// 300ms ease-out, taken from the XD interaction definition.
+		transition: opacity var(--transition), transform var(--transition), visibility var(--transition);
+	}
+}
+
+.nav__item--has-children.is-open > .nav__submenu {
+	@include bp.upto(lg) {
+		display: block;
+	}
+}
+
+@include bp.from(lg) {
+	.nav__item--has-children:hover > .nav__submenu,
+	.nav__item--has-children:focus-within > .nav__submenu,
+	.nav__item--has-children.is-open > .nav__submenu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+}
+
+.nav__subitem + .nav__subitem .nav__sublink {
+	border-top: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+.nav__sublink {
+	display: block;
+	padding-block: 0.6rem;
+	color: var(--c-on-dark);
+	font-size: var(--fs-small);
+	text-decoration: none;
+	transition: opacity var(--transition-fast);
+
+	@include bp.upto(lg) {
+		color: var(--c-text);
+		border-top: 0;
+	}
+
+	&:hover {
+		opacity: 0.75;
+	}
+}
+
+// --- Header call to action --------------------------------------------------
+
+.site-header__cta {
+	flex: 0 0 auto;
+
+	@include bp.upto(lg) {
+		align-self: flex-start;
+		margin-top: var(--sp-sm);
+	}
+}
+
+// Stops the page scrolling behind the open mobile menu.
+body.nav-open {
+	overflow: hidden;
+}
