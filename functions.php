@@ -18,4 +18,5 @@ require_once TPPH_DIR . '/inc/setup.php';
 require_once TPPH_DIR . '/inc/enqueue.php';
 require_once TPPH_DIR . '/inc/template-tags.php';
 require_once TPPH_DIR . '/inc/nav-walker.php';
+require_once TPPH_DIR . '/inc/post-types.php';
 require_once TPPH_DIR . '/inc/optimisation.php';
