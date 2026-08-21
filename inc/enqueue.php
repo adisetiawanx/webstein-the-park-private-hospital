@@ -33,6 +33,27 @@ function tpph_enqueue_assets() {
 		tpph_asset_version( 'js/navigation.js' ),
 		true
 	);
+
+	/*
+	 * Registered, not enqueued. The map template part enqueues it only when a
+	 * map is actually on the page and an API key exists, so pages without one
+	 * never pay for it.
+	 */
+	wp_register_script(
+		'tpph-map',
+		TPPH_URI . '/js/map.js',
+		array(),
+		tpph_asset_version( 'js/map.js' ),
+		true
+	);
+
+	if ( defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY ) {
+		wp_localize_script(
+			'tpph-map',
+			'tpphMap',
+			array( 'key' => TPPH_GOOGLE_MAPS_KEY )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'tpph_enqueue_assets' );
 
