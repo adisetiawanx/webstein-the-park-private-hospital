@@ -102,7 +102,7 @@ add_action( 'wp_enqueue_scripts', 'tpph_conditional_block_styles', 100 );
  * @return string
  */
 function tpph_defer_scripts( $tag, $handle ) {
-	$deferred = array( 'tpph-navigation', 'tpph-team', 'tpph-map' );
+	$deferred = array( 'tpph-navigation', 'tpph-team', 'tpph-map', 'tpph-testimonials' );
 
 	if ( in_array( $handle, $deferred, true ) && false === strpos( $tag, ' defer' ) ) {
 		$tag = str_replace( ' src=', ' defer src=', $tag );

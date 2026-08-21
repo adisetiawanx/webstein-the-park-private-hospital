@@ -21,6 +21,10 @@ if ( ! $tpph_quotes ) {
 }
 
 $tpph_multiple = count( $tpph_quotes ) > 1;
+
+if ( $tpph_multiple ) {
+	wp_enqueue_script( 'tpph-testimonials' );
+}
 ?>
 
 <section class="testimonials<?php echo $tpph_multiple ? ' testimonials--slider' : ''; ?>"
