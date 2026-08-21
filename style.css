@@ -1134,6 +1134,7 @@ body.nav-open {
   overflow: hidden;
   color: var(--c-on-dark);
   background-color: var(--c-green);
+  isolation: isolate;
 }
 
 .testimonials__media {
@@ -1145,7 +1146,8 @@ body.nav-open {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgba(56, 108, 95, 0.72);
+  background-color: var(--c-green);
+  mix-blend-mode: multiply;
 }
 
 .testimonials__image {

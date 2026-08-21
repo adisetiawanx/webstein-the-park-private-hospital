@@ -254,6 +254,8 @@
 	overflow: hidden;
 	color: var(--c-on-dark);
 	background-color: var(--c-green);
+	// Contains the multiply blend below so it cannot reach the page behind.
+	isolation: isolate;
 }
 
 .testimonials__media {
@@ -261,14 +263,19 @@
 	inset: 0;
 	z-index: 0;
 
-	// The photograph is washed with the brand green in the design. Doing it in
-	// CSS keeps the source image reusable and the text contrast predictable
-	// rather than baked into a JPEG.
+	// The design washes the photograph green. Sampling the artboard gives
+	// rgb(40, 84, 83) over bright brickwork, which is the brand green
+	// *multiplied* with the photo rather than laid over it at an alpha — a flat
+	// overlay comes out noticeably lighter and flatter.
+	//
+	// Doing it in CSS keeps the source image reusable and the resulting text
+	// contrast predictable, rather than baking a tint into a JPEG.
 	&::after {
 		content: "";
 		position: absolute;
 		inset: 0;
-		background-color: rgba(56, 108, 95, 0.72);
+		background-color: var(--c-green);
+		mix-blend-mode: multiply;
 	}
 }
 
