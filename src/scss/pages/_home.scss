@@ -1,0 +1,299 @@
+// -----------------------------------------------------------------------------
+// Home page
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+@use "../abstracts/mixins" as m;
+
+// --- Hero -------------------------------------------------------------------
+
+.hero {
+	position: relative;
+	display: flex;
+	align-items: center;
+	// The artboard hero is 1920x813, a 2.36:1 band. Held with a viewport-based
+	// clamp so it stays generous on desktop without swallowing a phone screen.
+	min-height: clamp(420px, 42vw, 813px);
+	overflow: hidden;
+}
+
+.hero__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+}
+
+.hero__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+}
+
+.hero__inner {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	padding-block: var(--sp-xl);
+}
+
+.hero__content {
+	// Text sits over the left of the frame and is centre-aligned within its own
+	// column — unusual, but that is what the artboard does.
+	max-width: 40ch;
+	text-align: center;
+
+	@include bp.from(lg) {
+		margin-left: clamp(0px, 3vw, 60px);
+	}
+}
+
+.hero__heading {
+	margin-bottom: var(--sp-lg);
+}
+
+.hero__cta {
+	justify-content: center;
+	text-align: center;
+}
+
+// --- About band -------------------------------------------------------------
+
+.home-about__grid {
+	display: grid;
+	gap: var(--sp-xl);
+	grid-template-columns: 1fr;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+		gap: var(--sp-2xl);
+		align-items: start;
+	}
+}
+
+.home-about__body {
+	margin-block: var(--sp-md) var(--sp-lg);
+	max-width: 46ch;
+}
+
+.statement-cards {
+	display: grid;
+	gap: var(--sp-md);
+	grid-template-columns: 1fr;
+
+	@include bp.from(md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.statement-card {
+	padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+}
+
+.statement-card__title {
+	margin-bottom: var(--sp-sm);
+	color: var(--c-on-dark);
+}
+
+// The artboard staggers the cards: first and third in the left column, second
+// dropped down in the right. It is decoration, and below 768 it only produces
+// collisions, so it exists only from md up.
+@include bp.from(md) {
+	.statement-card:nth-child(2) {
+		transform: translateY(clamp(1.5rem, 3.5vw, 3.6rem));
+	}
+
+	.statement-card:nth-child(3) {
+		grid-column: 1;
+	}
+}
+
+.home-about__figure {
+	margin-top: var(--sp-xl);
+
+	@include bp.from(md) {
+		// Clears the dropped second card.
+		margin-top: clamp(2.5rem, 6vw, 5.5rem);
+	}
+}
+
+.home-about__image {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 5;
+	object-fit: cover;
+}
+
+// --- Our Services -----------------------------------------------------------
+
+.service-list {
+	display: grid;
+	gap: var(--sp-lg) var(--sp-md);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin-bottom: var(--sp-xl);
+
+	@include bp.from(sm) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	@include bp.from(lg) {
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+	}
+}
+
+.service {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--sp-sm);
+	text-align: center;
+	color: var(--c-olive);
+}
+
+.service__icon {
+	width: auto;
+	height: 3.1rem;
+}
+
+.service__label {
+	font-size: var(--fs-small);
+}
+
+.home-services__action {
+	text-align: center;
+}
+
+// --- Promo cards ------------------------------------------------------------
+
+.promo-cards {
+	@include m.grid(1, 2, 3, 3, var(--sp-md));
+}
+
+.promo-card {
+	display: flex;
+	flex-direction: column;
+	padding: var(--sp-lg);
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+}
+
+.promo-card__title {
+	margin-bottom: var(--sp-md);
+	color: var(--c-on-dark);
+	max-width: 18ch;
+}
+
+.promo-card__text {
+	margin-bottom: var(--sp-lg);
+}
+
+.promo-card__cta {
+	// Pins the button to the bottom so cards with unequal copy still line up.
+	margin-top: auto;
+	align-self: flex-start;
+}
+
+// --- Accreditations ---------------------------------------------------------
+
+.accreditation-list {
+	@include m.grid(2, 2, 4, 4, var(--sp-lg));
+}
+
+.accreditation {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--sp-sm);
+	color: var(--c-olive);
+	text-align: center;
+}
+
+.accreditation__icon {
+	width: auto;
+	height: 3.4rem;
+}
+
+.accreditation__label {
+	font-size: var(--fs-small);
+	max-width: 18ch;
+}
+
+// --- Testimonials -----------------------------------------------------------
+
+.testimonials {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: clamp(300px, 26vw, 470px);
+	padding-block: var(--sp-xl);
+	overflow: hidden;
+	color: var(--c-on-dark);
+	background-color: var(--c-green);
+}
+
+.testimonials__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+
+	// The photograph is washed with the brand green in the design. Doing it in
+	// CSS keeps the source image reusable and the text contrast predictable
+	// rather than baked into a JPEG.
+	&::after {
+		content: "";
+		position: absolute;
+		inset: 0;
+		background-color: rgba(56, 108, 95, 0.72);
+	}
+}
+
+.testimonials__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.testimonials__inner {
+	position: relative;
+	z-index: 1;
+	text-align: center;
+}
+
+.testimonials__heading {
+	margin-bottom: var(--sp-lg);
+	color: var(--c-on-dark);
+}
+
+.testimonials__track {
+	position: relative;
+	max-width: 62ch;
+	margin-inline: auto;
+}
+
+.testimonial__quote p {
+	margin-bottom: var(--sp-md);
+}
+
+.testimonial__attribution {
+	font-size: var(--fs-label);
+}
+
+// Only relevant once a second quote is added; a lone quote renders static, as
+// drawn.
+.testimonials--slider {
+	.testimonial {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity var(--transition), visibility var(--transition);
+	}
+
+	.testimonial.is-active {
+		position: relative;
+		opacity: 1;
+		visibility: visible;
+	}
+}

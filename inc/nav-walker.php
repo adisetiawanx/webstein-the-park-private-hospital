@@ -161,11 +161,11 @@ function tpph_primary_menu() {
 		),
 		array(
 			'title'    => 'For Patients &amp; Visitors',
-			'url'      => home_url( '/for-patients-visitors/visitors/' ),
+			'url'      => home_url( '/for-patients-visitors/' ),
 			'children' => array(
 				array(
 					'title' => 'Visitors',
-					'url'   => home_url( '/for-patients-visitors/visitors/' ),
+					'url'   => home_url( '/for-patients-visitors/' ),
 				),
 				array(
 					'title'  => 'Online Admission',
@@ -192,11 +192,11 @@ function tpph_primary_menu() {
 		),
 		array(
 			'title'    => 'For Doctors',
-			'url'      => home_url( '/for-doctors/credentialing/' ),
+			'url'      => home_url( '/for-doctors/' ),
 			'children' => array(
 				array(
 					'title' => 'Credentialing',
-					'url'   => home_url( '/for-doctors/credentialing/' ),
+					'url'   => home_url( '/for-doctors/' ),
 				),
 			),
 		),

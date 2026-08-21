@@ -1,0 +1,87 @@
+// -----------------------------------------------------------------------------
+// Map band
+//
+// A facade until the visitor scrolls near it. The facade paints the same brand
+// colours the styled Google map uses — cream base, green roads — so the swap is
+// not jarring, and Get Directions works with or without an API key.
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+
+.map-band {
+	position: relative;
+}
+
+.map {
+	position: relative;
+	width: 100%;
+	height: clamp(280px, 26vw, 470px);
+	background-color: var(--c-cream);
+	overflow: hidden;
+}
+
+// Suggestion of a street grid in the brand colours. Cheap — three gradients,
+// no image request — and it reads as a map rather than as a grey box while the
+// real one is still off screen.
+.map__facade {
+	position: absolute;
+	inset: 0;
+	background-color: #f2f6e4;
+	background-image:
+		repeating-linear-gradient(
+			90deg,
+			rgba(56, 108, 95, 0.16) 0 2px,
+			transparent 2px 78px
+		),
+		repeating-linear-gradient(
+			0deg,
+			rgba(56, 108, 95, 0.16) 0 2px,
+			transparent 2px 64px
+		),
+		linear-gradient(
+			118deg,
+			transparent 46%,
+			rgba(56, 108, 95, 0.34) 46%,
+			rgba(56, 108, 95, 0.34) 47.2%,
+			transparent 47.2%
+		);
+	transition: opacity var(--transition);
+}
+
+// Removed once the real map has painted.
+.map.is-loaded .map__facade {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.map__canvas {
+	position: absolute;
+	inset: 0;
+}
+
+.map__directions {
+	position: absolute;
+	right: var(--gutter);
+	bottom: var(--sp-md);
+	z-index: 2;
+}
+
+// The address is announced to screen readers and to Google, but the visual is
+// carried by the map itself, as in the design.
+.map__address {
+	position: absolute;
+	left: var(--gutter);
+	bottom: var(--sp-md);
+	z-index: 2;
+	max-width: 22rem;
+	padding: var(--sp-2xs) var(--sp-sm);
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+	font-size: var(--fs-small);
+	line-height: 1.4;
+
+	@include bp.upto(sm) {
+		position: static;
+		max-width: none;
+	}
+}
