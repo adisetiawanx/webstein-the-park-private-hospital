@@ -1,0 +1,104 @@
+{
+	"key": "group_tpph_settings",
+	"title": "Site Settings",
+	"fields": [
+		{
+			"key": "field_tpph_header_cta_label",
+			"label": "Header button label",
+			"name": "header_cta_label",
+			"type": "text",
+			"instructions": "The button at the top right of every page.",
+			"required": 0,
+			"default_value": "Make a Payment",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_header_cta_url",
+			"label": "Header button link",
+			"name": "header_cta_url",
+			"type": "url",
+			"instructions": "",
+			"required": 0,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_default_hero",
+			"label": "Default page header image",
+			"name": "default_hero_image",
+			"type": "image",
+			"instructions": "Used on any page that does not set its own header image.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "tpph-card",
+			"library": "all"
+		},
+		{
+			"key": "field_tpph_map_tab",
+			"label": "Map",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_map_lat",
+			"label": "Latitude",
+			"name": "map_lat",
+			"type": "number",
+			"instructions": "",
+			"required": 0,
+			"default_value": -31.9333,
+			"step": "any",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_map_lng",
+			"label": "Longitude",
+			"name": "map_lng",
+			"type": "number",
+			"instructions": "",
+			"required": 0,
+			"default_value": 115.8747,
+			"step": "any",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_map_zoom",
+			"label": "Zoom level",
+			"name": "map_zoom",
+			"type": "range",
+			"instructions": "",
+			"required": 0,
+			"default_value": 14,
+			"min": 10,
+			"max": 18,
+			"step": 1
+		},
+		{
+			"key": "field_tpph_map_notice",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"message": "The Google Maps API key is set in wp-config.php as TPPH_GOOGLE_MAPS_KEY, not here. Until it is present the site shows a styled static map with a working Get Directions link.",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "options_page",
+				"operator": "==",
+				"value": "tpph-settings"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "Values that appear on every template.",
+	"show_in_rest": 0
+}

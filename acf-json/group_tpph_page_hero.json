@@ -1,0 +1,63 @@
+{
+	"key": "group_tpph_page_hero",
+	"title": "Page Header",
+	"fields": [
+		{
+			"key": "field_tpph_hero_image",
+			"label": "Header image",
+			"name": "hero_image",
+			"type": "image",
+			"instructions": "The full-width banner behind the page title. Leave empty to use the site default.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "tpph-card",
+			"library": "all"
+		},
+		{
+			"key": "field_tpph_hero_eyebrow",
+			"label": "Small label above the title",
+			"name": "hero_eyebrow",
+			"type": "text",
+			"instructions": "Optional. For example ABOUT US on the Our Hospital page.",
+			"required": 0,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_hero_title",
+			"label": "Header title",
+			"name": "hero_title",
+			"type": "text",
+			"instructions": "Leave empty to use the page title.",
+			"required": 0,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_hero_intro",
+			"label": "Header intro text",
+			"name": "hero_intro",
+			"type": "textarea",
+			"instructions": "Optional. Only the Our Hospital page uses this in the design.",
+			"required": 0,
+			"rows": 4,
+			"new_lines": "wpautop"
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "page"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "acf_after_title",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "The banner at the top of every inner page.",
+	"show_in_rest": 0
+}

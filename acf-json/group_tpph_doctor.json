@@ -1,0 +1,60 @@
+{
+	"key": "group_tpph_doctor",
+	"title": "Doctor Details",
+	"fields": [
+		{
+			"key": "field_tpph_doctor_qualifications",
+			"label": "Qualifications",
+			"name": "qualifications",
+			"type": "text",
+			"instructions": "The letters after the name, exactly as supplied. For example BSc, BDSc, MBBS, FRACDS(OMS), MRCPS(Glasg)",
+			"required": 0
+		},
+		{
+			"key": "field_tpph_doctor_role",
+			"label": "Role",
+			"name": "role",
+			"type": "text",
+			"instructions": "For example Oral and Maxillofacial Surgeon.",
+			"required": 1
+		},
+		{
+			"key": "field_tpph_doctor_bio",
+			"label": "Biography",
+			"name": "biography",
+			"type": "textarea",
+			"instructions": "Shown when a visitor clicks the card. Plain paragraphs; blank lines separate them.",
+			"required": 0,
+			"rows": 12,
+			"new_lines": "wpautop"
+		},
+		{
+			"key": "field_tpph_doctor_is_executive",
+			"label": "Also on the Executive Team",
+			"name": "is_executive",
+			"type": "true_false",
+			"instructions": "Some people appear in both grids on Our Team. A/Prof Dieter Gebauer is listed as Medical Director in the executive grid.",
+			"required": 0,
+			"ui": 1,
+			"default_value": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "doctor"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "The photo comes from the Featured Image. Order comes from the Order field under Page Attributes.",
+	"show_in_rest": 0
+}

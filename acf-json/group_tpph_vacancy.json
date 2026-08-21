@@ -1,0 +1,89 @@
+{
+	"key": "group_tpph_vacancy",
+	"title": "Vacancy Details",
+	"fields": [
+		{
+			"key": "field_tpph_vacancy_summary",
+			"label": "Short description",
+			"name": "summary",
+			"type": "text",
+			"instructions": "One line under the job title.",
+			"required": 0
+		},
+		{
+			"key": "field_tpph_vacancy_points",
+			"label": "Details",
+			"name": "points",
+			"type": "repeater",
+			"instructions": "One line each, as drawn in the design: role entails, experience needed, hours per week, starting rate.",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add line",
+			"sub_fields": [
+				{
+					"key": "field_tpph_vacancy_point",
+					"label": "Line",
+					"name": "text",
+					"type": "text",
+					"required": 1
+				}
+			]
+		},
+		{
+			"key": "field_tpph_vacancy_apply_email",
+			"label": "Apply to",
+			"name": "apply_email",
+			"type": "email",
+			"instructions": "Leave empty to use careers@tpph.com.au.",
+			"required": 0,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_vacancy_employment_type",
+			"label": "Employment type",
+			"name": "employment_type",
+			"type": "select",
+			"instructions": "Used by the JobPosting structured data so the role can appear in Google Jobs.",
+			"required": 0,
+			"choices": {
+				"FULL_TIME": "Full time",
+				"PART_TIME": "Part time",
+				"CONTRACTOR": "Contractor",
+				"TEMPORARY": "Temporary",
+				"CASUAL": "Casual"
+			},
+			"default_value": "FULL_TIME",
+			"allow_null": 1,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_vacancy_closes",
+			"label": "Closing date",
+			"name": "closes",
+			"type": "date_picker",
+			"instructions": "Optional. Google requires a validThrough date or it treats the posting as stale after 30 days.",
+			"required": 0,
+			"display_format": "j F Y",
+			"return_format": "Y-m-d",
+			"first_day": 1
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "post_type",
+				"operator": "==",
+				"value": "vacancy"
+			}
+		]
+	],
+	"menu_order": 0,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": "",
+	"active": true,
+	"description": "Cards on the Careers page. Order comes from the Order field under Page Attributes.",
+	"show_in_rest": 0
+}

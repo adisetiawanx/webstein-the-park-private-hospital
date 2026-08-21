@@ -1,0 +1,396 @@
+{
+	"key": "group_tpph_home",
+	"title": "Home Page",
+	"fields": [
+		{
+			"key": "field_tpph_home_tab_hero",
+			"label": "Hero",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_hero_image",
+			"label": "Background image",
+			"name": "hero_image",
+			"type": "image",
+			"instructions": "This is the largest image on the site and the one Google measures page speed against. Upload it no wider than 2560px.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "tpph-card",
+			"library": "all"
+		},
+		{
+			"key": "field_tpph_home_hero_eyebrow",
+			"label": "Small label",
+			"name": "hero_eyebrow",
+			"type": "text",
+			"required": 0,
+			"default_value": "Welcome to The Park Private Hospital",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_hero_heading",
+			"label": "Headline",
+			"name": "hero_heading",
+			"type": "textarea",
+			"required": 0,
+			"rows": 3,
+			"new_lines": "",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_hero_btn_label",
+			"label": "Button label",
+			"name": "hero_button_label",
+			"type": "text",
+			"required": 0,
+			"default_value": "Patient Information",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_hero_btn_url",
+			"label": "Button link",
+			"name": "hero_button_url",
+			"type": "link",
+			"required": 0,
+			"return_format": "array",
+			"wrapper": { "width": "50" }
+		},
+
+		{
+			"key": "field_tpph_home_tab_about",
+			"label": "About Us",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_about_heading",
+			"label": "Heading",
+			"name": "about_heading",
+			"type": "text",
+			"required": 0,
+			"default_value": "About Us"
+		},
+		{
+			"key": "field_tpph_home_about_text",
+			"label": "Text",
+			"name": "about_text",
+			"type": "textarea",
+			"required": 0,
+			"rows": 6,
+			"new_lines": "wpautop"
+		},
+		{
+			"key": "field_tpph_home_about_btn",
+			"label": "Button",
+			"name": "about_button",
+			"type": "link",
+			"required": 0,
+			"return_format": "array",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_about_image",
+			"label": "Image",
+			"name": "about_image",
+			"type": "image",
+			"instructions": "The wide photograph beneath the text.",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "tpph-card",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_statements",
+			"label": "Statement cards",
+			"name": "statements",
+			"type": "repeater",
+			"instructions": "The green cards. Three in the design: Our Vision, Our Mission, Our Values.",
+			"required": 0,
+			"min": 0,
+			"max": 4,
+			"layout": "block",
+			"button_label": "Add card",
+			"sub_fields": [
+				{
+					"key": "field_tpph_home_statement_title",
+					"label": "Title",
+					"name": "title",
+					"type": "text",
+					"required": 1,
+					"wrapper": { "width": "30" }
+				},
+				{
+					"key": "field_tpph_home_statement_text",
+					"label": "Text",
+					"name": "text",
+					"type": "textarea",
+					"required": 0,
+					"rows": 3,
+					"new_lines": "",
+					"wrapper": { "width": "70" }
+				}
+			]
+		},
+
+		{
+			"key": "field_tpph_home_tab_services",
+			"label": "Our Services",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_services_heading",
+			"label": "Heading",
+			"name": "services_heading",
+			"type": "text",
+			"required": 0,
+			"default_value": "Our Services",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_services_intro",
+			"label": "Intro line",
+			"name": "services_intro",
+			"type": "text",
+			"required": 0,
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_services",
+			"label": "Specialties",
+			"name": "services",
+			"type": "repeater",
+			"instructions": "Six in the design, each with one of the theme icons.",
+			"required": 0,
+			"layout": "table",
+			"button_label": "Add specialty",
+			"sub_fields": [
+				{
+					"key": "field_tpph_home_service_icon",
+					"label": "Icon",
+					"name": "icon",
+					"type": "select",
+					"required": 1,
+					"choices": {
+						"oral-maxillofacial-surgery": "Oral Maxillofacial Surgery",
+						"plastic-surgery": "Plastic Surgery",
+						"cosmetic-surgery": "Cosmetic Surgery",
+						"general-surgery": "General Surgery",
+						"surgical-podiatry": "Surgical Podiatry",
+						"sleep-studies": "Sleep Studies"
+					},
+					"wrapper": { "width": "40" }
+				},
+				{
+					"key": "field_tpph_home_service_label",
+					"label": "Label",
+					"name": "label",
+					"type": "text",
+					"required": 1,
+					"wrapper": { "width": "60" }
+				}
+			]
+		},
+		{
+			"key": "field_tpph_home_services_btn",
+			"label": "Button",
+			"name": "services_button",
+			"type": "link",
+			"required": 0,
+			"return_format": "array"
+		},
+
+		{
+			"key": "field_tpph_home_tab_cards",
+			"label": "Promo Cards",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_cards",
+			"label": "Cards",
+			"name": "promo_cards",
+			"type": "repeater",
+			"instructions": "The three green cards: Patient and Visitor Information, Become an Accredited Practitioner, Career Opportunities.",
+			"required": 0,
+			"min": 0,
+			"max": 3,
+			"layout": "block",
+			"button_label": "Add card",
+			"sub_fields": [
+				{
+					"key": "field_tpph_home_card_title",
+					"label": "Title",
+					"name": "title",
+					"type": "text",
+					"required": 1
+				},
+				{
+					"key": "field_tpph_home_card_text",
+					"label": "Text",
+					"name": "text",
+					"type": "textarea",
+					"required": 0,
+					"rows": 5,
+					"new_lines": ""
+				},
+				{
+					"key": "field_tpph_home_card_link",
+					"label": "Button",
+					"name": "link",
+					"type": "link",
+					"required": 0,
+					"return_format": "array"
+				}
+			]
+		},
+
+		{
+			"key": "field_tpph_home_tab_accreditations",
+			"label": "Accreditations",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_accreditations",
+			"label": "Accreditations",
+			"name": "accreditations",
+			"type": "repeater",
+			"instructions": "The four icons and captions below the promo cards.",
+			"required": 0,
+			"max": 4,
+			"layout": "table",
+			"button_label": "Add accreditation",
+			"sub_fields": [
+				{
+					"key": "field_tpph_home_accreditation_icon",
+					"label": "Icon",
+					"name": "icon",
+					"type": "select",
+					"required": 1,
+					"choices": {
+						"accreditation-licensed": "Certificate",
+						"accreditation-achs": "Rosette",
+						"accreditation-experience": "Document with tick",
+						"accreditation-infection": "Microbe"
+					},
+					"wrapper": { "width": "40" }
+				},
+				{
+					"key": "field_tpph_home_accreditation_label",
+					"label": "Caption",
+					"name": "label",
+					"type": "text",
+					"required": 1,
+					"wrapper": { "width": "60" }
+				}
+			]
+		},
+
+		{
+			"key": "field_tpph_home_tab_testimonials",
+			"label": "Testimonials",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_testimonials_heading",
+			"label": "Heading",
+			"name": "testimonials_heading",
+			"type": "text",
+			"required": 0,
+			"default_value": "Testimonials",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_testimonials_image",
+			"label": "Background image",
+			"name": "testimonials_image",
+			"type": "image",
+			"required": 0,
+			"return_format": "id",
+			"preview_size": "tpph-card",
+			"wrapper": { "width": "50" }
+		},
+		{
+			"key": "field_tpph_home_testimonials",
+			"label": "Quotes",
+			"name": "testimonials",
+			"type": "repeater",
+			"instructions": "One quote shows on its own, exactly as drawn. Add a second and the section becomes a slider.",
+			"required": 0,
+			"layout": "block",
+			"button_label": "Add quote",
+			"sub_fields": [
+				{
+					"key": "field_tpph_home_testimonial_quote",
+					"label": "Quote",
+					"name": "quote",
+					"type": "textarea",
+					"required": 1,
+					"rows": 4,
+					"new_lines": ""
+				},
+				{
+					"key": "field_tpph_home_testimonial_author",
+					"label": "Attribution",
+					"name": "author",
+					"type": "text",
+					"instructions": "For example Patient 2025.",
+					"required": 0
+				}
+			]
+		},
+
+		{
+			"key": "field_tpph_home_tab_map",
+			"label": "Map",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_home_show_map",
+			"label": "Show the map band",
+			"name": "show_map",
+			"type": "true_false",
+			"required": 0,
+			"ui": 1,
+			"default_value": 1
+		},
+		{
+			"key": "field_tpph_home_map_notice",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"message": "Position and zoom are set once under Site Settings, so the homepage and Contact Us cannot drift apart.",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "page_type",
+				"operator": "==",
+				"value": "front_page"
+			}
+		]
+	],
+	"menu_order": 1,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [ "the_content", "excerpt", "discussion", "comments", "author", "format", "revisions" ],
+	"active": true,
+	"description": "",
+	"show_in_rest": 0
+}
