@@ -40,6 +40,14 @@ function tpph_enqueue_assets() {
 	 * never pay for it.
 	 */
 	wp_register_script(
+		'tpph-team',
+		TPPH_URI . '/js/team.js',
+		array(),
+		tpph_asset_version( 'js/team.js' ),
+		true
+	);
+
+	wp_register_script(
 		'tpph-testimonials',
 		TPPH_URI . '/js/testimonials.js',
 		array(),

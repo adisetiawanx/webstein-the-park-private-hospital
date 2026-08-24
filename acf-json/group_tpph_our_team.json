@@ -1,0 +1,146 @@
+{
+	"key": "group_tpph_our_team",
+	"title": "About — Our Team",
+	"fields": [
+		{
+			"key": "field_tpph_team_tab_exec",
+			"label": "Executive Team",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_team_exec_heading",
+			"label": "Heading",
+			"name": "exec_heading",
+			"type": "text",
+			"required": 0,
+			"default_value": "Executive Team"
+		},
+		{
+			"key": "field_tpph_team_exec_intro",
+			"label": "Intro",
+			"name": "exec_intro",
+			"type": "textarea",
+			"required": 0,
+			"rows": 5,
+			"new_lines": ""
+		},
+		{
+			"key": "field_tpph_team_exec",
+			"label": "Members",
+			"name": "executives",
+			"type": "repeater",
+			"instructions": "Four in the design. Kept here rather than as a post type because the list is short, rarely changes, and is not filtered.",
+			"required": 0,
+			"layout": "block",
+			"button_label": "Add member",
+			"sub_fields": [
+				{
+					"key": "field_tpph_exec_photo",
+					"label": "Photo",
+					"name": "photo",
+					"type": "image",
+					"required": 0,
+					"return_format": "id",
+					"preview_size": "tpph-portrait",
+					"wrapper": { "width": "25" }
+				},
+				{
+					"key": "field_tpph_exec_name",
+					"label": "Name",
+					"name": "name",
+					"type": "text",
+					"required": 1,
+					"wrapper": { "width": "35" }
+				},
+				{
+					"key": "field_tpph_exec_role",
+					"label": "Role",
+					"name": "role",
+					"type": "text",
+					"required": 0,
+					"wrapper": { "width": "40" }
+				},
+				{
+					"key": "field_tpph_exec_quals",
+					"label": "Qualifications",
+					"name": "qualifications",
+					"type": "text",
+					"required": 0
+				},
+				{
+					"key": "field_tpph_exec_bio",
+					"label": "Biography",
+					"name": "biography",
+					"type": "textarea",
+					"instructions": "Shown when the card is clicked. Leave empty and the card is not clickable.",
+					"required": 0,
+					"rows": 8,
+					"new_lines": ""
+				}
+			]
+		},
+
+		{
+			"key": "field_tpph_team_tab_doctors",
+			"label": "Our Doctors",
+			"name": "",
+			"type": "tab",
+			"placement": "top"
+		},
+		{
+			"key": "field_tpph_team_doctors_heading",
+			"label": "Heading",
+			"name": "doctors_heading",
+			"type": "text",
+			"required": 0,
+			"default_value": "Our Doctors"
+		},
+		{
+			"key": "field_tpph_team_doctors_intro",
+			"label": "Intro",
+			"name": "doctors_intro",
+			"type": "textarea",
+			"required": 0,
+			"rows": 3,
+			"new_lines": ""
+		},
+		{
+			"key": "field_tpph_team_doctors_notice",
+			"label": "",
+			"name": "",
+			"type": "message",
+			"message": "Doctors themselves are edited under <strong>Doctors</strong> in the sidebar, not here. Their order comes from the Order field under Page Attributes, and the filter buttons come from the Specialties assigned to them.",
+			"new_lines": "wpautop",
+			"esc_html": 0
+		},
+		{
+			"key": "field_tpph_team_show_filters",
+			"label": "Show the specialty filter buttons",
+			"name": "show_filters",
+			"type": "true_false",
+			"required": 0,
+			"ui": 1,
+			"default_value": 1
+		}
+	],
+	"location": [
+		[
+			{
+				"param": "page_template",
+				"operator": "==",
+				"value": "page-templates/our-team.php"
+			}
+		]
+	],
+	"menu_order": 1,
+	"position": "normal",
+	"style": "default",
+	"label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [ "the_content", "excerpt", "discussion", "comments", "author", "format", "revisions" ],
+	"active": true,
+	"description": "",
+	"show_in_rest": 0
+}

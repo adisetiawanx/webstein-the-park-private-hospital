@@ -61,8 +61,11 @@ dd {
 	margin: 0;
 }
 
-ul[class],
-ol[class] {
+// Wrapped in :where() so this contributes zero specificity. As `ul[class]` it
+// scored (0,1,1) and silently beat every component class that tried to set a
+// margin on a list — .person-grid, .specialty-list, .service-list and the rest
+// all lost their spacing without any warning.
+:where(ul[class], ol[class]) {
 	list-style: none;
 	margin: 0;
 	padding: 0;
@@ -90,6 +93,12 @@ button {
 	border: 0;
 	padding: 0;
 	cursor: pointer;
+}
+
+// A class-level `display` beats the user-agent rule for [hidden], which quietly
+// breaks every JS toggle that relies on the attribute. Stated once, here.
+[hidden] {
+	display: none !important;
 }
 
 a {
