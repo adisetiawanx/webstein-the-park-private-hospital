@@ -1,0 +1,126 @@
+// -----------------------------------------------------------------------------
+// Flexible page sections
+//
+// Three shapes cover every inner artboard: heading and text with images
+// alongside, a row of columns, and a full-width photograph.
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+
+// --- Heading and text -------------------------------------------------------
+
+.text-band__heading {
+	margin-bottom: var(--sp-md);
+}
+
+.text-band__body {
+	max-width: 72ch;
+}
+
+.text-band--with-media {
+	display: grid;
+	gap: var(--sp-lg);
+	grid-template-columns: 1fr;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+		gap: var(--sp-2xl);
+		align-items: start;
+	}
+
+	.text-band__body {
+		max-width: 62ch;
+	}
+}
+
+@include bp.from(lg) {
+	.text-band--media-left {
+		.text-band__body {
+			order: 2;
+		}
+
+		.text-band__media {
+			order: 1;
+		}
+	}
+}
+
+.text-band__media--single img {
+	width: 100%;
+	height: auto;
+}
+
+// The artboards stack three images as one tall on the left and two on the
+// right. Below lg they become a plain two-up so nothing gets postage-stamp
+// sized on a phone.
+.text-band__media--collage {
+	display: grid;
+	gap: var(--sp-sm);
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@include bp.from(md) {
+		grid-template-rows: repeat(2, minmax(0, 1fr));
+
+		> img:first-child {
+			grid-row: span 2;
+		}
+	}
+}
+
+// --- Columns ----------------------------------------------------------------
+
+.column-band {
+	display: grid;
+	gap: var(--sp-lg);
+	grid-template-columns: 1fr;
+	align-items: start;
+
+	@include bp.from(md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	@include bp.from(lg) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--sp-xl);
+	}
+}
+
+.column-band__figure {
+	margin-bottom: var(--sp-md);
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 3 / 2;
+		object-fit: cover;
+	}
+}
+
+.column-band__title {
+	padding-bottom: var(--sp-2xs);
+	margin-bottom: var(--sp-sm);
+	border-bottom: 1px solid var(--c-rule);
+	font-family: var(--ff-body);
+	font-size: var(--fs-label);
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+}
+
+.column-band__text {
+	font-size: var(--fs-small);
+
+	// Sub-headings inside a column, written as "## Label" in the textarea.
+	h4 {
+		margin-top: 1.4em;
+		text-transform: uppercase;
+		font-size: var(--fs-small);
+		letter-spacing: 0.02em;
+	}
+}

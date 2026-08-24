@@ -171,10 +171,15 @@ function tpph_contact_details() {
 /**
  * Turn a plain textarea into paragraphs and bullet lists.
  *
- * The facility panels in the design mix prose with bulleted lists inside one
- * block of copy. Rather than hand editors a second field, or a rich-text editor
- * that would let them break the styling, a line beginning with a dash becomes a
- * list item and consecutive dashes group into one list.
+ * The facility panels and the Visitors columns in the design mix prose,
+ * sub-headings and bulleted lists inside one block of copy. Rather than hand
+ * editors three fields, or a rich-text editor that would let them break the
+ * styling, two prefixes carry the structure:
+ *
+ *   -  a bullet; consecutive dashes group into one list
+ *   ## a sub-heading, e.g. CHILDREN AGED 12 YEARS AND UNDER
+ *
+ * Everything else is a paragraph.
  *
  * @param string $text Raw textarea value.
  * @return string Escaped HTML.
@@ -188,6 +193,16 @@ function tpph_lines_to_html( $text ) {
 		$line = trim( $line );
 
 		if ( '' === $line ) {
+			continue;
+		}
+
+		if ( 0 === strpos( $line, '##' ) ) {
+			if ( $in_list ) {
+				$html   .= '</ul>';
+				$in_list = false;
+			}
+
+			$html .= '<h4>' . esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h4>';
 			continue;
 		}
 

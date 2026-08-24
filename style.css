@@ -204,7 +204,6 @@ a {
 h1,
 h2,
 h3,
-h4,
 .h1,
 .h2,
 .h3 {
@@ -232,8 +231,11 @@ h3,
 }
 
 h4 {
+  color: var(--c-green);
+  font-family: var(--ff-body);
   font-size: var(--fs-label);
   font-weight: 700;
+  line-height: 1.35;
 }
 
 p {
@@ -1581,4 +1583,109 @@ body.nav-open {
 .specialty-filter__btn:hover, .specialty-filter__btn.is-active {
   background-color: var(--c-green);
   color: var(--c-on-dark);
+}
+
+.text-band__heading {
+  margin-bottom: var(--sp-md);
+}
+
+.text-band__body {
+  max-width: 72ch;
+}
+
+.text-band--with-media {
+  display: grid;
+  gap: var(--sp-lg);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .text-band--with-media {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
+    gap: var(--sp-2xl);
+    align-items: start;
+  }
+}
+.text-band--with-media .text-band__body {
+  max-width: 62ch;
+}
+
+@media (min-width: 1024px) {
+  .text-band--media-left .text-band__body {
+    order: 2;
+  }
+  .text-band--media-left .text-band__media {
+    order: 1;
+  }
+}
+.text-band__media--single img {
+  width: 100%;
+  height: auto;
+}
+
+.text-band__media--collage {
+  display: grid;
+  gap: var(--sp-sm);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.text-band__media--collage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+@media (min-width: 768px) {
+  .text-band__media--collage {
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+  }
+  .text-band__media--collage > img:first-child {
+    grid-row: span 2;
+  }
+}
+
+.column-band {
+  display: grid;
+  gap: var(--sp-lg);
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+@media (min-width: 768px) {
+  .column-band {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .column-band {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--sp-xl);
+  }
+}
+
+.column-band__figure {
+  margin-bottom: var(--sp-md);
+}
+.column-band__figure img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3/2;
+  object-fit: cover;
+}
+
+.column-band__title {
+  padding-bottom: var(--sp-2xs);
+  margin-bottom: var(--sp-sm);
+  border-bottom: 1px solid var(--c-rule);
+  font-family: var(--ff-body);
+  font-size: var(--fs-label);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.column-band__text {
+  font-size: var(--fs-small);
+}
+.column-band__text h4 {
+  margin-top: 1.4em;
+  text-transform: uppercase;
+  font-size: var(--fs-small);
+  letter-spacing: 0.02em;
 }
