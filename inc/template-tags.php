@@ -177,7 +177,7 @@ function tpph_contact_details() {
  * styling, two prefixes carry the structure:
  *
  *   -  a bullet; consecutive dashes group into one list
- *   ## a sub-heading, e.g. CHILDREN AGED 12 YEARS AND UNDER
+ *   ## a sub-heading (h3.sub-label), e.g. CHILDREN AGED 12 YEARS AND UNDER
  *
  * Everything else is a paragraph.
  *
@@ -202,7 +202,12 @@ function tpph_lines_to_html( $text ) {
 				$in_list = false;
 			}
 
-			$html .= '<h4>' . esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h4>';
+			/*
+			 * h3, not h4. These sit directly under the section h2, and jumping a
+			 * level is an accessibility failure even when it looks right.
+			 * The class carries the visual: Noto Sans Bold, not the serif.
+			 */
+			$html .= '<h3 class="sub-label">' . esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h3>';
 			continue;
 		}
 

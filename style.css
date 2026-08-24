@@ -287,6 +287,10 @@ p + p {
 .rich-text h3 {
   margin-top: 1.6em;
 }
+.rich-text .sub-label {
+  margin-top: 1.5em;
+  margin-bottom: 0.35em;
+}
 .rich-text ul,
 .rich-text ol {
   margin: 1em 0;
@@ -587,7 +591,7 @@ p + p {
   .nav {
     display: flex;
     align-items: center;
-    gap: clamp(1rem, 1.6vw, 2rem);
+    gap: clamp(0.9rem, 1.5vw, 1.9rem);
   }
 }
 
@@ -608,7 +612,7 @@ p + p {
   .nav__list {
     display: flex;
     align-items: center;
-    gap: clamp(0.9rem, 1.5vw, 1.9rem);
+    gap: clamp(0.75rem, 1.35vw, 1.75rem);
   }
 }
 
@@ -668,7 +672,8 @@ p + p {
   .nav__toggle {
     width: auto;
     height: auto;
-    margin-left: 0.35em;
+    padding: 14px 7px;
+    margin: -14px -7px -14px 0.2em;
     vertical-align: middle;
     pointer-events: auto;
   }
@@ -813,6 +818,8 @@ body.nav-open {
   gap: var(--sp-xs);
 }
 .site-footer__list a {
+  display: inline-block;
+  padding-block: 0.3rem;
   text-decoration: none;
 }
 .site-footer__list a:hover {
@@ -823,6 +830,8 @@ body.nav-open {
   margin-bottom: var(--sp-xs);
 }
 .site-footer__line a {
+  display: inline-block;
+  padding-block: 0.25rem;
   text-decoration: none;
 }
 .site-footer__line a:hover {
@@ -1684,7 +1693,7 @@ body.nav-open {
 .column-band__text {
   font-size: var(--fs-small);
 }
-.column-band__text h4 {
+.column-band__text .sub-label {
   margin-top: 1.4em;
   text-transform: uppercase;
   font-size: var(--fs-small);
@@ -1709,6 +1718,8 @@ body.nav-open {
   margin-bottom: var(--sp-lg);
 }
 .error-404__links a {
+  display: inline-block;
+  padding-block: 0.25rem;
   color: var(--c-green);
   text-decoration: none;
   border-bottom: 1px solid var(--c-rule);
@@ -1809,7 +1820,7 @@ body.nav-open {
 .contact__details p:first-child + p {
   margin-top: 1em;
 }
-.contact__details h4 {
+.contact__details .sub-label {
   margin-top: 1.6em;
 }
 

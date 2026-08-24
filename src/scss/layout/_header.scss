@@ -139,7 +139,7 @@
 	@include bp.from(lg) {
 		display: flex;
 		align-items: center;
-		gap: clamp(1rem, 1.6vw, 2rem);
+		gap: clamp(0.9rem, 1.5vw, 1.9rem);
 	}
 }
 
@@ -159,7 +159,7 @@
 	@include bp.from(lg) {
 		display: flex;
 		align-items: center;
-		gap: clamp(0.9rem, 1.5vw, 1.9rem);
+		gap: clamp(0.75rem, 1.35vw, 1.75rem);
 	}
 }
 
@@ -219,7 +219,12 @@
 	@include bp.from(lg) {
 		width: auto;
 		height: auto;
-		margin-left: 0.35em;
+		// The chevron is 11x8. Padding gives it a real hit area; the negative
+		// margin cancels it exactly, so the horizontal rhythm of the menu is
+		// unchanged. Getting this wrong pushed the nav past 1440 and introduced
+		// a horizontal scrollbar.
+		padding: 14px 7px;
+		margin: -14px -7px -14px 0.2em;
 		vertical-align: middle;
 		// Desktop opens on hover; the button stays in the accessibility tree for
 		// keyboard users but must not disturb the inline rhythm.

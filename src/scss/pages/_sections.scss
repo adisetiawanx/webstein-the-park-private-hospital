@@ -117,7 +117,7 @@
 	font-size: var(--fs-small);
 
 	// Sub-headings inside a column, written as "## Label" in the textarea.
-	h4 {
+	.sub-label {
 		margin-top: 1.4em;
 		text-transform: uppercase;
 		font-size: var(--fs-small);
@@ -145,6 +145,8 @@
 	margin-bottom: var(--sp-lg);
 
 	a {
+		display: inline-block;
+		padding-block: 0.25rem;
 		color: var(--c-green);
 		text-decoration: none;
 		border-bottom: 1px solid var(--c-rule);

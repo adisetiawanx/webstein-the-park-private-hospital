@@ -61,6 +61,10 @@
 	gap: var(--sp-xs);
 
 	a {
+		display: inline-block;
+		// Standalone navigation links, so they carry padding to clear the 24px
+		// minimum touch target. They measured 20px tall without it.
+		padding-block: 0.3rem;
 		text-decoration: none;
 
 		&:hover {
@@ -73,6 +77,8 @@
 	margin-bottom: var(--sp-xs);
 
 	a {
+		display: inline-block;
+		padding-block: 0.25rem;
 		text-decoration: none;
 
 		&:hover {
