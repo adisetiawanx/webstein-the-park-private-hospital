@@ -1,0 +1,136 @@
+// -----------------------------------------------------------------------------
+// Careers and Contact Us
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+@use "../abstracts/mixins" as m;
+
+// --- Careers ----------------------------------------------------------------
+
+.vacancy-cards {
+	@include m.grid(1, 2, 3, 3, var(--sp-md));
+}
+
+.vacancy-card {
+	display: flex;
+	flex-direction: column;
+	padding: var(--sp-lg);
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+}
+
+.vacancy-card__title {
+	margin-bottom: var(--sp-md);
+	color: var(--c-on-dark);
+}
+
+.vacancy-card__summary {
+	margin-bottom: var(--sp-md);
+	font-size: var(--fs-small);
+}
+
+.vacancy-card__points {
+	margin-bottom: var(--sp-lg);
+	font-size: var(--fs-small);
+
+	li {
+		padding-left: 0.9em;
+		text-indent: -0.9em;
+	}
+
+	// The artboard writes these as dashes rather than bullets.
+	li::before {
+		content: "– ";
+	}
+
+	li + li {
+		margin-top: 0.25em;
+	}
+}
+
+.vacancy-card__cta {
+	margin-top: auto;
+	align-self: flex-start;
+}
+
+.careers-register__text {
+	text-align: center;
+
+	a {
+		color: inherit;
+	}
+}
+
+// --- Contact ----------------------------------------------------------------
+
+.contact__grid {
+	display: grid;
+	gap: var(--sp-xl);
+	grid-template-columns: 1fr;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+		gap: var(--sp-2xl);
+		align-items: start;
+	}
+}
+
+.contact__details {
+	font-size: var(--fs-body);
+
+	// The artboard sets the phone/fax/mail/email lines tight against each other
+	// rather than as separate paragraphs.
+	p + p {
+		margin-top: 0.35em;
+	}
+
+	// A blank line in the field still opens a gap where the design has one.
+	p:first-child + p {
+		margin-top: 1em;
+	}
+
+	h4 {
+		margin-top: 1.6em;
+	}
+}
+
+.contact__map {
+	position: relative;
+
+	// The map band is full-bleed on the homepage but boxed here, so the shared
+	// component is constrained rather than duplicated.
+	.map-band {
+		width: 100%;
+	}
+
+	.map {
+		height: clamp(260px, 30vw, 420px);
+	}
+
+	// Inside the box the floating address card does the job, so the map's own
+	// address strip would just repeat it.
+	.map__address {
+		display: none;
+	}
+}
+
+// Green card overlapping the top-right corner of the map, as drawn.
+.contact__card {
+	position: absolute;
+	top: calc(var(--sp-lg) * -1);
+	right: 0;
+	z-index: 3;
+	max-width: 20rem;
+	padding: var(--sp-md) var(--sp-lg);
+	background-color: var(--c-green);
+	color: var(--c-on-dark);
+	font-size: var(--fs-small);
+	line-height: 1.6;
+	text-align: right;
+
+	@include bp.upto(md) {
+		position: static;
+		max-width: none;
+		text-align: left;
+	}
+}

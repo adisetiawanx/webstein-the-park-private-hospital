@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*!
 Theme Name:  The Park Private Hospital
 Theme URI:   https://tpph.com.au
@@ -1688,4 +1689,130 @@ body.nav-open {
   text-transform: uppercase;
   font-size: var(--fs-small);
   letter-spacing: 0.02em;
+}
+
+.vacancy-cards {
+  display: grid;
+  gap: var(--sp-md);
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+@media (min-width: 768px) {
+  .vacancy-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1024px) {
+  .vacancy-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1440px) {
+  .vacancy-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.vacancy-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sp-lg);
+  background-color: var(--c-green);
+  color: var(--c-on-dark);
+}
+
+.vacancy-card__title {
+  margin-bottom: var(--sp-md);
+  color: var(--c-on-dark);
+}
+
+.vacancy-card__summary {
+  margin-bottom: var(--sp-md);
+  font-size: var(--fs-small);
+}
+
+.vacancy-card__points {
+  margin-bottom: var(--sp-lg);
+  font-size: var(--fs-small);
+}
+.vacancy-card__points li {
+  padding-left: 0.9em;
+  text-indent: -0.9em;
+}
+.vacancy-card__points li::before {
+  content: "– ";
+}
+.vacancy-card__points li + li {
+  margin-top: 0.25em;
+}
+
+.vacancy-card__cta {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+.careers-register__text {
+  text-align: center;
+}
+.careers-register__text a {
+  color: inherit;
+}
+
+.contact__grid {
+  display: grid;
+  gap: var(--sp-xl);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1024px) {
+  .contact__grid {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: var(--sp-2xl);
+    align-items: start;
+  }
+}
+
+.contact__details {
+  font-size: var(--fs-body);
+}
+.contact__details p + p {
+  margin-top: 0.35em;
+}
+.contact__details p:first-child + p {
+  margin-top: 1em;
+}
+.contact__details h4 {
+  margin-top: 1.6em;
+}
+
+.contact__map {
+  position: relative;
+}
+.contact__map .map-band {
+  width: 100%;
+}
+.contact__map .map {
+  height: clamp(260px, 30vw, 420px);
+}
+.contact__map .map__address {
+  display: none;
+}
+
+.contact__card {
+  position: absolute;
+  top: calc(var(--sp-lg) * -1);
+  right: 0;
+  z-index: 3;
+  max-width: 20rem;
+  padding: var(--sp-md) var(--sp-lg);
+  background-color: var(--c-green);
+  color: var(--c-on-dark);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+  text-align: right;
+}
+@media (max-width: 767.98px) {
+  .contact__card {
+    position: static;
+    max-width: none;
+    text-align: left;
+  }
 }

@@ -1,0 +1,14 @@
+{
+	"key": "group_tpph_contact",
+	"title": "Contact Us",
+	"fields": [
+		{ "key": "field_tpph_contact_text", "label": "Contact details", "name": "contact_text", "type": "textarea", "instructions": "The block of text beside the map. Blank lines separate paragraphs.", "required": 0, "rows": 14, "new_lines": "" },
+		{ "key": "field_tpph_contact_card", "label": "Address card over the map", "name": "map_card", "type": "textarea", "instructions": "Leave empty to use the hospital address.", "required": 0, "rows": 4, "new_lines": "" },
+		{ "key": "field_tpph_contact_closing", "label": "Closing photograph", "name": "closing_image", "type": "image", "required": 0, "return_format": "id", "preview_size": "tpph-card" }
+	],
+	"location": [ [ { "param": "page_template", "operator": "==", "value": "page-templates/contact.php" } ] ],
+	"menu_order": 1, "position": "normal", "style": "default", "label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [ "the_content", "excerpt", "discussion", "comments", "author", "format", "revisions" ],
+	"active": true, "description": "", "show_in_rest": 0
+}

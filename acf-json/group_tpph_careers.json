@@ -1,0 +1,19 @@
+{
+	"key": "group_tpph_careers",
+	"title": "Careers",
+	"fields": [
+		{ "key": "field_tpph_careers_heading", "label": "Heading", "name": "intro_heading", "type": "text", "required": 0, "default_value": "Join our team" },
+		{ "key": "field_tpph_careers_text", "label": "Intro text", "name": "intro_text", "type": "textarea", "required": 0, "rows": 10, "new_lines": "" },
+		{ "key": "field_tpph_careers_images", "label": "Images", "name": "intro_images", "type": "gallery", "instructions": "Three in the design: one tall on the left, two stacked on the right.", "required": 0, "return_format": "id", "preview_size": "tpph-card", "insert": "append" },
+		{ "key": "field_tpph_careers_vac_heading", "label": "Vacancies heading", "name": "vacancies_heading", "type": "text", "required": 0, "default_value": "Current Vacancies" },
+		{ "key": "field_tpph_careers_vac_notice", "label": "", "name": "", "type": "message", "message": "Vacancies are edited under <strong>Vacancies</strong> in the sidebar. When there are none, the whole band is hidden rather than showing an empty heading.", "new_lines": "wpautop", "esc_html": 0 },
+		{ "key": "field_tpph_careers_reg_heading", "label": "Register heading", "name": "register_heading", "type": "text", "required": 0, "default_value": "Register your interest" },
+		{ "key": "field_tpph_careers_reg_text", "label": "Register text", "name": "register_text", "type": "textarea", "required": 0, "rows": 4, "new_lines": "" },
+		{ "key": "field_tpph_careers_closing", "label": "Closing photograph", "name": "closing_image", "type": "image", "required": 0, "return_format": "id", "preview_size": "tpph-card" }
+	],
+	"location": [ [ { "param": "page_template", "operator": "==", "value": "page-templates/careers.php" } ] ],
+	"menu_order": 1, "position": "normal", "style": "default", "label_placement": "top",
+	"instruction_placement": "label",
+	"hide_on_screen": [ "the_content", "excerpt", "discussion", "comments", "author", "format", "revisions" ],
+	"active": true, "description": "", "show_in_rest": 0
+}
