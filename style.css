@@ -1691,6 +1691,36 @@ body.nav-open {
   letter-spacing: 0.02em;
 }
 
+.error-404 {
+  padding-block: var(--sp-2xl);
+  text-align: center;
+}
+
+.error-404__text {
+  max-width: 48ch;
+  margin: var(--sp-md) auto var(--sp-lg);
+}
+
+.error-404__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-sm) var(--sp-lg);
+  margin-bottom: var(--sp-lg);
+}
+.error-404__links a {
+  color: var(--c-green);
+  text-decoration: none;
+  border-bottom: 1px solid var(--c-rule);
+}
+.error-404__links a:hover {
+  border-bottom-color: var(--c-green);
+}
+
+.error-404__phone {
+  font-size: var(--fs-small);
+}
+
 .vacancy-cards {
   display: grid;
   gap: var(--sp-md);
