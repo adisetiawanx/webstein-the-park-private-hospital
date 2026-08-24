@@ -1452,6 +1452,7 @@ body.nav-open {
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  overflow: hidden;
 }
 
 .person-card__face {
@@ -1518,10 +1519,10 @@ body.nav-open {
   position: absolute;
   right: var(--sp-md);
   bottom: var(--sp-sm);
-  width: 22px;
-  height: 12px;
-  background-color: rgba(255, 255, 255, 0.8);
-  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12'%3E%3Cpath d='M0 6h21M16 1l5 5-5 5' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E");
+  width: 16px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'%3E%3Cpath d='M1 8.5 8 1.5l7 7' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   mask-repeat: no-repeat;
   mask-position: center;
   mask-size: contain;
@@ -1530,48 +1531,96 @@ body.nav-open {
 
 .person-card--has-bio:hover .person-card__face::after {
   background-color: #fff;
-  transform: translateX(3px);
+  transform: translateY(-3px);
 }
 
 .person-card__bio {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
-  min-height: 100%;
-  padding: var(--sp-md) var(--sp-md) var(--sp-lg);
+  padding: var(--sp-md) var(--sp-2xs) var(--sp-md) var(--sp-md);
   background-color: var(--c-green);
   color: var(--c-on-dark);
   font-size: var(--fs-small);
   line-height: 1.6;
+  transform: translateY(100%);
+  visibility: hidden;
+  transition: transform var(--transition), visibility var(--transition);
 }
 .person-card__bio p + p {
   margin-top: 0.9em;
 }
 
+.person-card--has-bio:hover .person-card__bio,
+.person-card--has-bio:focus-within .person-card__bio,
+.person-card--has-bio.is-open .person-card__bio {
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.person-card--has-bio.is-dismissed .person-card__bio {
+  transform: translateY(100%);
+  visibility: hidden;
+}
+
 .person-card__bio-scroll {
-  max-height: 26rem;
+  flex: 1 1 auto;
+  min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding-right: var(--sp-2xs);
+  padding-right: var(--sp-sm);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+}
+.person-card__bio-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.person-card__bio-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.person-card__bio-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+}
+.person-card__bio-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+.person-card__bio-scroll:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.8);
+  outline-offset: -2px;
+}
+
+.person-card__bio::after {
+  content: "";
+  position: absolute;
+  right: var(--sp-2xs);
+  bottom: 0;
+  left: 0;
+  height: var(--sp-md);
+  background: linear-gradient(to top, var(--c-green), rgba(56, 108, 95, 0));
+  pointer-events: none;
 }
 
 .person-card__close {
   position: absolute;
-  top: var(--sp-2xs);
-  right: var(--sp-2xs);
-  display: inline-flex;
+  top: 0;
+  right: 0;
+  display: none;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   color: var(--c-on-dark);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 .person-card__close:hover {
   opacity: 1;
 }
 
-.person-card.is-open .person-card__face {
-  display: none;
+.person-card.is-open .person-card__close {
+  display: inline-flex;
 }
 
 .specialty-filter {

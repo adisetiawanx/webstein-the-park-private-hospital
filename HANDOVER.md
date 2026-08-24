@@ -22,7 +22,7 @@ leaving it obviously unfinished.
 | **Safety and Quality → Accreditation and Licensing** | The whole page. Two body sections plus one sub-section |
 | **Careers → Join our team** | Two intro paragraphs |
 | **Careers → Current Vacancies** | Three real vacancies. Currently "Job One / Job Two / Job Three" with "Short job description" and four dummy lines, exactly as drawn |
-| **About → Our Team → Executive Team** | Four biographies — A/Prof Dieter Gebauer, Brendon Garton, Helen Robinson, Jan Morskate. Shown when a card is clicked |
+| **About → Our Team → Executive Team** | Four biographies — A/Prof Dieter Gebauer, Brendon Garton, Helen Robinson, Jan Morskate. Shown when a card is hovered |
 
 ## 2. Missing photographs
 
@@ -91,10 +91,11 @@ anything.
 - **Alt text** has been written for every image from what it shows, so the site
   ships accessible rather than waiting on a content pass. All of it is editable
   in the Media Library if the client wants different wording.
-- **The Our Team card interaction** — clicking a card swaps the portrait for the
-  biography in place — is our reading of the two artboards, which show both
-  states but define no transition between them. Worth confirming with Edge
-  Creative. Changing it to a modal later would not disturb anything else.
+- **The Our Team card interaction** is now built to Edge Creative's note:
+  hovering a card slides the biography up over the portrait from the bottom
+  edge. Because hover does not exist on touch, tapping a card does the same
+  thing on a phone or tablet, with a close button that only appears in that
+  case. Keyboard users get it on focus, and Escape closes.
 
 ---
 

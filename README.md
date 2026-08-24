@@ -164,6 +164,23 @@ This is why the facility panels and the Visitors columns can mix prose, sub-head
 - Content images live in the **Media Library**. Logo, service icons and the tree ornament live in the **theme**.
 - Hero images go through `tpph_image( $id, $size, [ 'eager' => true ] )`, which sets `fetchpriority="high"`. Everything else is lazy.
 
+### The Our Team biography panel
+
+Hovering a person card slides the biography up over the portrait from the bottom
+edge, per Edge Creative's note. Opening is pure CSS — `:hover` for pointers,
+`:focus-within` for keyboard — so it works with JavaScript off.
+
+Two things are worth knowing before touching it:
+
+- The panel has **no `hidden` attribute**. An element that is `display: none`
+  cannot be transitioned from, so visibility is driven by CSS instead, which
+  also keeps the panel out of the tab order while it is closed.
+- Closing on touch or by keyboard returns focus to the toggle, which lives
+  *inside* the card — so `:focus-within` matched again and the panel sprang
+  straight back open, making the close button appear to do nothing. The
+  `is-dismissed` class holds it shut, and is cleared as soon as focus or the
+  pointer genuinely leaves.
+
 ### Two reset rules worth knowing about
 
 Both of these cost real debugging time and are commented in place:

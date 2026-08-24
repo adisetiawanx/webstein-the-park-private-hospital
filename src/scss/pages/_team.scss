@@ -2,7 +2,11 @@
 // About — Our Team
 //
 // Person cards have two faces of the same size: a portrait with a green name
-// bar, and the biography. Clicking swaps them in place.
+// bar, and the biography, which slides up over the portrait from the bottom
+// edge.
+//
+// Hover opens it, per the designer's note. Hover does not exist on touch, so
+// the toggle button carries the same behaviour for tap and for keyboard.
 // -----------------------------------------------------------------------------
 
 @use "../abstracts/breakpoints" as bp;
@@ -30,9 +34,11 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	// Both faces occupy the same box, so swapping them does not reflow the grid
-	// and knock every card below out of place.
+	// The biography is absolutely positioned inside this box, so opening a card
+	// never reflows the grid or knocks the rows below out of place.
 	min-height: 100%;
+	// Clips the panel while it sits below the bottom edge waiting to slide up.
+	overflow: hidden;
 }
 
 .person-card__face {
@@ -108,17 +114,17 @@
 }
 
 // Quiet affordance that the card opens. The artboard shows no icon at all, but
-// a card that does nothing on hover and everything on click needs some signal.
-// Reuses the arrow from the button set rather than introducing a new glyph.
+// a card that only reveals itself on hover needs some signal on first sight.
+// A chevron pointing up, because that is the direction the panel comes from.
 .person-card--has-bio .person-card__face::after {
 	content: "";
 	position: absolute;
 	right: var(--sp-md);
 	bottom: var(--sp-sm);
-	width: 22px;
-	height: 12px;
-	background-color: rgba(255, 255, 255, 0.8);
-	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 12'%3E%3Cpath d='M0 6h21M16 1l5 5-5 5' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E");
+	width: 16px;
+	height: 10px;
+	background-color: rgba(255, 255, 255, 0.75);
+	mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'%3E%3Cpath d='M1 8.5 8 1.5l7 7' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 	mask-repeat: no-repeat;
 	mask-position: center;
 	mask-size: contain;
@@ -127,53 +133,125 @@
 
 .person-card--has-bio:hover .person-card__face::after {
 	background-color: #fff;
-	transform: translateX(3px);
+	transform: translateY(-3px);
 }
 
 // --- Biography face ---------------------------------------------------------
 
 .person-card__bio {
+	position: absolute;
+	inset: 0;
+	z-index: 3;
 	display: flex;
 	flex-direction: column;
-	min-height: 100%;
-	padding: var(--sp-md) var(--sp-md) var(--sp-lg);
+	padding: var(--sp-md) var(--sp-2xs) var(--sp-md) var(--sp-md);
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
 	font-size: var(--fs-small);
 	line-height: 1.6;
+
+	// Parked below the bottom edge and clipped by the card. Sliding up from
+	// here is the movement the designer asked for.
+	transform: translateY(100%);
+	visibility: hidden;
+	transition: transform var(--transition), visibility var(--transition);
 
 	p + p {
 		margin-top: 0.9em;
 	}
 }
 
+// Pointer devices: hover opens it. focus-within covers keyboard, so tabbing to
+// the card reveals the panel exactly as hovering does.
+.person-card--has-bio:hover .person-card__bio,
+.person-card--has-bio:focus-within .person-card__bio,
+.person-card--has-bio.is-open .person-card__bio {
+	transform: translateY(0);
+	visibility: visible;
+}
+
+// Closing on touch or by keyboard returns focus to the toggle, which lives
+// inside the card — so :focus-within matched again and the panel sprang
+// straight back open, making the close button do nothing. This wins on source
+// order, and the class is cleared as soon as focus or the pointer leaves.
+.person-card--has-bio.is-dismissed .person-card__bio {
+	transform: translateY(100%);
+	visibility: hidden;
+}
+
 .person-card__bio-scroll {
-	// Long biographies scroll inside the card instead of stretching the row.
-	max-height: 26rem;
+	// Biographies run past the height of a portrait card, so they scroll inside
+	// the panel rather than stretching the row they sit in.
+	flex: 1 1 auto;
+	min-height: 0;
 	overflow-y: auto;
 	overscroll-behavior: contain;
-	padding-right: var(--sp-2xs);
+	padding-right: var(--sp-sm);
+
+	// The platform scrollbar is a light grey slab that looks broken against the
+	// green. Firefox first, then the WebKit pseudo-elements.
+	scrollbar-width: thin;
+	scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+
+	&::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: rgba(255, 255, 255, 0.4);
+		border-radius: 2px;
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: rgba(255, 255, 255, 0.65);
+	}
+
+	&:focus-visible {
+		outline: 2px solid rgba(255, 255, 255, 0.8);
+		outline-offset: -2px;
+	}
+}
+
+// Signals there is more copy below the fold of the panel.
+.person-card__bio::after {
+	content: "";
+	position: absolute;
+	right: var(--sp-2xs);
+	bottom: 0;
+	left: 0;
+	height: var(--sp-md);
+	background: linear-gradient(to top, var(--c-green), rgba(56, 108, 95, 0));
+	pointer-events: none;
 }
 
 .person-card__close {
 	position: absolute;
-	top: var(--sp-2xs);
-	right: var(--sp-2xs);
-	display: inline-flex;
+	top: 0;
+	right: 0;
+	// Sits in its own corner rather than over the scrollbar, which is why the
+	// panel carries asymmetric padding.
+	display: none;
 	align-items: center;
 	justify-content: center;
-	width: 34px;
-	height: 34px;
+	width: 40px;
+	height: 40px;
 	color: var(--c-on-dark);
-	opacity: 0.8;
+	opacity: 0.85;
 
 	&:hover {
 		opacity: 1;
 	}
 }
 
-.person-card.is-open .person-card__face {
-	display: none;
+// Only when the card was opened by tap or keyboard. On a pointer device moving
+// away closes it, so a close control would be furniture the design does not
+// have.
+.person-card.is-open .person-card__close {
+	display: inline-flex;
 }
 
 // --- Specialty filter -------------------------------------------------------

@@ -2,11 +2,12 @@
 /**
  * Person card — used for both the Executive Team and Our Doctors grids.
  *
- * Two faces: a portrait with a green name bar, and the biography. Clicking
- * swaps them in place, which is what the two Our Team artboards show.
+ * Two faces: a portrait with a green name bar, and the biography, which slides
+ * up over the portrait from the bottom edge.
  *
- * Click rather than hover: the biographies run to roughly 200 words, which is
- * unreadable in a hover, and hover does not exist on touch at all.
+ * Hover opens it, per the designer's note. Hover does not exist on touch, so
+ * the toggle button below carries the same behaviour for tap and for keyboard —
+ * without it the biographies would be unreachable on a phone.
  *
  * Expects $args:
  *   name, role, qualifications, photo (attachment ID), biography, specialties
@@ -86,12 +87,24 @@ $tpph_uid = 'person-' . sanitize_title( $tpph_name );
 	</div>
 
 	<?php if ( $tpph_bio ) : ?>
-		<div class="person-card__bio" id="<?php echo esc_attr( $tpph_uid ); ?>" hidden>
-			<div class="person-card__bio-scroll">
-				<h3 class="screen-reader-text"><?php echo esc_html( $tpph_name ); ?></h3>
+		<?php
+		/*
+		 * No `hidden` attribute: the panel slides up from the bottom edge, and an
+		 * element that is display:none cannot be transitioned from. Visibility is
+		 * driven by CSS instead, which also keeps it out of the tab order and away
+		 * from screen readers while it is closed.
+		 */
+		?>
+		<div class="person-card__bio" id="<?php echo esc_attr( $tpph_uid ); ?>">
+			<div class="person-card__bio-scroll" tabindex="0" role="group" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: person name. */ __( 'Biography of %s', 'tpph' ), $tpph_name ) ); ?>">
 				<?php echo wp_kses_post( wpautop( $tpph_bio ) ); ?>
 			</div>
 
+			<?php
+			// Only reachable when the card was opened by tap or keyboard. On a
+			// pointer device moving away closes it, so a close control would be
+			// furniture the design does not have.
+			?>
 			<button class="person-card__close" type="button">
 				<span class="screen-reader-text">
 					<?php

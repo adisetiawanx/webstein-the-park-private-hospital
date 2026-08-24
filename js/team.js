@@ -1,89 +1,129 @@
 /**
- * Our Team — biography toggles and specialty filtering.
+ * Our Team — biography panels and specialty filtering.
  *
- * The two artboards show a portrait card and a biography card of the same size.
- * Clicking swaps them in place. Click, not hover: the biographies run to about
- * 200 words, and hover does not exist on touch.
+ * The panel slides up over the portrait from the bottom edge. Opening it is
+ * CSS: `:hover` on pointer devices and `:focus-within` for keyboard, so it
+ * works with JavaScript switched off.
+ *
+ * This file supplies the two things CSS cannot: a tap toggle for touch devices,
+ * which have no hover at all, and keeping `aria-expanded` honest whichever way
+ * the panel was opened.
  */
 ( function () {
 	'use strict';
 
+	var HOVER = window.matchMedia( '(hover: hover) and (pointer: fine)' );
+
 	/* --------------------------------------------------------------------- */
-	/* Biography toggles                                                     */
+	/* Biography panels                                                      */
 	/* --------------------------------------------------------------------- */
 
 	var cards = Array.prototype.slice.call( document.querySelectorAll( '.person-card--has-bio' ) );
 
+	function setExpanded( card, open ) {
+		var toggle = card.querySelector( '.person-card__open' );
+
+		if ( toggle ) {
+			toggle.setAttribute( 'aria-expanded', open ? 'true' : 'false' );
+		}
+	}
+
 	function closeCard( card ) {
-		var open = card.querySelector( '.person-card__open' );
-		var bio = card.querySelector( '.person-card__bio' );
-
 		card.classList.remove( 'is-open' );
-
-		if ( open ) {
-			open.setAttribute( 'aria-expanded', 'false' );
-		}
-
-		if ( bio ) {
-			bio.hidden = true;
-		}
+		/*
+		 * Closing returns focus to the toggle, which is inside the card, so
+		 * :focus-within would match and reopen the panel immediately. This class
+		 * holds it shut until focus or the pointer actually leaves.
+		 */
+		card.classList.add( 'is-dismissed' );
+		setExpanded( card, false );
 	}
 
 	function openCard( card ) {
-		var open = card.querySelector( '.person-card__open' );
-		var bio = card.querySelector( '.person-card__bio' );
-
+		card.classList.remove( 'is-dismissed' );
 		card.classList.add( 'is-open' );
+		setExpanded( card, true );
+	}
 
-		if ( open ) {
-			open.setAttribute( 'aria-expanded', 'true' );
-		}
-
-		if ( bio ) {
-			bio.hidden = false;
-		}
+	function release( card ) {
+		card.classList.remove( 'is-dismissed' );
 	}
 
 	cards.forEach( function ( card ) {
-		var open = card.querySelector( '.person-card__open' );
+		var toggle = card.querySelector( '.person-card__open' );
 		var close = card.querySelector( '.person-card__close' );
 
-		if ( open ) {
-			open.addEventListener( 'click', function () {
+		if ( toggle ) {
+			toggle.addEventListener( 'click', function () {
+				/*
+				 * On a pointer device the panel is already open under the cursor,
+				 * so a click would only pin it. Let it pin, and let a second click
+				 * release it — but the common case is touch, where this is the
+				 * only way in.
+				 */
 				if ( card.classList.contains( 'is-open' ) ) {
 					closeCard( card );
-					return;
-				}
-
-				openCard( card );
-
-				// Move focus into the panel that just appeared, so a keyboard
-				// user is not left on a control that is now behind the card.
-				var closeBtn = card.querySelector( '.person-card__close' );
-
-				if ( closeBtn ) {
-					closeBtn.focus();
+				} else {
+					openCard( card );
 				}
 			} );
 		}
 
 		if ( close ) {
-			close.addEventListener( 'click', function () {
+			close.addEventListener( 'click', function ( event ) {
+				event.stopPropagation();
 				closeCard( card );
 
-				if ( open ) {
-					open.focus();
+				if ( toggle ) {
+					toggle.focus();
 				}
 			} );
 		}
 
+		/*
+		 * Hover is handled in CSS. The class is kept in step anyway so that
+		 * aria-expanded does not report "collapsed" while the panel is visibly
+		 * open under someone's cursor.
+		 */
+		card.addEventListener( 'mouseenter', function () {
+			if ( HOVER.matches ) {
+				setExpanded( card, true );
+			}
+		} );
+
+		card.addEventListener( 'mouseleave', function () {
+			release( card );
+
+			if ( HOVER.matches && ! card.classList.contains( 'is-open' ) ) {
+				setExpanded( card, false );
+			}
+		} );
+
+		// Once focus has genuinely left the card, the panel is free to respond
+		// to hover and focus again.
+		card.addEventListener( 'focusout', function ( event ) {
+			if ( ! card.contains( event.relatedTarget ) ) {
+				release( card );
+				setExpanded( card, false );
+			}
+		} );
+
 		card.addEventListener( 'keydown', function ( event ) {
-			if ( 'Escape' === event.key && card.classList.contains( 'is-open' ) ) {
+			if ( 'Escape' === event.key ) {
 				closeCard( card );
 
-				if ( open ) {
-					open.focus();
+				if ( toggle ) {
+					toggle.focus();
 				}
+			}
+		} );
+	} );
+
+	// Tapping elsewhere releases a pinned card.
+	document.addEventListener( 'click', function ( event ) {
+		cards.forEach( function ( card ) {
+			if ( card.classList.contains( 'is-open' ) && ! card.contains( event.target ) ) {
+				closeCard( card );
 			}
 		} );
 	} );
@@ -114,7 +154,7 @@
 			if ( match ) {
 				shown++;
 			} else {
-				// A hidden card must not keep an open biography, or its focus.
+				// A hidden card must not keep a pinned panel, or its focus.
 				closeCard( card );
 			}
 		} );
