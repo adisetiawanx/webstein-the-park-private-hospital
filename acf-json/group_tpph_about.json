@@ -1,0 +1,255 @@
+{
+ "key": "group_tpph_about",
+ "title": "About — Our Hospital",
+ "fields": [
+  {
+   "key": "field_tpph_about_tab_services",
+   "label": "Our Services",
+   "name": "",
+   "type": "tab",
+   "placement": "top"
+  },
+  {
+   "key": "field_tpph_about_services_image",
+   "label": "Image",
+   "name": "services_image",
+   "type": "image",
+   "required": 0,
+   "return_format": "id",
+   "preview_size": "tpph-card",
+   "wrapper": {
+    "width": "40"
+   }
+  },
+  {
+   "key": "field_tpph_about_services_heading",
+   "label": "Heading",
+   "name": "services_heading",
+   "type": "text",
+   "required": 0,
+   "default_value": "Our Services",
+   "wrapper": {
+    "width": "60"
+   }
+  },
+  {
+   "key": "field_tpph_about_services_intro",
+   "label": "Intro",
+   "name": "services_intro",
+   "type": "textarea",
+   "required": 0,
+   "rows": 3,
+   "new_lines": ""
+  },
+  {
+   "key": "field_tpph_about_services_list",
+   "label": "Specialties",
+   "name": "services_list",
+   "type": "repeater",
+   "instructions": "Laid out in two columns with a hairline rule under each.",
+   "required": 0,
+   "layout": "table",
+   "button_label": "Add specialty",
+   "sub_fields": [
+    {
+     "key": "field_tpph_about_service_label",
+     "label": "Specialty",
+     "name": "label",
+     "type": "text",
+     "required": 1
+    }
+   ]
+  },
+  {
+   "key": "field_tpph_about_services_note",
+   "label": "Closing note",
+   "name": "services_note",
+   "type": "textarea",
+   "required": 0,
+   "rows": 3,
+   "new_lines": ""
+  },
+  {
+   "key": "field_tpph_about_band_image",
+   "label": "Full-width photograph",
+   "name": "band_image",
+   "type": "image",
+   "instructions": "The wide ward photograph beneath this section.",
+   "required": 0,
+   "return_format": "id",
+   "preview_size": "tpph-card"
+  },
+  {
+   "key": "field_tpph_about_tab_facilities",
+   "label": "Our Facilities",
+   "name": "",
+   "type": "tab",
+   "placement": "top"
+  },
+  {
+   "key": "field_tpph_about_facilities_heading",
+   "label": "Heading",
+   "name": "facilities_heading",
+   "type": "text",
+   "required": 0,
+   "default_value": "Our Facilities"
+  },
+  {
+   "key": "field_tpph_about_facilities",
+   "label": "Panels",
+   "name": "facilities",
+   "type": "repeater",
+   "instructions": "Two in the design: The Park Private Hospital and Walcott Street Surgical Centre.",
+   "required": 0,
+   "max": 3,
+   "layout": "block",
+   "button_label": "Add panel",
+   "sub_fields": [
+    {
+     "key": "field_tpph_about_facility_title",
+     "label": "Title",
+     "name": "title",
+     "type": "text",
+     "required": 1
+    },
+    {
+     "key": "field_tpph_about_facility_text",
+     "label": "Text",
+     "name": "text",
+     "type": "textarea",
+     "instructions": "A line starting with a dash becomes a bullet.",
+     "required": 0,
+     "rows": 12,
+     "new_lines": ""
+    }
+   ]
+  },
+  {
+   "key": "field_tpph_about_facilities_note",
+   "label": "Note beneath the panels",
+   "name": "facilities_note",
+   "type": "textarea",
+   "instructions": "The design carries the no-emergency-department notice here.",
+   "required": 0,
+   "rows": 3,
+   "new_lines": ""
+  },
+  {
+   "key": "field_tpph_about_tab_vmv",
+   "label": "Vision, Mission and Values",
+   "name": "",
+   "type": "tab",
+   "placement": "top"
+  },
+  {
+   "key": "field_tpph_about_vmv_heading",
+   "label": "Heading",
+   "name": "vmv_heading",
+   "type": "text",
+   "required": 0,
+   "default_value": "Vision, Mission and Values",
+   "wrapper": {
+    "width": "50"
+   }
+  },
+  {
+   "key": "field_tpph_about_vmv_text",
+   "label": "Text",
+   "name": "vmv_text",
+   "type": "textarea",
+   "required": 0,
+   "rows": 6,
+   "new_lines": "",
+   "wrapper": {
+    "width": "50"
+   }
+  },
+  {
+   "key": "field_tpph_about_vmv_cards",
+   "label": "Cards",
+   "name": "vmv_cards",
+   "type": "repeater",
+   "instructions": "Four in the design: Our Vision, Our Mission, Our Values, Principles.",
+   "required": 0,
+   "max": 4,
+   "layout": "block",
+   "button_label": "Add card",
+   "sub_fields": [
+    {
+     "key": "field_tpph_about_vmv_title",
+     "label": "Title",
+     "name": "title",
+     "type": "text",
+     "required": 1,
+     "wrapper": {
+      "width": "30"
+     }
+    },
+    {
+     "key": "field_tpph_about_vmv_style",
+     "label": "Layout",
+     "name": "style",
+     "type": "select",
+     "required": 0,
+     "choices": {
+      "paragraph": "Paragraph",
+      "bullets": "Bullet list"
+     },
+     "default_value": "paragraph",
+     "wrapper": {
+      "width": "20"
+     }
+    },
+    {
+     "key": "field_tpph_about_vmv_text_card",
+     "label": "Text",
+     "name": "text",
+     "type": "textarea",
+     "instructions": "For a bullet list, one bullet per line.",
+     "required": 0,
+     "rows": 5,
+     "new_lines": "",
+     "wrapper": {
+      "width": "50"
+     }
+    }
+   ]
+  },
+  {
+   "key": "field_tpph_about_closing_image",
+   "label": "Closing photograph",
+   "name": "closing_image",
+   "type": "image",
+   "instructions": "The full-width reception photograph at the foot of the page.",
+   "required": 0,
+   "return_format": "id",
+   "preview_size": "tpph-card"
+  }
+ ],
+ "location": [
+  [
+   {
+    "param": "page_template",
+    "operator": "==",
+    "value": "page-templates/about.php"
+   }
+  ]
+ ],
+ "menu_order": 1,
+ "position": "normal",
+ "style": "default",
+ "label_placement": "top",
+ "instruction_placement": "label",
+ "hide_on_screen": [
+  "the_content",
+  "excerpt",
+  "discussion",
+  "comments",
+  "author",
+  "format",
+  "revisions"
+ ],
+ "active": true,
+ "description": "",
+ "show_in_rest": 0
+}

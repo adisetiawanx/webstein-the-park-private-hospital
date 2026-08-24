@@ -2,9 +2,9 @@
 /**
  * Default page template.
  *
- * Banner, then whatever field-driven sections the page has, then its Gutenberg
- * content. Pages that are purely long-form text — Post Operative Care, the stub
- * pages — need nothing beyond this.
+ * Banner, then the page's Gutenberg content. Pages with a field-driven layout
+ * use one of the templates in page-templates/ instead; this is what the four
+ * stub pages and any future plain-text page fall back to.
  *
  * @package tpph
  */
@@ -21,17 +21,6 @@ get_header();
 
 		get_template_part( 'template-parts/sections/page-hero' );
 
-		/*
-		 * Pages with their own field-driven layout provide a part named after
-		 * their slug. Everything else falls through to the content block below.
-		 */
-		$tpph_slug = get_post_field( 'post_name', get_the_ID() );
-		$tpph_part = locate_template( 'template-parts/pages/' . $tpph_slug . '.php' );
-
-		if ( $tpph_part ) {
-			get_template_part( 'template-parts/pages/' . $tpph_slug );
-		}
-
 		if ( trim( get_the_content() ) ) {
 			?>
 			<section class="section">
@@ -40,7 +29,7 @@ get_header();
 				</div>
 			</section>
 			<?php
-		} elseif ( ! $tpph_part ) {
+		} else {
 			get_template_part( 'template-parts/sections/awaiting-content' );
 		}
 

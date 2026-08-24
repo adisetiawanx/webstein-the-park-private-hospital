@@ -1,0 +1,174 @@
+// -----------------------------------------------------------------------------
+// About — Our Hospital
+// -----------------------------------------------------------------------------
+
+@use "../abstracts/breakpoints" as bp;
+
+// Full-bleed photograph band, used twice on this page and on several others.
+.media-band {
+	width: 100%;
+	overflow: hidden;
+}
+
+.media-band__image {
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16 / 5;
+	object-fit: cover;
+
+	@include bp.upto(md) {
+		aspect-ratio: 3 / 2;
+	}
+}
+
+// --- Our Services -----------------------------------------------------------
+
+.about-services__grid {
+	display: grid;
+	gap: var(--sp-lg);
+	grid-template-columns: 1fr;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
+		gap: var(--sp-2xl);
+		align-items: start;
+	}
+}
+
+.about-services__figure {
+	margin: 0;
+
+	img {
+		width: 100%;
+		height: auto;
+		aspect-ratio: 3 / 2.6;
+		object-fit: cover;
+	}
+}
+
+.about-services__intro,
+.about-services__note {
+	max-width: 68ch;
+	margin-top: var(--sp-md);
+}
+
+// Two columns, each item underlined, with a rule between the columns — the
+// hairline grid in the artboard.
+.specialty-list {
+	display: grid;
+	gap: 0 var(--sp-lg);
+	grid-template-columns: 1fr;
+	margin-top: var(--sp-lg);
+
+	@include bp.from(md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.specialty-list__item {
+	padding-block: var(--sp-xs);
+	border-bottom: 1px solid var(--c-rule);
+}
+
+@include bp.from(md) {
+	// Divider between the two columns, drawn on the left-hand items only.
+	.specialty-list__item:nth-child(odd) {
+		padding-right: var(--sp-lg);
+		border-right: 1px solid var(--c-rule);
+	}
+}
+
+// --- Our Facilities ---------------------------------------------------------
+
+.facility-panels {
+	display: grid;
+	grid-template-columns: 1fr;
+	border: 1px solid var(--c-rule);
+	background-color: var(--c-white);
+
+	@include bp.from(md) {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.facility-panel {
+	padding: var(--sp-lg);
+
+	+ .facility-panel {
+		border-top: 1px solid var(--c-rule);
+
+		@include bp.from(md) {
+			border-top: 0;
+			border-left: 1px solid var(--c-rule);
+		}
+	}
+
+	p + p,
+	p + ul,
+	ul + p {
+		margin-top: 1em;
+	}
+
+	ul {
+		margin: 0.5em 0 0;
+		padding-left: 1.2em;
+		list-style: disc;
+	}
+
+	li + li {
+		margin-top: 0.3em;
+	}
+}
+
+.facility-panel__title {
+	margin-bottom: var(--sp-md);
+	font-family: var(--ff-body);
+	font-size: var(--fs-body);
+	font-weight: 400;
+	color: var(--c-text);
+}
+
+.about-facilities__note {
+	margin-top: var(--sp-md);
+	font-size: var(--fs-small);
+}
+
+// --- Vision, Mission and Values ---------------------------------------------
+
+.about-vmv__grid {
+	display: grid;
+	gap: var(--sp-xl);
+	grid-template-columns: 1fr;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
+		gap: var(--sp-2xl);
+		align-items: start;
+	}
+}
+
+.about-vmv__text {
+	margin-top: var(--sp-md);
+	max-width: 46ch;
+}
+
+.statement-card__list {
+	margin: 0;
+	padding-left: 1.1em;
+	list-style: disc;
+
+	li + li {
+		margin-top: 0.5em;
+	}
+}
+
+// Four cards rather than three: the right column drops by half a step, same
+// idea as the homepage.
+.statement-cards--four {
+	@include bp.from(md) {
+		.statement-card:nth-child(2),
+		.statement-card:nth-child(4) {
+			transform: translateY(clamp(1.5rem, 3.5vw, 3.6rem));
+		}
+	}
+}

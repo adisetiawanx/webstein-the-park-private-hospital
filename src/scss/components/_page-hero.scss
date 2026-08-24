@@ -16,6 +16,19 @@
 
 .page-hero--tall {
 	min-height: clamp(260px, 27vw, 515px);
+
+	// The tall variant carries body copy, not just a title, so the wash has to
+	// hold further across the frame to keep that copy legible.
+	.page-hero__media::after {
+		background: linear-gradient(
+			100deg,
+			rgba(255, 255, 255, 0.94) 0%,
+			rgba(255, 255, 255, 0.88) 34%,
+			rgba(255, 255, 255, 0.62) 52%,
+			rgba(255, 255, 255, 0.22) 74%,
+			rgba(255, 255, 255, 0.08) 100%
+		);
+	}
 }
 
 .page-hero__media {

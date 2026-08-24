@@ -167,3 +167,53 @@ function tpph_contact_details() {
 		'lng'      => 115.8747,
 	);
 }
+
+/**
+ * Turn a plain textarea into paragraphs and bullet lists.
+ *
+ * The facility panels in the design mix prose with bulleted lists inside one
+ * block of copy. Rather than hand editors a second field, or a rich-text editor
+ * that would let them break the styling, a line beginning with a dash becomes a
+ * list item and consecutive dashes group into one list.
+ *
+ * @param string $text Raw textarea value.
+ * @return string Escaped HTML.
+ */
+function tpph_lines_to_html( $text ) {
+	$lines   = preg_split( '/\r\n|\r|\n/', (string) $text );
+	$html    = '';
+	$in_list = false;
+
+	foreach ( $lines as $line ) {
+		$line = trim( $line );
+
+		if ( '' === $line ) {
+			continue;
+		}
+
+		$is_bullet = ( 0 === strpos( $line, '-' ) || 0 === strpos( $line, '•' ) );
+
+		if ( $is_bullet ) {
+			if ( ! $in_list ) {
+				$html   .= '<ul>';
+				$in_list = true;
+			}
+
+			$html .= '<li>' . esc_html( trim( ltrim( $line, '-• ' ) ) ) . '</li>';
+			continue;
+		}
+
+		if ( $in_list ) {
+			$html   .= '</ul>';
+			$in_list = false;
+		}
+
+		$html .= '<p>' . esc_html( $line ) . '</p>';
+	}
+
+	if ( $in_list ) {
+		$html .= '</ul>';
+	}
+
+	return $html;
+}
