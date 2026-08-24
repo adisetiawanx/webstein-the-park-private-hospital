@@ -48,6 +48,7 @@ if ( ! $tpph_heading && ! $tpph_services ) {
 			<p class="home-services__action">
 				<a class="btn" href="<?php echo esc_url( $tpph_button['url'] ); ?>">
 					<?php echo esc_html( ! empty( $tpph_button['title'] ) ? $tpph_button['title'] : __( 'Learn More', 'tpph' ) ); ?>
+					<span class="screen-reader-text"><?php esc_html_e( 'about our services', 'tpph' ); ?></span>
 				</a>
 			</p>
 		<?php endif; ?>

@@ -37,6 +37,20 @@ if ( ! $tpph_cards ) {
 									: __( 'Learn More', 'tpph' )
 							);
 							?>
+							<?php
+							/*
+							 * Three buttons reading "Learn More" in a row give a screen
+							 * reader nothing to tell them apart, and Lighthouse flags it
+							 * as non-descriptive link text. The card title supplies the
+							 * destination without changing the visible label.
+							 */
+							?>
+							<span class="screen-reader-text">
+								<?php
+								/* translators: %s: card title. */
+								printf( esc_html__( 'about %s', 'tpph' ), esc_html( $tpph_card['title'] ) );
+								?>
+							</span>
 						</a>
 					<?php endif; ?>
 				</li>
