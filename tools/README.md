@@ -11,7 +11,7 @@ rather than lost in someone's terminal history.
 They are **not** loaded by the theme. Nothing in `functions.php` references
 them.
 
-## Order
+## Rebuilding the content from scratch
 
 ```bash
 # 1. Resize and convert the design images. Writes .upload-staging/
@@ -23,11 +23,36 @@ wp eval-file tools/import-images.php
 # 3. Create the page tree and set the front page
 wp eval-file tools/create-pages.php
 
-# 4. Populate the home page fields
+# 4. Build the menus and assign them to their theme locations
+wp eval-file tools/create-menus.php
+
+# 5. Populate each page
 wp eval-file tools/seed-home.php
+wp eval-file tools/seed-about.php
+wp eval-file tools/seed-team.php             # 4 executives, 8 doctors
+wp eval-file tools/seed-sections.php         # the six section-template pages
+wp eval-file tools/seed-careers-contact.php  # + 3 placeholder vacancies
+wp eval-file tools/seed-meta.php             # Yoast meta descriptions
 ```
 
-All four are idempotent. Re-running skips anything already present.
+Every one is idempotent. Re-running skips or updates rather than duplicating.
+
+## Auditing
+
+Both harnesses run against whatever is at `http://localhost:10010`. They need
+`npm install lighthouse puppeteer-core` in whatever directory you run them from.
+
+```bash
+node tools/lighthouse.mjs                 # four categories, mobile + desktop
+node tools/lighthouse.mjs /about/ /careers/
+node tools/lighthouse.mjs --verbose       # + LCP, TBT, CLS per page
+
+node tools/audit-layout.mjs               # every page at 390 / 834 / 1440:
+                                          # overflow, tiny text, touch targets,
+                                          # missing alt, heading order
+```
+
+Results as of 24 August 2026 are recorded in `../LIGHTHOUSE.md`.
 
 ## Notes
 
