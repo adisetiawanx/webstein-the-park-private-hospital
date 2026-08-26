@@ -52,7 +52,29 @@ node tools/audit-layout.mjs               # every page at 390 / 834 / 1440:
                                           # missing alt, heading order
 ```
 
-Results as of 24 August 2026 are recorded in `../LIGHTHOUSE.md`.
+Results as of 26 August 2026 are recorded in `../LIGHTHOUSE.md`.
+
+The layout audit deliberately ignores anything inside `.map__canvas`. Google's
+map widget renders 10px attribution text, sub-24px zoom buttons and tiles that
+overflow their container by design; flagging all of it every run buries our own
+findings.
+
+## Comparing against the design
+
+```bash
+node tools/capture-pages.mjs        # every page at the artboards' own 1920 canvas
+python tools/compare-to-design.py   # design left, build right, one sheet per page
+```
+
+Captures are stitched from viewport-sized slices rather than taken with
+`fullPage`. Chrome's full-page capture does not reliably resolve lazy-loaded
+images in headless — it silently dropped the About photograph on one run and the
+testimonial on another, which reads as a missing image when you are checking a
+design match. Scrolling and shooting one viewport at a time only ever captures
+what is genuinely painted.
+
+This is how the 1610 container and the 6:1 band ratio were measured; both had
+been estimated wrongly by eye.
 
 ## Notes
 
