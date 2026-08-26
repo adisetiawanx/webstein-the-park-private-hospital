@@ -24,7 +24,9 @@
 						"media": "Full-width photograph"
 					},
 					"default_value": "text",
-					"wrapper": { "width": "50" }
+					"wrapper": {
+						"width": "50"
+					}
 				},
 				{
 					"key": "field_tpph_section_background",
@@ -32,11 +34,22 @@
 					"name": "background",
 					"type": "select",
 					"required": 0,
-					"choices": { "white": "White", "cream": "Cream" },
+					"choices": {
+						"white": "White",
+						"cream": "Cream"
+					},
 					"default_value": "white",
-					"wrapper": { "width": "25" },
+					"wrapper": {
+						"width": "25"
+					},
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "!=", "value": "media" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "!=",
+								"value": "media"
+							}
+						]
 					]
 				},
 				{
@@ -47,9 +60,39 @@
 					"required": 0,
 					"ui": 1,
 					"default_value": 0,
-					"wrapper": { "width": "25" },
+					"wrapper": {
+						"width": "25"
+					},
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_background", "operator": "==", "value": "cream" } ]
+						[
+							{
+								"field": "field_tpph_section_background",
+								"operator": "==",
+								"value": "cream"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_tpph_section_panel",
+					"label": "White panel behind the text",
+					"name": "panel",
+					"type": "true_false",
+					"instructions": "Safety and Quality sets its text on a white card over the cream band.",
+					"required": 0,
+					"ui": 1,
+					"default_value": 0,
+					"wrapper": {
+						"width": "25"
+					},
+					"conditional_logic": [
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "text"
+							}
+						]
 					]
 				},
 				{
@@ -59,7 +102,13 @@
 					"type": "text",
 					"required": 0,
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "!=", "value": "media" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "!=",
+								"value": "media"
+							}
+						]
 					]
 				},
 				{
@@ -72,7 +121,13 @@
 					"rows": 12,
 					"new_lines": "",
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "==", "value": "text" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "text"
+							}
+						]
 					]
 				},
 				{
@@ -86,7 +141,13 @@
 					"preview_size": "tpph-card",
 					"insert": "append",
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "==", "value": "text" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "text"
+							}
+						]
 					]
 				},
 				{
@@ -95,11 +156,22 @@
 					"name": "media_position",
 					"type": "select",
 					"required": 0,
-					"choices": { "right": "Right of the text", "left": "Left of the text" },
+					"choices": {
+						"right": "Right of the text",
+						"left": "Left of the text"
+					},
 					"default_value": "right",
-					"wrapper": { "width": "50" },
+					"wrapper": {
+						"width": "50"
+					},
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "==", "value": "text" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "text"
+							}
+						]
 					]
 				},
 				{
@@ -111,7 +183,13 @@
 					"layout": "block",
 					"button_label": "Add column",
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "==", "value": "columns" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "columns"
+							}
+						]
 					],
 					"sub_fields": [
 						{
@@ -122,7 +200,9 @@
 							"required": 0,
 							"return_format": "id",
 							"preview_size": "tpph-card",
-							"wrapper": { "width": "30" }
+							"wrapper": {
+								"width": "30"
+							}
 						},
 						{
 							"key": "field_tpph_column_title",
@@ -130,7 +210,9 @@
 							"name": "title",
 							"type": "text",
 							"required": 0,
-							"wrapper": { "width": "70" }
+							"wrapper": {
+								"width": "70"
+							}
 						},
 						{
 							"key": "field_tpph_column_text",
@@ -153,7 +235,39 @@
 					"return_format": "id",
 					"preview_size": "tpph-card",
 					"conditional_logic": [
-						[ { "field": "field_tpph_section_layout", "operator": "==", "value": "media" } ]
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "media"
+							}
+						]
+					]
+				},
+				{
+					"key": "field_tpph_section_band_height",
+					"label": "Band height",
+					"name": "band_height",
+					"type": "select",
+					"instructions": "How deep the strip is. The design varies this from a thin sliver to a half-height photograph.",
+					"required": 0,
+					"choices": {
+						"short": "Thin strip",
+						"standard": "Standard",
+						"tall": "Deep"
+					},
+					"default_value": "standard",
+					"wrapper": {
+						"width": "50"
+					},
+					"conditional_logic": [
+						[
+							{
+								"field": "field_tpph_section_layout",
+								"operator": "==",
+								"value": "media"
+							}
+						]
 					]
 				}
 			]
@@ -173,7 +287,15 @@
 	"style": "default",
 	"label_placement": "top",
 	"instruction_placement": "label",
-	"hide_on_screen": [ "the_content", "excerpt", "discussion", "comments", "author", "format", "revisions" ],
+	"hide_on_screen": [
+		"the_content",
+		"excerpt",
+		"discussion",
+		"comments",
+		"author",
+		"format",
+		"revisions"
+	],
 	"active": true,
 	"description": "",
 	"show_in_rest": 0

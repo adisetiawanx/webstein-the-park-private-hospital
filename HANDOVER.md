@@ -77,11 +77,14 @@ anything.
 
 ## 6. Needed from Webstein, not the client
 
-- **Google Maps API key.** The design's map is custom styled — cream base, green
-  roads — which needs the Maps JavaScript API. Until the key is set the site
-  renders a styled static map with a working Get Directions link, so nothing is
-  broken. Add it to `wp-config.php` as `TPPH_GOOGLE_MAPS_KEY` and restrict it to
-  the live domain.
+- **Google Maps API key — supplied and installed** on the local build as
+  `TPPH_GOOGLE_MAPS_KEY` in `wp-config.php`. The map now renders live on Home
+  and Contact Us in the brand palette.
+
+  Two things still to do before launch: **add the same constant to the staging
+  and production `wp-config.php`**, and **restrict the key** to the site's
+  domains in the Google Cloud console. An unrestricted key can be lifted from
+  the page source and billed to the account.
 
 ## 7. Worth flagging, low priority
 

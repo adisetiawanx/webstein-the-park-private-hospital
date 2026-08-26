@@ -44,7 +44,17 @@ while ( have_posts() ) :
 					continue;
 				}
 				?>
-				<div class="media-band">
+				<?php
+				$tpph_band = $tpph_section['band_height'] ?? 'standard';
+				$tpph_band_class = 'media-band';
+
+				if ( 'short' === $tpph_band ) {
+					$tpph_band_class .= ' media-band--short';
+				} elseif ( 'tall' === $tpph_band ) {
+					$tpph_band_class .= ' media-band--tall';
+				}
+				?>
+				<div class="<?php echo esc_attr( $tpph_band_class ); ?>">
 					<?php
 					tpph_image(
 						$tpph_image,
@@ -124,6 +134,15 @@ while ( have_posts() ) :
 				<?php endif; ?>
 
 				<div class="container">
+					<?php
+					// Safety and Quality sets its text on a white card over the cream
+					// band. Nothing else in the design does.
+					$tpph_panel = ! empty( $tpph_section['panel'] );
+
+					if ( $tpph_panel ) {
+						echo '<div class="text-panel">';
+					}
+					?>
 					<div class="text-band<?php echo $tpph_has_media ? ' text-band--with-media text-band--media-' . esc_attr( $tpph_position ) : ''; ?>">
 
 						<div class="text-band__body">
@@ -153,6 +172,11 @@ while ( have_posts() ) :
 						<?php endif; ?>
 
 					</div>
+					<?php
+					if ( $tpph_panel ) {
+						echo '</div>';
+					}
+					?>
 				</div>
 			</section>
 			<?php

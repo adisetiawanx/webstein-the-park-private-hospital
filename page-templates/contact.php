@@ -60,8 +60,19 @@ while ( have_posts() ) :
 		</section>
 
 		<?php if ( $tpph_closing ) : ?>
-			<div class="media-band">
-				<?php tpph_image( $tpph_closing, 'tpph-wide', array( 'class' => 'media-band__image', 'sizes' => '100vw' ) ); ?>
+			<?php // Unlike the other closing photographs this one sits inside the
+			      // container in the artboard, not edge to edge. ?>
+			<div class="media-band media-band--boxed container">
+				<?php
+				tpph_image(
+					$tpph_closing,
+					'tpph-wide',
+					array(
+						'class' => 'media-band__image',
+						'sizes' => '(min-width: 1610px) 1610px, 100vw',
+					)
+				);
+				?>
 			</div>
 		<?php endif; ?>
 

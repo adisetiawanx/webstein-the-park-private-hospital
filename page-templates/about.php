@@ -156,7 +156,8 @@ while ( have_posts() ) :
 		<?php endif; ?>
 
 		<?php if ( $tpph_closing_image ) : ?>
-			<div class="media-band">
+			<?php // Artboard runs this one at 9.75:1, thinner than the ward band above. ?>
+			<div class="media-band media-band--short">
 				<?php
 				tpph_image(
 					$tpph_closing_image,

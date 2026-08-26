@@ -259,7 +259,7 @@
 		top: 100%;
 		left: -1rem;
 		z-index: var(--z-dropdown);
-		min-width: 15rem;
+		min-width: 18.5rem; // 296px, matching the artboard panel.
 		padding: var(--sp-2xs) var(--sp-md) var(--sp-sm);
 		background-color: var(--c-green);
 		opacity: 0;

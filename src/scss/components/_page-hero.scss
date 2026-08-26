@@ -10,12 +10,12 @@
 	align-items: center;
 	// The artboards run this band at roughly 260px on a 1920 canvas — a slim
 	// strip, not a hero. Our Hospital is the exception and grows with its copy.
-	min-height: clamp(150px, 13.5vw, 260px);
+	min-height: clamp(150px, 13.1vw, 251px);
 	overflow: hidden;
 }
 
 .page-hero--tall {
-	min-height: clamp(260px, 27vw, 515px);
+	min-height: clamp(260px, 26vw, 500px);
 
 	// The tall variant carries body copy, not just a title, so the wash has to
 	// hold further across the frame to keep that copy legible.
@@ -57,7 +57,9 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	object-position: center;
+	// Weighted upward. A 3:2 photograph centre-cropped into a 251px strip lands
+	// on the ground-level signage; the artboard shows the roofline.
+	object-position: center 34%;
 }
 
 .page-hero__inner {

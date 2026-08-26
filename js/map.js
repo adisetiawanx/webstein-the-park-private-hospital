@@ -50,12 +50,20 @@
 			lng: parseFloat( container.dataset.lng )
 		};
 
+		/*
+		 * Google's own zoom buttons are below the 24px touch-target minimum and
+		 * Lighthouse flags them on mobile. On touch they are redundant anyway —
+		 * cooperative gesture handling already allows pinch to zoom — so they are
+		 * only offered to pointer devices.
+		 */
+		var pointer = window.matchMedia( '(hover: hover) and (pointer: fine)' ).matches;
+
 		var map = new window.google.maps.Map( canvas, {
 			center: position,
 			zoom: parseInt( container.dataset.zoom, 10 ) || 14,
 			styles: STYLE,
 			disableDefaultUI: true,
-			zoomControl: true,
+			zoomControl: pointer,
 			// The map is decorative until the visitor engages with it. Scroll
 			// wheel zoom would otherwise trap the page scroll on the way past.
 			gestureHandling: 'cooperative'

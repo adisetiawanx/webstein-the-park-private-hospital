@@ -13,11 +13,40 @@
 .media-band__image {
 	width: 100%;
 	height: auto;
-	aspect-ratio: 16 / 5;
+	// Artboard measurements for these bands: About ward 6.38:1, Careers 6.17:1,
+	// Visitors 5.42:1. 6:1 sits in the middle of them. They are thin decorative
+	// strips in the design, not feature images — 16/5 was nearly twice as tall
+	// as any of them.
+	aspect-ratio: var(--band-ratio, 6 / 1);
 	object-fit: cover;
+
+	@include bp.upto(lg) {
+		aspect-ratio: 12 / 5;
+	}
 
 	@include bp.upto(md) {
 		aspect-ratio: 3 / 2;
+	}
+}
+
+// Artboard 9.75:1 — the closing reception strip on Our Hospital.
+.media-band--short {
+	--band-ratio: 10 / 1;
+}
+
+// Artboard 3.63:1 — the bathroom photograph closing Patient Rights.
+.media-band--tall {
+	--band-ratio: 18 / 5;
+}
+
+// Contact Us is the one closing photograph the artboard keeps inside the
+// container rather than running edge to edge.
+.media-band--boxed {
+	margin-top: var(--sp-xl);
+
+	.media-band__image {
+		// 4.9:1 in the artboard.
+		--band-ratio: 5 / 1;
 	}
 }
 

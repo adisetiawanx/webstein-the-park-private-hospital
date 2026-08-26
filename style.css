@@ -53,7 +53,7 @@ Tags:        healthcare, hospital, custom-theme
   --sp-xl: 4rem;
   --sp-2xl: 6rem;
   --sp-section: clamp(3.5rem, 2.4rem + 4.5vw, 7rem);
-  --container: 1440px;
+  --container: 1610px;
   --container-narrow: 1100px;
   --gutter: clamp(1.25rem, 0.6rem + 2.8vw, 5rem);
   --radius: 0;
@@ -704,7 +704,7 @@ p + p {
     top: 100%;
     left: -1rem;
     z-index: var(--z-dropdown);
-    min-width: 15rem;
+    min-width: 18.5rem;
     padding: var(--sp-2xs) var(--sp-md) var(--sp-sm);
     background-color: var(--c-green);
     opacity: 0;
@@ -1088,7 +1088,7 @@ body.nav-open {
 .promo-card__title {
   margin-bottom: var(--sp-md);
   color: var(--c-on-dark);
-  max-width: 18ch;
+  max-width: 26ch;
 }
 
 .promo-card__text {
@@ -1137,7 +1137,7 @@ body.nav-open {
 
 .accreditation__label {
   font-size: var(--fs-small);
-  max-width: 18ch;
+  max-width: 24ch;
 }
 
 .testimonials {
@@ -1213,12 +1213,12 @@ body.nav-open {
   position: relative;
   display: flex;
   align-items: center;
-  min-height: clamp(150px, 13.5vw, 260px);
+  min-height: clamp(150px, 13.1vw, 251px);
   overflow: hidden;
 }
 
 .page-hero--tall {
-  min-height: clamp(260px, 27vw, 515px);
+  min-height: clamp(260px, 26vw, 500px);
 }
 .page-hero--tall .page-hero__media::after {
   background: linear-gradient(100deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.88) 34%, rgba(255, 255, 255, 0.62) 52%, rgba(255, 255, 255, 0.22) 74%, rgba(255, 255, 255, 0.08) 100%);
@@ -1240,7 +1240,7 @@ body.nav-open {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center 34%;
 }
 
 .page-hero__inner {
@@ -1267,13 +1267,33 @@ body.nav-open {
 .media-band__image {
   width: 100%;
   height: auto;
-  aspect-ratio: 16/5;
+  aspect-ratio: var(--band-ratio, 6/1);
   object-fit: cover;
+}
+@media (max-width: 1023.98px) {
+  .media-band__image {
+    aspect-ratio: 12/5;
+  }
 }
 @media (max-width: 767.98px) {
   .media-band__image {
     aspect-ratio: 3/2;
   }
+}
+
+.media-band--short {
+  --band-ratio: 10 / 1;
+}
+
+.media-band--tall {
+  --band-ratio: 18 / 5;
+}
+
+.media-band--boxed {
+  margin-top: var(--sp-xl);
+}
+.media-band--boxed .media-band__image {
+  --band-ratio: 5 / 1;
 }
 
 .about-services__grid {
@@ -1698,6 +1718,15 @@ body.nav-open {
   .text-band__media--collage > img:first-child {
     grid-row: span 2;
   }
+}
+
+.text-panel {
+  padding: clamp(1.75rem, 3.5vw, 4rem) clamp(1.5rem, 6vw, 7rem);
+  background-color: var(--c-white);
+}
+.text-panel .text-band__body {
+  max-width: 78ch;
+  margin-inline: auto;
 }
 
 .column-band {

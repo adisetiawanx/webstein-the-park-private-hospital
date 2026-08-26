@@ -1,6 +1,6 @@
 # Lighthouse results
 
-Recorded 24 August 2026 against the LocalWP build at `http://localhost:10010`,
+Recorded 26 August 2026 against the LocalWP build at `http://localhost:10010`,
 Lighthouse 13.4.1, headless Chrome. Mobile runs use the standard Moto G Power
 emulation with 4× CPU throttling and Slow 4G; desktop uses the standard desktop
 preset.
@@ -14,7 +14,7 @@ desktop.**
 |---|---|---:|---:|---:|---:|
 | Home | mobile | 98 | 100 | 100 | 100 |
 | Home | desktop | 100 | 100 | 100 | 100 |
-| About — Our Hospital | mobile | 98 | 100 | 100 | 100 |
+| About — Our Hospital | mobile | 99 | 100 | 100 | 100 |
 | About — Our Hospital | desktop | 100 | 100 | 100 | 100 |
 | About — Our Team | mobile | 98 | 100 | 100 | 100 |
 | About — Our Team | desktop | 100 | 100 | 100 | 100 |
@@ -32,12 +32,16 @@ desktop.**
 | Safety and Quality | desktop | 100 | 100 | 100 | 100 |
 | Careers | mobile | 98 | 100 | 100 | 100 |
 | Careers | desktop | 100 | 100 | 100 | 100 |
-| Contact Us | mobile | 98 | 100 | 100 | 100 |
-| Contact Us | desktop | 100 | 100 | 100 | 100 |
+| Contact Us | mobile | 98 | 100 | **96** | 100 |
+| Contact Us | desktop | 100 | 100 | **96** | 100 |
 | Make a Payment (stub) | mobile | 99 | 100 | 100 | **92** |
 | Make a Payment (stub) | desktop | 100 | 100 | 100 | **92** |
 
 **Lowest score anywhere: 92.** Every page clears the target on every category.
+
+Run with the live Google Maps key in place. The facade holds: Home and Contact
+Us still score 98 on mobile Performance with the real map on the page, because
+it only hydrates once the visitor scrolls near it.
 
 Reproduce with:
 
@@ -70,6 +74,15 @@ node tools/lighthouse.mjs /about/ /careers/    # specific pages
 of the four pages the design links to but never designs, so there is no content
 to describe. It will reach 100 as soon as the client supplies copy. The same
 applies to Fees Charges & Insurance, Privacy Policy and Disclaimer.
+
+**Contact Us scores 96 on Best Practices** and, before the fix below, 96 on
+mobile Accessibility. Both findings sit inside Google's own map widget, not our
+markup: a low-resolution `transparent.png` tile spacer served from
+`maps.gstatic.com`, and Google's zoom buttons falling under the 24px touch
+target minimum. The zoom control is now offered only to pointer devices —
+cooperative gesture handling already covers pinch-to-zoom on touch, so nothing
+is lost — which clears the accessibility finding. The tile spacer is Google's
+and cannot be changed.
 
 **"Use efficient cache lifetimes"** is flagged on every page. This is the
 LocalWP nginx default, not something the theme controls. Set far-future

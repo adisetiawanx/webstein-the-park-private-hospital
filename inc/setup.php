@@ -69,6 +69,6 @@ add_filter( 'image_size_names_choose', 'tpph_custom_image_size_names' );
  * Content width used by embeds and wide blocks.
  */
 function tpph_content_width() {
-	$GLOBALS['content_width'] = 1440;
+	$GLOBALS['content_width'] = 1610;
 }
 add_action( 'after_setup_theme', 'tpph_content_width', 0 );

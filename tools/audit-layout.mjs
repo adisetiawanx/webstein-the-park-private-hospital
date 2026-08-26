@@ -59,9 +59,15 @@ const VIEWPORTS = [
         const vw = de.clientWidth;
 
         // Anything sticking out horizontally, ignoring the off-canvas drawer.
+        // Everything Google renders inside the map is theirs: 10px attribution
+        // text, sub-24px zoom buttons, and tiles that deliberately overflow
+        // their container. Flagging it every run buries our own findings.
+        const ours = (el) => !el.closest('.map__canvas');
+
         const overflow = [];
         document.querySelectorAll('body *').forEach((el) => {
           if (el.closest('#primary-navigation') && window.innerWidth < 1024) return;
+          if (!ours(el)) return;
           const b = el.getBoundingClientRect();
           if (b.width > 0 && (b.right > vw + 2 || b.left < -2)) {
             overflow.push(
@@ -77,7 +83,7 @@ const VIEWPORTS = [
         // Text small enough to fail Lighthouse's legible-font-size audit.
         const tiny = [];
         document.querySelectorAll('p, li, span, a, td').forEach((el) => {
-          if (!el.textContent.trim()) return;
+          if (!el.textContent.trim() || !ours(el)) return;
           const fs = parseFloat(getComputedStyle(el).fontSize);
           if (fs && fs < 12) tiny.push(el.tagName.toLowerCase() + ' ' + fs + 'px');
         });
@@ -85,6 +91,7 @@ const VIEWPORTS = [
         // Interactive targets smaller than 24px in either axis.
         const small = [];
         document.querySelectorAll('a, button').forEach((el) => {
+          if (!ours(el)) return;
           const b = el.getBoundingClientRect();
           if (b.width === 0 || b.height === 0) return;
           if (b.width < 24 || b.height < 24) {
