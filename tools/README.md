@@ -76,6 +76,28 @@ what is genuinely painted.
 This is how the 1610 container and the 6:1 band ratio were measured; both had
 been estimated wrongly by eye.
 
+The capture waits for the Google map to finish hydrating before shooting the
+slice it sits in. Without that the map is caught mid-load and reads as broken
+when it is fine on the page.
+
+## Regenerating the tree watermark
+
+The supplied `assets/images/Mask Group 32.png` is olive at 10% alpha. Alpha on a
+leaf silhouette will not compress, and the design only sets it on cream or on
+white, so it is flattened onto each:
+
+```python
+from PIL import Image
+m = Image.open('assets/images/Mask Group 32.png').convert('RGBA')
+m = m.crop(m.getbbox())
+m = m.resize((820, round(m.size[1] * 820 / m.size[0])), Image.LANCZOS)
+for name, bg in (('tree-ornament.webp', (247, 251, 234)),
+                 ('tree-ornament-white.webp', (255, 255, 255))):
+    base = Image.new('RGBA', m.size, bg + (255,))
+    Image.alpha_composite(base, m).convert('RGB').save(
+        'assets/theme/img/' + name, format='WEBP', quality=86, method=6)
+```
+
 ## Notes
 
 **`prepare-images.py`** needs Pillow (`pip install Pillow`). It reads

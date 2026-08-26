@@ -45,7 +45,7 @@ while ( have_posts() ) :
 				<img
 					class="section__ornament"
 					src="<?php echo esc_url( TPPH_URI . '/assets/theme/img/tree-ornament.webp' ); ?>"
-					width="822" height="804" alt="" aria-hidden="true" loading="lazy" decoding="async"
+					width="820" height="801" alt="" aria-hidden="true" loading="lazy" decoding="async"
 				>
 
 				<div class="container">

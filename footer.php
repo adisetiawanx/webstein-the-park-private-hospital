@@ -22,7 +22,7 @@ $tpph_contact = tpph_contact_details();
 				<img
 					src="<?php echo esc_url( TPPH_URI . '/assets/theme/logos/tpph-logo.png' ); ?>"
 					width="480"
-					height="178"
+					height="173"
 					alt="<?php esc_attr_e( 'The Park Private Hospital', 'tpph' ); ?>"
 					loading="lazy"
 					decoding="async"

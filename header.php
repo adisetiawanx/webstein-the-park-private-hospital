@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) || exit;
 				<img
 					src="<?php echo esc_url( $logo_png ); ?>"
 					width="480"
-					height="178"
+					height="173"
 					alt="<?php esc_attr_e( 'The Park Private Hospital', 'tpph' ); ?>"
 					fetchpriority="high"
 					decoding="sync"

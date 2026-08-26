@@ -76,9 +76,9 @@ while ( have_posts() ) :
 				?>
 				<section class="<?php echo esc_attr( $tpph_classes ); ?>">
 					<?php if ( ! empty( $tpph_section['ornament'] ) ) : ?>
-						<img class="section__ornament"
+						<img class="section__ornament<?php echo 'right' === ( $tpph_section['ornament_side'] ?? 'left' ) ? ' section__ornament--right' : ''; ?>"
 							src="<?php echo esc_url( TPPH_URI . '/assets/theme/img/tree-ornament.webp' ); ?>"
-							width="822" height="804" alt="" aria-hidden="true" loading="lazy" decoding="async">
+							width="820" height="801" alt="" aria-hidden="true" loading="lazy" decoding="async">
 					<?php endif; ?>
 
 					<div class="container">
@@ -128,9 +128,9 @@ while ( have_posts() ) :
 			?>
 			<section class="<?php echo esc_attr( $tpph_classes ); ?>">
 				<?php if ( ! empty( $tpph_section['ornament'] ) ) : ?>
-					<img class="section__ornament"
+					<img class="section__ornament<?php echo 'right' === ( $tpph_section['ornament_side'] ?? 'left' ) ? ' section__ornament--right' : ''; ?>"
 						src="<?php echo esc_url( TPPH_URI . '/assets/theme/img/tree-ornament.webp' ); ?>"
-						width="822" height="804" alt="" aria-hidden="true" loading="lazy" decoding="async">
+						width="820" height="801" alt="" aria-hidden="true" loading="lazy" decoding="async">
 				<?php endif; ?>
 
 				<div class="container">

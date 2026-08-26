@@ -76,6 +76,23 @@ async function captureSlices( name ) {
           )
       );
     } );
+    // The map hydrates on IntersectionObserver, so a slice can be shot while
+    // Google is still fetching tiles. Wait for it before capturing that slice.
+    await page.evaluate( async () => {
+      const map = document.querySelector( '[data-map]' );
+      if ( ! map ) return;
+      const r = map.getBoundingClientRect();
+      if ( r.bottom < 0 || r.top > window.innerHeight ) return;
+      await new Promise( ( res ) => {
+        if ( map.classList.contains( 'is-loaded' ) ) return res();
+        const t = setInterval( () => {
+          if ( map.classList.contains( 'is-loaded' ) ) { clearInterval( t ); res(); }
+        }, 200 );
+        setTimeout( () => { clearInterval( t ); res(); }, 12000 );
+      } );
+      await new Promise( ( res ) => setTimeout( res, 2500 ) );
+    } );
+
     await new Promise( ( r ) => setTimeout( r, 320 ) );
 
     const file = `${ OUT }/_slice-${ name }-${ i }.png`;

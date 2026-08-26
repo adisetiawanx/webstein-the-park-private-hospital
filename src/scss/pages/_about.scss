@@ -191,6 +191,14 @@
 	}
 }
 
+// The Principles card runs 126px over the closing photograph in the artboard.
+// The section's own bottom padding has to be cancelled as well as the gap.
+.about-vmv + .media-band {
+	@include bp.from(lg) {
+		margin-top: -11.25rem;
+	}
+}
+
 // Four cards rather than three: the right column drops by half a step, same
 // idea as the homepage.
 .statement-cards--four {

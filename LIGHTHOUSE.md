@@ -84,6 +84,12 @@ cooperative gesture handling already covers pinch-to-zoom on touch, so nothing
 is lost — which clears the accessibility finding. The tile spacer is Google's
 and cannot be changed.
 
+**Home SEO reads 100 normally but can dip to 92** on a run where the map happens
+to hydrate inside the audit window. The finding is Google's own attribution
+links — "Terms", "Report a map error", "Keyboard shortcuts" — which the Maps
+terms of service require and which cannot be relabelled. It is below the fold,
+so most runs never see it.
+
 **"Use efficient cache lifetimes"** is flagged on every page. This is the
 LocalWP nginx default, not something the theme controls. Set far-future
 `Cache-Control` on `/wp-content/uploads/`, `/wp-content/themes/` and the font

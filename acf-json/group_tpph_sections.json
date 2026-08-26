@@ -74,6 +74,30 @@
 					]
 				},
 				{
+					"key": "field_tpph_section_ornament_side",
+					"label": "Watermark side",
+					"name": "ornament_side",
+					"type": "select",
+					"required": 0,
+					"choices": {
+						"left": "Left",
+						"right": "Right"
+					},
+					"default_value": "left",
+					"wrapper": {
+						"width": "25"
+					},
+					"conditional_logic": [
+						[
+							{
+								"field": "field_tpph_section_ornament",
+								"operator": "==",
+								"value": "1"
+							}
+						]
+					]
+				},
+				{
 					"key": "field_tpph_section_panel",
 					"label": "White panel behind the text",
 					"name": "panel",

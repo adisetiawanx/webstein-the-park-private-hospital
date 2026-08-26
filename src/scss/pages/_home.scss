@@ -102,6 +102,10 @@
 .statement-cards {
 	display: grid;
 	gap: var(--sp-md);
+	// Each card sizes to its own copy. Stretching them to the row height made
+	// the short cards as deep as Principles, so they overlapped the photograph
+	// below as well — in the artboard only Principles does.
+	align-items: start;
 	grid-template-columns: 1fr;
 
 	@include bp.from(md) {
@@ -110,6 +114,10 @@
 }
 
 .statement-card {
+	// Above the photograph that tucks under it. The artboard runs the image up
+	// behind the bottom edge of the cards rather than clearing them.
+	position: relative;
+	z-index: 2;
 	padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
@@ -137,8 +145,9 @@
 	margin-top: var(--sp-xl);
 
 	@include bp.from(md) {
-		// Clears the dropped second card.
-		margin-top: clamp(2.5rem, 6vw, 5.5rem);
+		// Measured off the artboard: the photograph starts 38px above the bottom
+		// of the lowest card and runs behind it. Cards carry the z-index.
+		margin-top: -2.4rem;
 	}
 }
 

@@ -69,7 +69,7 @@ Read out of the XD fill values, defined in `src/scss/abstracts/_tokens.scss` and
 | `--c-olive` | `#4d5b31` | Accents, eyebrows, icon strokes |
 | `--c-cream` | `#f7fbea` | Alternating section background |
 | `--c-mint` | `#eafbed` | Footer band |
-| `--c-ornament` | `#e3e7d9` | Tree watermark over the cream bands |
+| `--c-ornament` | `#e3e7d9` | Tree watermark — olive `#3b451d` at 10%, flattened onto the band it sits on |
 
 Every pairing the design uses clears **WCAG AA**, so no colour had to be changed for accessibility:
 
@@ -84,11 +84,24 @@ Every pairing the design uses clears **WCAG AA**, so no colour had to be changed
 
 ### Type scale
 
-The XD canvas is 1920 wide with a 45px H1 — small for its canvas. We build to a **1440** container and hold the absolute sizes rather than scaling them down by 25%, which preserves the proportion the designer intended instead of leaving laptops with tiny type in a wide, empty page. Sizes are fluid via `clamp()`.
+The XD canvas is 1920 wide with a 45px H1 — small for its canvas. Type sizes are held at their absolute values rather than scaled down, which preserves the proportion the designer intended. Sizes are fluid via `clamp()`.
+
+The container is **1610px**, measured rather than estimated: the Home promo cards run `x=154..1765` on the 1920 artboard. An earlier 1440 estimate inset every page by 150px a side and pushed the home hero copy well right of where it belongs.
 
 ### Breakpoints
 
 `480 / 768 / 1024 / 1440`. There are **no mobile or tablet artboards** in the design, so all responsive behaviour is a development decision. The notable one: the overlapping Vision/Mission/Values cards unwind to a plain stack below 768, because the offset is decorative and only produces collisions on small screens.
+
+### The tree watermark
+
+Supplied as `assets/images/Mask Group 32.png`: olive `rgb(59, 69, 29)` at 10%
+alpha. Alpha on a leaf silhouette does not compress — the transparent file came
+out at 66KB even at quality 55 — and the design only ever sets it on cream or on
+white, so it is flattened onto each. Two files, 23KB apiece, in
+`assets/theme/img/`.
+
+Regenerate both from the source with the snippet in `tools/README.md` if the
+band colours ever change.
 
 ### Fonts
 
