@@ -4,10 +4,12 @@
 
 @use "breakpoints" as bp;
 
-// Centred page container.
+// Centred page container. $width is the *content* width — the artboard sets its
+// copy on a 1610 measure at 1920, with the 155px margins outside that — so the
+// gutter is added to the max-width rather than eating into it.
 @mixin container($width: var(--container)) {
 	width: 100%;
-	max-width: $width;
+	max-width: calc(#{$width} + var(--gutter) * 2);
 	margin-inline: auto;
 	padding-inline: var(--gutter);
 }

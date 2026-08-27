@@ -16,7 +16,9 @@
 	--header-height: 72px;
 
 	@include bp.from(lg) {
-		--header-height: 88px;
+		// The white bar is 108px tall on every artboard, with the 183x66 logo
+		// centred in it.
+		--header-height: 108px;
 	}
 }
 
@@ -52,7 +54,7 @@
 	line-height: 0;
 
 	img {
-		width: clamp(150px, 12vw, 205px);
+		width: clamp(150px, 9.6vw, 183px);
 		height: auto;
 	}
 }
@@ -184,9 +186,12 @@
 	display: block;
 	padding-block: var(--sp-sm);
 	color: var(--c-green);
-	font-size: var(--fs-eyebrow);
+	// 16px in the XD at 1920, set uppercase. Eight items, a logo and a button do
+	// not fit on one row below that, so it scales down to 13 by 1280 rather than
+	// overflowing.
+	font-size: clamp(0.8125rem, 0.4375rem + 0.469vw, 1rem);
 	font-weight: 400;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.01em;
 	text-decoration: none;
 	text-transform: uppercase;
 	white-space: nowrap;
@@ -287,19 +292,25 @@
 }
 
 .nav__subitem + .nav__subitem .nav__sublink {
-	border-top: 1px solid rgba(255, 255, 255, 0.28);
+	// #b4e6a4 — the pale green the artboard rules these with, not a white tint.
+	border-top: 1px solid var(--c-lime-pale);
 }
 
 .nav__sublink {
 	display: block;
-	padding-block: 0.6rem;
-	color: var(--c-on-dark);
-	font-size: var(--fs-small);
+	// 48px per item on the artboard, with the label in Noto Sans Bold 17 white.
+	padding: 12px 9px;
+	color: var(--c-white);
+	font-size: var(--fs-label);
+	font-weight: 700;
+	line-height: var(--lh-body);
 	text-decoration: none;
 	transition: opacity var(--transition-fast);
 
 	@include bp.upto(lg) {
+		padding-inline: 0;
 		color: var(--c-text);
+		font-weight: 400;
 		border-top: 0;
 	}
 

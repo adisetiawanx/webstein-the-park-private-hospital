@@ -29,12 +29,17 @@
 				{
 					"slug": "brown",
 					"color": "#483932",
-					"name": "Body Brown"
+					"name": "Rule Brown"
 				},
 				{
 					"slug": "olive",
 					"color": "#4d5b31",
 					"name": "Olive Accent"
+				},
+				{
+					"slug": "lime",
+					"color": "#8aba31",
+					"name": "Lime Accent"
 				},
 				{
 					"slug": "cream",

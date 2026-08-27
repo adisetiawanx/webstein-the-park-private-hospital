@@ -15,7 +15,8 @@
 .map {
 	position: relative;
 	width: 100%;
-	height: clamp(280px, 26vw, 470px);
+	// 731 tall and edge to edge on Home, 334 inside the container on Contact.
+	height: var(--map-height, clamp(280px, 26vw, 470px));
 	background-color: var(--c-cream);
 	overflow: hidden;
 }

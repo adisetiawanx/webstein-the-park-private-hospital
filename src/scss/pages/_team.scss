@@ -13,13 +13,15 @@
 @use "../abstracts/mixins" as m;
 
 .team-section__intro {
-	max-width: 58ch;
+	max-width: 729px;
 	margin-top: var(--sp-sm);
 }
 
 .person-grid {
-	@include m.grid(1, 2, 3, 4, var(--sp-md));
+	// Four 362 cards on a 55px gutter, 83 between the rows.
+	@include m.grid(1, 2, 3, 4, 55px);
 
+	row-gap: 83px;
 	margin-top: var(--sp-xl);
 }
 
@@ -37,6 +39,7 @@
 	// The biography is absolutely positioned inside this box, so opening a card
 	// never reflows the grid or knocks the rows below out of place.
 	min-height: 100%;
+	border-radius: var(--radius);
 	// Clips the panel while it sits below the bottom edge waiting to slide up.
 	overflow: hidden;
 }
@@ -55,7 +58,8 @@
 	img {
 		width: 100%;
 		height: auto;
-		aspect-ratio: 15 / 16;
+		// 362x480 in the artboard, with the name bar overlapping its foot.
+		aspect-ratio: 362 / 480;
 		object-fit: cover;
 		object-position: top center;
 	}
@@ -65,7 +69,7 @@
 // the magenta the artboard uses for a missing asset.
 .person-card__photo-placeholder {
 	width: 100%;
-	aspect-ratio: 15 / 16;
+	aspect-ratio: 362 / 480;
 	background:
 		linear-gradient(
 			135deg,
@@ -76,9 +80,15 @@
 }
 
 .person-card__meta {
-	padding: var(--sp-sm) var(--sp-md) var(--sp-md);
+	// A 132-deep bar sitting over the last 115px of the portrait and hanging 17
+	// past its foot, which is what makes the card 497 rather than 612.
+	position: relative;
+	min-height: 132px;
+	margin-top: -115px;
+	padding: 12px 28px 16px;
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
+	border-radius: 0 0 var(--radius) var(--radius);
 	// Fills the remaining height so every name bar in a row lines up.
 	flex: 1 1 auto;
 }
@@ -86,17 +96,21 @@
 .person-card__name {
 	color: var(--c-on-dark);
 	font-size: var(--fs-h3);
+	font-weight: 700;
 }
 
+// Italic in the artboard, and white rather than the cream the name is set in.
 .person-card__quals {
 	margin-top: var(--sp-3xs);
-	font-size: var(--fs-small);
-	line-height: 1.4;
+	color: var(--c-white);
+	font-style: italic;
+	line-height: var(--lh-body);
 }
 
 .person-card__role {
 	margin-top: var(--sp-3xs);
-	font-size: var(--fs-small);
+	color: var(--c-white);
+	font-style: italic;
 }
 
 // The whole card is the hit area, which is why this covers the face rather than
@@ -144,11 +158,13 @@
 	z-index: 3;
 	display: flex;
 	flex-direction: column;
-	padding: var(--sp-md) var(--sp-2xs) var(--sp-md) var(--sp-md);
+	// The biography is inset 39px in the artboard, and the panel takes the
+	// card's own rounded corners.
+	padding: 36px var(--sp-2xs) 36px 39px;
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
-	font-size: var(--fs-small);
-	line-height: 1.6;
+	line-height: var(--lh-body);
+	border-radius: var(--radius);
 
 	// Parked below the bottom edge and clipped by the card. Sliding up from
 	// here is the movement the designer asked for.
@@ -259,23 +275,22 @@
 .specialty-filter {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--sp-2xs) var(--sp-sm);
+	// 40px between them on the artboard.
+	gap: 12px 40px;
 	margin-top: var(--sp-lg);
 }
 
+// The artboard draws all four of these solid green with a cream label, with no
+// distinction between them — it only ever shows one state. The filter needs to
+// show which one is on, so the selected one goes a shade darker rather than
+// being the only one filled.
 .specialty-filter__btn {
 	min-width: 0;
-	background-color: transparent;
-	color: var(--c-green);
-	border-color: var(--c-green);
-
-	&::after {
-		opacity: 0.7;
-	}
 
 	&:hover,
+	&:focus-visible,
 	&.is-active {
-		background-color: var(--c-green);
-		color: var(--c-on-dark);
+		background-color: var(--c-green-dark);
+		border-color: var(--c-green-dark);
 	}
 }

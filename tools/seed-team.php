@@ -30,7 +30,10 @@ update_post_meta( $page->ID, '_wp_page_template', 'page-templates/our-team.php' 
 /* -------------------------------------------------------------- Page fields */
 
 update_field( 'hero_image', tpph_media( '6-about-us-header' ), $page->ID );
-update_field( 'hero_title', 'Our Team', $page->ID );
+// The artboard puts the parent section's name in the banner on every child
+// page — "For Patients & Visitors" on all three of its children, and "About"
+// here — not the page's own title.
+update_field( 'hero_title', 'About', $page->ID );
 
 update_field( 'exec_heading', 'Executive Team', $page->ID );
 update_field(

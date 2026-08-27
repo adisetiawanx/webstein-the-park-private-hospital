@@ -69,7 +69,8 @@ while ( have_posts() ) :
 		<?php endif; ?>
 
 		<?php if ( $tpph_band_image ) : ?>
-			<div class="media-band">
+			<?php // A 1920x200 strip in the artboard, crossing the band boundary. ?>
+			<div class="media-band media-band--short">
 				<?php
 				tpph_image(
 					$tpph_band_image,
@@ -156,8 +157,9 @@ while ( have_posts() ) :
 		<?php endif; ?>
 
 		<?php if ( $tpph_closing_image ) : ?>
-			<?php // Artboard runs this one at 9.75:1, thinner than the ward band above. ?>
-			<div class="media-band media-band--short">
+			<?php // The closing photograph is 1612x334 inside the container, not
+			      // edge to edge, and the Principles card overlaps its top. ?>
+			<div class="media-band media-band--boxed container">
 				<?php
 				tpph_image(
 					$tpph_closing_image,

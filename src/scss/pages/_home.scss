@@ -11,9 +11,10 @@
 	position: relative;
 	display: flex;
 	align-items: center;
-	// The artboard hero is 1920x813, a 2.36:1 band. Held with a viewport-based
-	// clamp so it stays generous on desktop without swallowing a phone screen.
-	min-height: clamp(420px, 42vw, 813px);
+	// The artboard hero is the 1920x788 band between the header and the About
+	// section. Held with a viewport-based clamp so it stays generous on desktop
+	// without swallowing a phone screen.
+	min-height: clamp(420px, 41vw, 788px);
 	overflow: hidden;
 }
 
@@ -63,11 +64,12 @@
 	// Sized in rem, not ch: a ch max-width resolves against the body font size,
 	// not the 45px heading, which collapsed this to ~320px and broke the
 	// headline over six lines instead of four.
-	max-width: clamp(18rem, 42vw, 38.75rem);
+	// 598px on the artboard, set 30px in from the container's left edge.
+	max-width: clamp(18rem, 31.1vw, 598px);
 	text-align: center;
 
 	@include bp.from(lg) {
-		margin-left: clamp(0px, 3vw, 60px);
+		margin-left: clamp(0px, 1.6vw, 30px);
 	}
 }
 
@@ -88,8 +90,9 @@
 	grid-template-columns: 1fr;
 
 	@include bp.from(lg) {
-		grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-		gap: var(--sp-2xl);
+		// 524 of copy, a 156 gutter, then the 932 the three cards sit on.
+		grid-template-columns: minmax(0, 524fr) minmax(0, 932fr);
+		column-gap: 156px;
 		align-items: start;
 	}
 }
@@ -101,7 +104,8 @@
 
 .statement-cards {
 	display: grid;
-	gap: var(--sp-md);
+	// 446 wide with a 40px gutter between them, on the artboard.
+	gap: 40px;
 	// Each card sizes to its own copy. Stretching them to the row height made
 	// the short cards as deep as Principles, so they overlapped the photograph
 	// below as well — in the artboard only Principles does.
@@ -118,7 +122,9 @@
 	// behind the bottom edge of the cards rather than clearing them.
 	position: relative;
 	z-index: 2;
-	padding: var(--sp-md) var(--sp-lg) var(--sp-lg);
+	// 446x180 with the copy inset 40px, measured off the artboard.
+	min-height: 180px;
+	padding: 32px 40px 38px;
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
 }
@@ -133,7 +139,7 @@
 // collisions, so it exists only from md up.
 @include bp.from(md) {
 	.statement-card:nth-child(2) {
-		transform: translateY(clamp(1.5rem, 3.5vw, 3.6rem));
+		transform: translateY(clamp(1.5rem, 4.5vw, 86px));
 	}
 
 	.statement-card:nth-child(3) {
@@ -149,12 +155,68 @@
 		// of the lowest card and runs behind it. Cards carry the z-index.
 		margin-top: -2.4rem;
 	}
+
+	@include bp.from(lg) {
+		// The cream band stops 160px short of the photograph's bottom edge, so
+		// the picture crosses onto the white band beneath it.
+		position: relative;
+		z-index: 1;
+		margin-bottom: calc(var(--overhang-figure) * -1);
+	}
+}
+
+// --- Band overlaps ----------------------------------------------------------
+//
+// Two things on this page cross a band boundary in the artboard: the About
+// photograph hangs 160px below the cream, and the three promo cards start 177px
+// above the cream band they end in. Both are held here rather than inside the
+// component so the bands above and below can reserve the same space.
+
+:root {
+	--overhang-figure: 0px;
+	--overhang-promos: 0px;
+
+	@include bp.from(lg) {
+		--overhang-figure: clamp(40px, 8.3vw, 160px);
+		--overhang-promos: clamp(48px, 9.2vw, 177px);
+	}
+}
+
+.home-about {
+	// flow-root, so the photograph's negative bottom margin shortens this band
+	// rather than collapsing through it and dragging the next one up.
+	display: flow-root;
+	padding-bottom: 0;
+}
+
+.home-services {
+	padding-top: calc(var(--sp-section) + var(--overhang-figure));
+	// Clear of the promo cards that start inside this band.
+	padding-bottom: calc(var(--sp-section) + var(--overhang-promos));
+}
+
+.home-promos {
+	display: flow-root;
+	padding-top: 0;
+
+	.promo-cards {
+		margin-top: calc(var(--overhang-promos) * -1);
+	}
+}
+
+.home .map-band {
+	--map-height: clamp(300px, 38vw, 731px);
+}
+
+.home-accreditations {
+	padding-top: clamp(2.5rem, 6vw, 115px);
+	padding-bottom: clamp(2.5rem, 4.5vw, 86px);
 }
 
 .home-about__image {
 	width: 100%;
 	height: auto;
-	aspect-ratio: 16 / 5;
+	aspect-ratio: 1612 / 322;
 	object-fit: cover;
 }
 
@@ -171,7 +233,11 @@
 	}
 
 	@include bp.from(lg) {
+		// The artboard sets the six specialties on a 1134 row centred in the
+		// container, not across its full width.
 		grid-template-columns: repeat(6, minmax(0, 1fr));
+		max-width: 1134px;
+		margin-inline: auto;
 	}
 }
 
@@ -181,7 +247,7 @@
 	align-items: center;
 	gap: var(--sp-sm);
 	text-align: center;
-	color: var(--c-olive);
+	color: var(--c-green);
 }
 
 .service__icon {
@@ -190,7 +256,10 @@
 }
 
 .service__label {
-	font-size: var(--fs-small);
+	// Noto Sans Bold 17 in the heading green, as the XD sets every one of these
+	// specialty and accreditation labels.
+	font-size: var(--fs-label);
+	font-weight: 700;
 }
 
 .home-services__action {
@@ -200,13 +269,16 @@
 // --- Promo cards ------------------------------------------------------------
 
 .promo-cards {
-	@include m.grid(1, 2, 3, 3, var(--sp-md));
+	@include m.grid(1, 2, 3, 3, 20px);
 }
 
 .promo-card {
 	display: flex;
 	flex-direction: column;
-	padding: var(--sp-lg);
+	// 524x448 with the copy inset 60px and the button clear of the bottom edge
+	// by 62 — all four measured off the artboard.
+	min-height: 448px;
+	padding: 72px 60px 62px;
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
 }
@@ -224,6 +296,7 @@
 .promo-card__cta {
 	// Pins the button to the bottom so cards with unequal copy still line up.
 	margin-top: auto;
+	min-width: 152px;
 	align-self: flex-start;
 }
 
@@ -231,6 +304,11 @@
 
 .accreditation-list {
 	@include m.grid(2, 2, 4, 4, var(--sp-lg));
+
+	@include bp.from(lg) {
+		max-width: 1134px;
+		margin-inline: auto;
+	}
 }
 
 .accreditation {
@@ -238,7 +316,7 @@
 	flex-direction: column;
 	align-items: center;
 	gap: var(--sp-sm);
-	color: var(--c-olive);
+	color: var(--c-green);
 	text-align: center;
 }
 
@@ -248,7 +326,8 @@
 }
 
 .accreditation__label {
-	font-size: var(--fs-small);
+	font-size: var(--fs-label);
+	font-weight: 700;
 	max-width: 24ch;
 }
 
@@ -261,7 +340,9 @@
 	min-height: clamp(300px, 26vw, 470px);
 	padding-block: var(--sp-xl);
 	overflow: hidden;
-	color: var(--c-on-dark);
+	// Pure white, not the cream used on the green bands — the XD sets this band
+	// on its own.
+	color: var(--c-white);
 	background-color: var(--c-green);
 	// Contains the multiply blend below so it cannot reach the page behind.
 	isolation: isolate;
@@ -302,17 +383,20 @@
 
 .testimonials__heading {
 	margin-bottom: var(--sp-lg);
-	color: var(--c-on-dark);
+	color: var(--c-white);
 }
 
 .testimonials__track {
 	position: relative;
-	max-width: 62ch;
+	// 887 on the artboard, and the quote itself is Noto Sans Bold 17.
+	max-width: 887px;
 	margin-inline: auto;
 }
 
 .testimonial__quote p {
 	margin-bottom: var(--sp-md);
+	font-size: var(--fs-label);
+	font-weight: 700;
 }
 
 .testimonial__attribution {

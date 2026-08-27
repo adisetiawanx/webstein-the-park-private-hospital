@@ -11,8 +11,12 @@
 .site-footer {
 	background-color: var(--c-mint);
 	color: var(--c-olive);
-	padding-block: var(--sp-xl);
-	font-size: var(--fs-small);
+	// 52px above the first line and 42px below the last, measured off the mint
+	// band on the artboards.
+	padding-block: 52px 42px;
+	// 16px throughout, as everywhere else. The XD's 15px appears only in the
+	// copyright line.
+	font-size: var(--fs-body);
 }
 
 .site-footer__inner {
@@ -25,10 +29,11 @@
 	}
 
 	@include bp.from(lg) {
-		// Logo sits alone on the left, the two lists share the right half —
-		// the proportions in every artboard.
-		grid-template-columns: 1.7fr 1fr 1fr;
-		gap: var(--sp-xl);
+		// The artboards put the logo at the container's left edge, Legal at
+		// x=1060 and Contact at x=1428 on a 1610 measure. These ratios land the
+		// two lists on exactly those columns.
+		grid-template-columns: 905fr 368fr 337fr;
+		gap: 0;
 	}
 }
 
@@ -42,29 +47,33 @@
 	}
 
 	img {
-		width: clamp(150px, 12vw, 205px);
+		width: clamp(150px, 9.6vw, 183px);
 		height: auto;
 	}
 }
 
 .site-footer__heading {
-	margin-bottom: var(--sp-md);
+	// Heading to first item is 52px in the XD, and the items sit on a 35px
+	// pitch beneath it.
+	margin-bottom: 26px;
 	color: var(--c-olive);
 	font-family: var(--ff-body);
-	font-size: var(--fs-small);
-	font-weight: 400;
+	font-size: var(--fs-body);
+	font-weight: 700;
 }
 
 .site-footer__list {
 	display: flex;
 	flex-direction: column;
-	gap: var(--sp-xs);
+	gap: 11px;
 
 	a {
 		display: inline-block;
-		// Standalone navigation links, so they carry padding to clear the 24px
-		// minimum touch target. They measured 20px tall without it.
-		padding-block: 0.3rem;
+		// A 16px link on the body's 1.5 line height is already 24px tall, which
+		// is the minimum target, so it needs no padding of its own — and padding
+		// would break the 35px pitch the artboard sets these on.
+		min-height: 24px;
+		line-height: var(--lh-body);
 		text-decoration: none;
 
 		&:hover {
@@ -73,12 +82,15 @@
 	}
 }
 
+// The phone and email lines are bold in the XD; the address under them is not.
 .site-footer__line {
-	margin-bottom: var(--sp-xs);
+	margin-bottom: 11px;
+	font-weight: 700;
 
 	a {
 		display: inline-block;
-		padding-block: 0.25rem;
+		min-height: 24px;
+		line-height: var(--lh-body);
 		text-decoration: none;
 
 		&:hover {
@@ -88,7 +100,7 @@
 }
 
 .site-footer__address {
-	margin-top: var(--sp-md);
+	margin-top: 11px;
 	font-style: normal; // The design is upright; only the testimonial is italic.
-	line-height: 1.55;
+	line-height: var(--lh-body);
 }

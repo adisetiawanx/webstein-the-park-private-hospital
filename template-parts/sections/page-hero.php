@@ -37,7 +37,7 @@ $tpph_wide    = (bool) $tpph_intro;
 
 	<div class="page-hero__inner container">
 		<?php if ( $tpph_eyebrow ) : ?>
-			<span class="eyebrow"><?php echo esc_html( $tpph_eyebrow ); ?></span>
+			<span class="eyebrow eyebrow--lime"><?php echo esc_html( $tpph_eyebrow ); ?></span>
 		<?php endif; ?>
 
 		<h1 class="page-hero__title"><?php echo esc_html( $tpph_title ); ?></h1>

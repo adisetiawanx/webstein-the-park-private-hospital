@@ -178,8 +178,14 @@ function tpph_contact_details() {
  *
  *   -  a bullet; consecutive dashes group into one list
  *   ## a sub-heading (h3.sub-label), e.g. CHILDREN AGED 12 YEARS AND UNDER
+ *   #  a second card title, ruled like the first — the artboard sets one of
+ *      these, "Location and Parking" on the Visitors page
  *
  * Everything else is a paragraph.
+ *
+ * A blank line is not thrown away: the XD sets all of this copy on a strict
+ * 24px grid, and a blank line in it is one empty row of that grid. The block
+ * after a blank line carries .is-spaced, which is worth exactly that row.
  *
  * @param string $text Raw textarea value.
  * @return string Escaped HTML.
@@ -188,13 +194,18 @@ function tpph_lines_to_html( $text ) {
 	$lines   = preg_split( '/\r\n|\r|\n/', (string) $text );
 	$html    = '';
 	$in_list = false;
+	$spaced  = false;
 
 	foreach ( $lines as $line ) {
 		$line = trim( $line );
 
 		if ( '' === $line ) {
+			$spaced = true;
 			continue;
 		}
+
+		$class  = $spaced ? ' is-spaced' : '';
+		$spaced = false;
 
 		if ( 0 === strpos( $line, '##' ) ) {
 			if ( $in_list ) {
@@ -207,7 +218,18 @@ function tpph_lines_to_html( $text ) {
 			 * level is an accessibility failure even when it looks right.
 			 * The class carries the visual: Noto Sans Bold, not the serif.
 			 */
-			$html .= '<h3 class="sub-label">' . esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h3>';
+			$html .= '<h3 class="sub-label' . $class . '">' . esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h3>';
+			continue;
+		}
+
+		if ( 0 === strpos( $line, '#' ) ) {
+			if ( $in_list ) {
+				$html   .= '</ul>';
+				$in_list = false;
+			}
+
+			$html .= '<h3 class="column-band__title column-band__title--second' . $class . '">'
+				. esc_html( trim( ltrim( $line, '# ' ) ) ) . '</h3>';
 			continue;
 		}
 
@@ -215,7 +237,7 @@ function tpph_lines_to_html( $text ) {
 
 		if ( $is_bullet ) {
 			if ( ! $in_list ) {
-				$html   .= '<ul>';
+				$html   .= '<ul' . ( $class ? ' class="is-spaced"' : '' ) . '>';
 				$in_list = true;
 			}
 
@@ -228,7 +250,7 @@ function tpph_lines_to_html( $text ) {
 			$in_list = false;
 		}
 
-		$html .= '<p>' . esc_html( $line ) . '</p>';
+		$html .= '<p' . ( $class ? ' class="is-spaced"' : '' ) . '>' . esc_html( $line ) . '</p>';
 	}
 
 	if ( $in_list ) {

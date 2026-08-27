@@ -131,3 +131,25 @@ a {
 		transform: translateY(0);
 	}
 }
+
+// -----------------------------------------------------------------------------
+// Corner radius
+//
+// The XD rounds every card and every photograph that sits inside the content by
+// 5px. The full-bleed page banner and the home hero are square, so neither is
+// listed here.
+// -----------------------------------------------------------------------------
+
+.statement-card,
+.promo-card,
+.contact__card,
+.person-card__photo,
+.person-card__photo-placeholder,
+.home-about__image,
+.media-band__image,
+.testimonials__image,
+.text-band__media img,
+.split-band__figure img,
+.column-band__figure img {
+	border-radius: var(--radius);
+}

@@ -64,29 +64,48 @@ Read out of the XD fill values, defined in `src/scss/abstracts/_tokens.scss` and
 
 | Token | Value | Use |
 |---|---|---|
-| `--c-green` | `#386c5f` | Headings, cards, buttons, map roads |
-| `--c-brown` | `#483932` | Body copy |
-| `--c-olive` | `#4d5b31` | Accents, eyebrows, icon strokes |
-| `--c-cream` | `#f7fbea` | Alternating section background |
+| `--c-green` | `#386c5f` | Headings **and body copy**, cards, buttons, map roads |
+| `--c-brown` | `#483932` | Hairline rules only. The XD sets no text in this |
+| `--c-olive` | `#4d5b31` | Footer copy, icon strokes |
+| `--c-lime` | `#8aba31` | The `ABOUT US` eyebrow on Our Hospital. Used once |
+| `--c-lime-pale` | `#b4e6a4` | Hairlines inside the navigation dropdowns |
+| `--c-cream` | `#f7fbea` | Alternating section background, **and text on green** |
 | `--c-mint` | `#eafbed` | Footer band |
 | `--c-ornament` | `#e3e7d9` | Tree watermark — olive `#3b451d` at 10%, flattened onto the band it sits on |
 
-Every pairing the design uses clears **WCAG AA**, so no colour had to be changed for accessibility:
+Body copy is **green, not brown**. Counting the text runs settles it: `#386c5f`
+appears 135 times as a text fill across the thirteen artboards and `#483932`
+never does. The same count puts cream `#f7fbea` on the green cards and panels
+rather than white; white is reserved for the homepage testimonial band and for
+the italic qualifications on the Our Team cards.
+
+Every pairing clears **WCAG AA** with one exception, called out below:
 
 | Pairing | Ratio | AA normal |
 |---|---|---|
 | green on white | 6.04 | pass |
 | green on cream | 5.73 | pass |
-| brown on white | 11.01 | pass |
-| brown on cream | 10.46 | pass |
-| olive on white | 7.35 | pass |
+| olive on mint | 6.62 | pass |
+| cream on green | 5.61 | pass |
 | white on green | 6.04 | pass |
+| **lime on cream** | **2.0** | **fail** |
+
+The lime eyebrow is the design's own colour for the two words `ABOUT US` on Our
+Hospital, and it is the only pairing in the design that does not clear AA.
+Setting it in olive `#4d5b31` instead keeps the page at 100 and is a one-token
+change; it is set to the design's lime, so this is a live decision, not an
+oversight.
 
 ### Type scale
 
-The XD canvas is 1920 wide with a 45px H1 — small for its canvas. Type sizes are held at their absolute values rather than scaled down, which preserves the proportion the designer intended. Sizes are fluid via `clamp()`.
+The XD canvas is 1920 wide with a 45px H1 — small for its canvas. Type sizes are held at their absolute values rather than scaled down, which preserves the proportion the designer intended. Headings are fluid via `clamp()`; body copy is a flat 16px, which is what the design sets at every size it is used and what gives every inline link a 24px target without padding it out of the line rhythm.
 
-The container is **1610px**, measured rather than estimated: the Home promo cards run `x=154..1765` on the 1920 artboard. An earlier 1440 estimate inset every page by 150px a side and pushed the home hero copy well right of where it belongs.
+Two measurements out of the XD's own line boxes drive the vertical rhythm, and getting them wrong was worth hundreds of pixels a page:
+
+- **45px type sets on 61px** — `--lh-heading: 1.36`, not 1.22.
+- **16px type sets on 24px** — `--lh-body: 1.5`, not 1.65. Every block of copy in the design sits on that one unbroken 24px grid: paragraphs run on from one another with nothing between them, and where the design wants air it leaves a single empty row. `tpph_lines_to_html()` keeps blank lines for exactly that reason and marks the block after one `.is-spaced`.
+
+The container is **1610px of content**, measured rather than estimated: the Home promo cards run `x=154..1765` on the 1920 artboard, the header logo starts at 154 and the Make a Payment button ends at 1766. The gutter is added *outside* that width rather than eaten out of it — subtracting it instead inset every page by 63px a side.
 
 ### Breakpoints
 

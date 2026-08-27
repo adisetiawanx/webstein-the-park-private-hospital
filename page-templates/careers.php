@@ -26,7 +26,9 @@ while ( have_posts() ) :
 
 		<section class="section">
 			<div class="container">
-				<div class="text-band<?php echo $tpph_images ? ' text-band--with-media text-band--media-right' : ''; ?>">
+				<?php // The collage runs past the bottom of this band and over the
+				      // cream beneath it, exactly as it does on Patient Rights. ?>
+				<div class="text-band<?php echo $tpph_images ? ' text-band--with-media text-band--media-right text-band--media-overhang' : ''; ?>">
 					<div class="text-band__body">
 						<h2 class="text-band__heading"><?php echo esc_html( tpph_field( 'intro_heading', null, __( 'Join our team', 'tpph' ) ) ); ?></h2>
 
@@ -104,7 +106,7 @@ while ( have_posts() ) :
 
 		<?php if ( tpph_field( 'register_text' ) ) : ?>
 			<section class="section careers-register">
-				<div class="container container--narrow">
+				<div class="container">
 					<div class="section__head">
 						<h2><?php echo esc_html( tpph_field( 'register_heading', null, __( 'Register your interest', 'tpph' ) ) ); ?></h2>
 					</div>

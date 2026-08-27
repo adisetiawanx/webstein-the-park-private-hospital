@@ -63,8 +63,13 @@ findings.
 
 ```bash
 node tools/capture-pages.mjs        # every page at the artboards' own 1920 canvas
+python tools/stitch-pages.py        # join the slices into one image per page
 python tools/compare-to-design.py   # design left, build right, one sheet per page
 ```
+
+`capture-pages.mjs` imports `puppeteer-core`, which resolves against the
+script's own directory — run `npm install puppeteer-core` here, or copy the
+script to wherever the install is.
 
 Captures are stitched from viewport-sized slices rather than taken with
 `fullPage`. Chrome's full-page capture does not reliably resolve lazy-loaded

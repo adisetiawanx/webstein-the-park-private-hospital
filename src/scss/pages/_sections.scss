@@ -13,8 +13,10 @@
 	margin-bottom: var(--sp-md);
 }
 
+// The artboards set a full-width block of copy on a 1233px measure, and a
+// block that sits beside a photograph on 766. Both are read off the XD frames.
 .text-band__body {
-	max-width: 72ch;
+	max-width: 1233px;
 }
 
 .text-band--with-media {
@@ -23,18 +25,56 @@
 	grid-template-columns: 1fr;
 
 	@include bp.from(lg) {
-		grid-template-columns: minmax(0, 1fr) minmax(0, 0.82fr);
-		gap: var(--sp-2xl);
+		// 766 of copy, a 98 gutter, 746 of photograph — the XD's own frames,
+		// normalised onto the 1610 container.
+		grid-template-columns: minmax(0, 766fr) minmax(0, 746fr);
+		column-gap: 98px;
 		align-items: start;
 	}
 
 	.text-band__body {
-		max-width: 62ch;
+		max-width: none;
+	}
+}
+
+// Rights and Responsibilities sets its closing photograph narrow — 497 of
+// picture against 1095 of copy.
+.text-band--media-w-third {
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 497fr) minmax(0, 1095fr);
+		column-gap: 74px;
+	}
+}
+
+// The collage on Rights and Responsibilities runs past the bottom of its band
+// and over the cream beneath it. Taking it out of flow is what lets the band
+// keep the height its copy gives it, exactly as the artboard has it.
+.text-band--media-overhang {
+	@include bp.from(lg) {
+		position: relative;
+
+		.text-band__media {
+			position: absolute;
+			top: 0;
+			right: 0;
+			z-index: 1;
+			width: calc((746 / 1610) * 100%);
+		}
+	}
+}
+
+.text-band--media-overhang.text-band--media-w-third {
+	@include bp.from(lg) {
+		.text-band__media {
+			width: calc((497 / 1610) * 100%);
+		}
 	}
 }
 
 @include bp.from(lg) {
 	.text-band--media-left {
+		grid-template-columns: minmax(0, 746fr) minmax(0, 766fr);
+
 		.text-band__body {
 			order: 2;
 		}
@@ -42,6 +82,10 @@
 		.text-band__media {
 			order: 1;
 		}
+	}
+
+	.text-band--media-left.text-band--media-w-third {
+		grid-template-columns: minmax(0, 497fr) minmax(0, 1095fr);
 	}
 }
 
@@ -65,25 +109,74 @@
 	}
 
 	@include bp.from(md) {
-		grid-template-rows: repeat(2, minmax(0, 1fr));
+		// 350 + 29 + 350 across, with the tall picture 409 deep and the two
+		// stacked ones 321 each on a 31px gap.
+		gap: 31px 29px;
+		grid-template-rows: 321fr 321fr;
 
 		> img:first-child {
 			grid-row: span 2;
+			align-self: start;
+			aspect-ratio: 350 / 409;
+			height: auto;
 		}
 	}
 }
 
 // White card over a cream band. Only Safety and Quality uses it, but it is a
 // section option rather than a page rule so the client can reach for it again.
+//
+// 1462 wide, sitting flush with the container's right edge, with the copy set
+// on a 1086 measure 277 inside the card's left edge — all off the artboard.
 .text-panel {
-	// The artboard insets the copy well inside the card rather than running it to
-	// the padding edge.
-	padding: clamp(1.75rem, 3.5vw, 4rem) clamp(1.5rem, 6vw, 7rem);
+	padding: clamp(1.75rem, 3.5vw, 79px) clamp(1.5rem, 5vw, 99px);
 	background-color: var(--c-white);
+	border-radius: var(--radius);
+
+	@include bp.from(lg) {
+		max-width: 1462px;
+		margin-left: auto;
+		padding-left: 277px;
+	}
 
 	.text-band__body {
-		max-width: 78ch;
-		margin-inline: auto;
+		max-width: 1086px;
+	}
+}
+
+// --- Two columns of copy ----------------------------------------------------
+//
+// Preparing for your Admission sets four of its sections two-up: 766 of copy,
+// a 121px gutter, then 746. Below lg the two columns fall back into one, in the
+// reading order the artboard implies — left column first.
+
+.split-band {
+	display: grid;
+	gap: var(--sp-xl);
+	grid-template-columns: 1fr;
+	align-items: start;
+
+	@include bp.from(lg) {
+		grid-template-columns: minmax(0, 766fr) minmax(0, 746fr);
+		column-gap: 121px;
+	}
+}
+
+.split-band__col {
+	display: grid;
+	// The artboard leaves a clear band between two stacked sections in the same
+	// column — Fasting Instructions sits well below How long will I be in
+	// hospital, not tucked under it.
+	gap: var(--sp-xl);
+	align-content: start;
+}
+
+.split-band__figure {
+	margin-top: var(--sp-lg);
+
+	img {
+		width: 100%;
+		height: auto;
 	}
 }
 
@@ -100,8 +193,9 @@
 	}
 
 	@include bp.from(lg) {
+		// Three 493 columns on a 62px gutter, as the Visitors artboard sets them.
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: var(--sp-xl);
+		gap: 62px;
 	}
 }
 
@@ -111,32 +205,32 @@
 	img {
 		width: 100%;
 		height: auto;
-		aspect-ratio: 3 / 2;
+		aspect-ratio: 493 / 311;
 		object-fit: cover;
 	}
 }
 
-.column-band__title {
-	padding-bottom: var(--sp-2xs);
-	margin-bottom: var(--sp-sm);
-	border-bottom: 1px solid var(--c-rule);
-	font-family: var(--ff-body);
-	font-size: var(--fs-label);
-	font-weight: 700;
+// The artboard sets the sub-headings inside these columns uppercase.
+.column-band__text .sub-label {
 	text-transform: uppercase;
-	letter-spacing: 0.02em;
 }
 
-.column-band__text {
-	font-size: var(--fs-small);
+// A column can carry a second ruled title part-way down — "Location and
+// Parking" under Smoke-Free Facility on the Visitors page.
+.column-band__title--second {
+	margin-top: var(--sp-lg);
+}
 
-	// Sub-headings inside a column, written as "## Label" in the textarea.
-	.sub-label {
-		margin-top: 1.4em;
-		text-transform: uppercase;
-		font-size: var(--fs-small);
-		letter-spacing: 0.02em;
-	}
+// Noto Serif Bold 25 with a hairline under it — the same level as every other
+// card title in the design, not a small-caps label.
+.column-band__title {
+	padding-bottom: var(--sp-xs);
+	margin-bottom: var(--sp-sm);
+	border-bottom: 1px solid var(--c-rule);
+	font-family: var(--ff-heading);
+	font-size: var(--fs-h3);
+	font-weight: 700;
+	line-height: var(--lh-heading);
 }
 
 // --- 404 --------------------------------------------------------------------

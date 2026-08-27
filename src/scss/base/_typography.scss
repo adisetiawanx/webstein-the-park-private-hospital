@@ -55,15 +55,16 @@ p {
 }
 
 p + p {
-	margin-top: 1em;
+	margin-top: var(--sp-para);
 }
 
-// Small caps eyebrow above the hero headline: "WELCOME TO THE PARK PRIVATE
-// HOSPITAL". Olive in the design, not green.
+// Small caps eyebrow above a headline. The XD has two, and they are not the
+// same style: the home hero runs Noto Sans Bold 15 in the heading green, and
+// Our Hospital runs Noto Sans Bold 12 in the lime that appears nowhere else.
 .eyebrow {
 	display: block;
 	margin-bottom: var(--sp-sm);
-	color: var(--c-olive);
+	color: var(--c-green);
 	font-family: var(--ff-body);
 	font-size: var(--fs-eyebrow);
 	font-weight: 700;
@@ -71,16 +72,23 @@ p + p {
 	text-transform: uppercase;
 }
 
-// Bold sans sub-heading inside a text block, e.g. "EVALUATION OF CREDENTIALING
-// APPLICATIONS" or "CHILDREN AGED 12 YEARS AND UNDER".
+.eyebrow--lime {
+	margin-bottom: var(--sp-2xs);
+	color: var(--c-lime);
+	font-size: var(--fs-eyebrow-sm);
+}
+
+// Bold sans sub-heading inside a block of copy — Access, Safety, Respect on
+// Patient Rights. Noto Sans Bold 16 on the same 24px line as the copy around
+// it, not a size of its own: the XD sets these as bold runs inside the
+// paragraph, and the only thing separating them is one empty row.
 .sub-label {
 	display: block;
-	margin-bottom: var(--sp-2xs);
 	color: var(--c-green);
 	font-family: var(--ff-body);
-	font-size: var(--fs-label);
+	font-size: var(--fs-body);
 	font-weight: 700;
-	line-height: 1.35;
+	line-height: var(--lh-body);
 }
 
 .lede {
@@ -99,8 +107,22 @@ p + p {
 // Long-form copy coming out of Gutenberg. Kept deliberately plain: the design
 // has no styled tables, pull quotes or drop caps anywhere.
 .rich-text {
+	// Every block of copy in the XD sits on one unbroken 24px grid: paragraphs
+	// run on from one another with nothing between them, and where the design
+	// wants air it leaves a single empty row. .is-spaced is that row.
 	> * + * {
-		margin-top: 1em;
+		margin-top: 0;
+	}
+
+	> .is-spaced,
+	> .sub-label,
+	> ul + p,
+	> p + ul {
+		margin-top: 1.5em;
+	}
+
+	> :first-child {
+		margin-top: 0;
 	}
 
 	h2,
@@ -108,19 +130,14 @@ p + p {
 		margin-top: 1.6em;
 	}
 
-	.sub-label {
-		margin-top: 1.5em;
-		margin-bottom: 0.35em;
-	}
-
 	ul,
 	ol {
-		margin: 1em 0;
+		margin: 0;
 		padding-left: 1.25em;
 	}
 
 	li + li {
-		margin-top: 0.4em;
+		margin-top: 0;
 	}
 
 	a {

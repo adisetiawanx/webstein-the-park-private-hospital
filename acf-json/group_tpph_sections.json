@@ -1,326 +1,420 @@
 {
-	"key": "group_tpph_sections",
-	"title": "Page Sections",
-	"fields": [
-		{
-			"key": "field_tpph_sections",
-			"label": "Sections",
-			"name": "sections",
-			"type": "repeater",
-			"instructions": "Bands down the page, in order. Every inner page in the design is built from these three shapes.",
-			"required": 0,
-			"layout": "block",
-			"button_label": "Add section",
-			"sub_fields": [
-				{
-					"key": "field_tpph_section_layout",
-					"label": "Shape",
-					"name": "layout",
-					"type": "select",
-					"required": 1,
-					"choices": {
-						"text": "Heading and text, with optional images alongside",
-						"columns": "Several columns side by side",
-						"media": "Full-width photograph"
-					},
-					"default_value": "text",
-					"wrapper": {
-						"width": "50"
-					}
-				},
-				{
-					"key": "field_tpph_section_background",
-					"label": "Background",
-					"name": "background",
-					"type": "select",
-					"required": 0,
-					"choices": {
-						"white": "White",
-						"cream": "Cream"
-					},
-					"default_value": "white",
-					"wrapper": {
-						"width": "25"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "!=",
-								"value": "media"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_ornament",
-					"label": "Tree watermark",
-					"name": "ornament",
-					"type": "true_false",
-					"required": 0,
-					"ui": 1,
-					"default_value": 0,
-					"wrapper": {
-						"width": "25"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_background",
-								"operator": "==",
-								"value": "cream"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_ornament_side",
-					"label": "Watermark side",
-					"name": "ornament_side",
-					"type": "select",
-					"required": 0,
-					"choices": {
-						"left": "Left",
-						"right": "Right"
-					},
-					"default_value": "left",
-					"wrapper": {
-						"width": "25"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_ornament",
-								"operator": "==",
-								"value": "1"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_panel",
-					"label": "White panel behind the text",
-					"name": "panel",
-					"type": "true_false",
-					"instructions": "Safety and Quality sets its text on a white card over the cream band.",
-					"required": 0,
-					"ui": 1,
-					"default_value": 0,
-					"wrapper": {
-						"width": "25"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "text"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_heading",
-					"label": "Heading",
-					"name": "heading",
-					"type": "text",
-					"required": 0,
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "!=",
-								"value": "media"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_text",
-					"label": "Text",
-					"name": "text",
-					"type": "textarea",
-					"instructions": "Blank lines separate paragraphs. A line starting with a dash becomes a bullet.",
-					"required": 0,
-					"rows": 12,
-					"new_lines": "",
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "text"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_images",
-					"label": "Images",
-					"name": "images",
-					"type": "gallery",
-					"instructions": "One image sits alongside the text. Three stack into the collage the design uses.",
-					"required": 0,
-					"return_format": "id",
-					"preview_size": "tpph-card",
-					"insert": "append",
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "text"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_media_position",
-					"label": "Images sit",
-					"name": "media_position",
-					"type": "select",
-					"required": 0,
-					"choices": {
-						"right": "Right of the text",
-						"left": "Left of the text"
-					},
-					"default_value": "right",
-					"wrapper": {
-						"width": "50"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "text"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_columns",
-					"label": "Columns",
-					"name": "columns",
-					"type": "repeater",
-					"required": 0,
-					"layout": "block",
-					"button_label": "Add column",
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "columns"
-							}
-						]
-					],
-					"sub_fields": [
-						{
-							"key": "field_tpph_column_image",
-							"label": "Image",
-							"name": "image",
-							"type": "image",
-							"required": 0,
-							"return_format": "id",
-							"preview_size": "tpph-card",
-							"wrapper": {
-								"width": "30"
-							}
-						},
-						{
-							"key": "field_tpph_column_title",
-							"label": "Title",
-							"name": "title",
-							"type": "text",
-							"required": 0,
-							"wrapper": {
-								"width": "70"
-							}
-						},
-						{
-							"key": "field_tpph_column_text",
-							"label": "Text",
-							"name": "text",
-							"type": "textarea",
-							"instructions": "A line starting with a dash becomes a bullet. Two hashes at the start of a line make a sub-heading.",
-							"required": 0,
-							"rows": 10,
-							"new_lines": ""
-						}
-					]
-				},
-				{
-					"key": "field_tpph_section_image",
-					"label": "Photograph",
-					"name": "image",
-					"type": "image",
-					"required": 0,
-					"return_format": "id",
-					"preview_size": "tpph-card",
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "media"
-							}
-						]
-					]
-				},
-				{
-					"key": "field_tpph_section_band_height",
-					"label": "Band height",
-					"name": "band_height",
-					"type": "select",
-					"instructions": "How deep the strip is. The design varies this from a thin sliver to a half-height photograph.",
-					"required": 0,
-					"choices": {
-						"short": "Thin strip",
-						"standard": "Standard",
-						"tall": "Deep"
-					},
-					"default_value": "standard",
-					"wrapper": {
-						"width": "50"
-					},
-					"conditional_logic": [
-						[
-							{
-								"field": "field_tpph_section_layout",
-								"operator": "==",
-								"value": "media"
-							}
-						]
-					]
-				}
-			]
-		}
-	],
-	"location": [
-		[
-			{
-				"param": "page_template",
-				"operator": "==",
-				"value": "page-templates/sections.php"
-			}
-		]
-	],
-	"menu_order": 1,
-	"position": "normal",
-	"style": "default",
-	"label_placement": "top",
-	"instruction_placement": "label",
-	"hide_on_screen": [
-		"the_content",
-		"excerpt",
-		"discussion",
-		"comments",
-		"author",
-		"format",
-		"revisions"
-	],
-	"active": true,
-	"description": "",
-	"show_in_rest": 0
+    "key": "group_tpph_sections",
+    "title": "Page Sections",
+    "fields": [
+        {
+            "key": "field_tpph_sections",
+            "label": "Sections",
+            "name": "sections",
+            "type": "repeater",
+            "instructions": "Bands down the page, in order. Every inner page in the design is built from these three shapes.",
+            "required": 0,
+            "layout": "block",
+            "button_label": "Add section",
+            "sub_fields": [
+                {
+                    "key": "field_tpph_section_layout",
+                    "label": "Shape",
+                    "name": "layout",
+                    "type": "select",
+                    "required": 1,
+                    "choices": {
+                        "text": "Heading and text, with optional images alongside",
+                        "columns": "Several columns side by side",
+                        "media": "Full-width photograph"
+                    },
+                    "default_value": "text",
+                    "wrapper": {
+                        "width": "50"
+                    }
+                },
+                {
+                    "key": "field_tpph_section_span",
+                    "label": "Width",
+                    "name": "span",
+                    "type": "select",
+                    "instructions": "Half-width sections that follow one another share a band, exactly as the artboards set them: one column on the left, one on the right.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "full": "Full width",
+                        "left": "Half width, left column",
+                        "right": "Half width, right column"
+                    },
+                    "default_value": "full",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_tpph_section_background",
+                    "label": "Background",
+                    "name": "background",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "white": "White",
+                        "cream": "Cream"
+                    },
+                    "default_value": "white",
+                    "wrapper": {
+                        "width": "25"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "!=",
+                                "value": "media"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_ornament",
+                    "label": "Tree watermark",
+                    "name": "ornament",
+                    "type": "true_false",
+                    "required": 0,
+                    "ui": 1,
+                    "default_value": 0,
+                    "wrapper": {
+                        "width": "25"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_background",
+                                "operator": "==",
+                                "value": "cream"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_ornament_side",
+                    "label": "Watermark side",
+                    "name": "ornament_side",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "left": "Left",
+                        "right": "Right"
+                    },
+                    "default_value": "left",
+                    "wrapper": {
+                        "width": "25"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_ornament",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_panel",
+                    "label": "White panel behind the text",
+                    "name": "panel",
+                    "type": "true_false",
+                    "instructions": "Safety and Quality sets its text on a white card over the cream band.",
+                    "required": 0,
+                    "ui": 1,
+                    "default_value": 0,
+                    "wrapper": {
+                        "width": "25"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_heading",
+                    "label": "Heading",
+                    "name": "heading",
+                    "type": "text",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "!=",
+                                "value": "media"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_text",
+                    "label": "Text",
+                    "name": "text",
+                    "type": "textarea",
+                    "instructions": "Blank lines separate paragraphs. A line starting with a dash becomes a bullet.",
+                    "required": 0,
+                    "rows": 12,
+                    "new_lines": "",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_images",
+                    "label": "Images",
+                    "name": "images",
+                    "type": "gallery",
+                    "instructions": "One image sits alongside the text. Three stack into the collage the design uses.",
+                    "required": 0,
+                    "return_format": "id",
+                    "preview_size": "tpph-card",
+                    "insert": "append",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_media_position",
+                    "label": "Images sit",
+                    "name": "media_position",
+                    "type": "select",
+                    "required": 0,
+                    "choices": {
+                        "right": "Right of the text",
+                        "left": "Left of the text"
+                    },
+                    "default_value": "right",
+                    "wrapper": {
+                        "width": "50"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_media_width",
+                    "label": "Images take up",
+                    "name": "media_width",
+                    "type": "select",
+                    "instructions": "How much of the row the photographs occupy. The artboards use two widths: 746 beside 766 of copy, or a narrow 497 beside 1095.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "half": "About half the row",
+                        "third": "A narrow column"
+                    },
+                    "default_value": "half",
+                    "return_format": "value",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 0,
+                    "ajax": 0,
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_tpph_section_media_overhang",
+                    "label": "Images hang past the band",
+                    "name": "media_overhang",
+                    "type": "true_false",
+                    "instructions": "Let the photographs run past the bottom of this band and over the one below, as Rights and Responsibilities does.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "text"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_tpph_section_columns",
+                    "label": "Columns",
+                    "name": "columns",
+                    "type": "repeater",
+                    "required": 0,
+                    "layout": "block",
+                    "button_label": "Add column",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "columns"
+                            }
+                        ]
+                    ],
+                    "sub_fields": [
+                        {
+                            "key": "field_tpph_column_image",
+                            "label": "Image",
+                            "name": "image",
+                            "type": "image",
+                            "required": 0,
+                            "return_format": "id",
+                            "preview_size": "tpph-card",
+                            "wrapper": {
+                                "width": "30"
+                            }
+                        },
+                        {
+                            "key": "field_tpph_column_title",
+                            "label": "Title",
+                            "name": "title",
+                            "type": "text",
+                            "required": 0,
+                            "wrapper": {
+                                "width": "70"
+                            }
+                        },
+                        {
+                            "key": "field_tpph_column_text",
+                            "label": "Text",
+                            "name": "text",
+                            "type": "textarea",
+                            "instructions": "A line starting with a dash becomes a bullet. Two hashes at the start of a line make a sub-heading.",
+                            "required": 0,
+                            "rows": 10,
+                            "new_lines": ""
+                        }
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_image",
+                    "label": "Photograph",
+                    "name": "image",
+                    "type": "image",
+                    "required": 0,
+                    "return_format": "id",
+                    "preview_size": "tpph-card",
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "media"
+                            }
+                        ]
+                    ]
+                },
+                {
+                    "key": "field_tpph_section_band_height",
+                    "label": "Band height",
+                    "name": "band_height",
+                    "type": "select",
+                    "instructions": "How deep the strip is. The design varies this from a thin sliver to a half-height photograph.",
+                    "required": 0,
+                    "choices": {
+                        "short": "Thin strip",
+                        "standard": "Standard",
+                        "tall": "Deep"
+                    },
+                    "default_value": "standard",
+                    "wrapper": {
+                        "width": "50"
+                    },
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "media"
+                            }
+                        ]
+                    ]
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates/sections.php"
+            }
+        ]
+    ],
+    "menu_order": 1,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": [
+        "the_content",
+        "excerpt",
+        "discussion",
+        "comments",
+        "author",
+        "format",
+        "revisions"
+    ],
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1787000001
 }

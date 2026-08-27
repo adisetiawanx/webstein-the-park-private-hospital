@@ -102,6 +102,12 @@ second at 98/100. Inlining critical CSS would claw back part of it at the cost
 of a build step and a cache-invalidation problem on every stylesheet change.
 Not worth it at this score; revisit only if the number drops.
 
+**"Serves images with low resolution" on Contact Us** costs that page 4 points
+of Best Practices. The closing photograph is 1612x334 inside the container in
+the artboard, and the supplied source tops out at 1600px wide — so it is roughly
+1x on a 2x display. Nothing to fix in the theme; it needs a larger original from
+Edge Creative, which is item 7 in `HANDOVER.md`.
+
 **Inline `mailto:` and `tel:` links inside running prose** measure about 20px
 tall, under the 24px touch-target guidance. Padding them would break the line
 rhythm of the paragraph they sit in for no practical gain, so they are left as
@@ -117,5 +123,8 @@ Accessibility scores 100 on every page and device. Independently swept for:
 - heading order — no skipped levels
 - exactly one `h1` per page
 
-The brand palette clears WCAG AA on every pairing the design uses, so no colour
-had to be changed to get there. See the contrast table in `README.md`.
+The brand palette clears WCAG AA on every pairing the design uses but one: the
+lime `#8aba31` the artboard sets for the two words `ABOUT US` on Our Hospital
+measures 2.0:1 on cream. It is built as the design draws it, which costs Our
+Hospital its 100 on Accessibility; setting that one eyebrow in olive `#4d5b31`
+restores it and is a one-token change. See the contrast table in `README.md`.

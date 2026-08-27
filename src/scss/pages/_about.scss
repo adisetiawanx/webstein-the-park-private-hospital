@@ -17,7 +17,9 @@
 	// Visitors 5.42:1. 6:1 sits in the middle of them. They are thin decorative
 	// strips in the design, not feature images — 16/5 was nearly twice as tall
 	// as any of them.
-	aspect-ratio: var(--band-ratio, 6 / 1);
+	// 1945x357 on Visitors, which is the ratio these full-bleed strips default
+	// to; the two that differ set --band-ratio for themselves.
+	aspect-ratio: var(--band-ratio, 1945 / 357);
 	object-fit: cover;
 
 	@include bp.upto(lg) {
@@ -29,24 +31,25 @@
 	}
 }
 
-// Artboard 9.75:1 — the closing reception strip on Our Hospital.
+// The artboard runs this strip 1920x200, crossing the boundary between the
+// white band above and the cream below.
 .media-band--short {
-	--band-ratio: 10 / 1;
+	--band-ratio: 1920 / 200;
 }
 
-// Artboard 3.63:1 — the bathroom photograph closing Patient Rights.
+// 1933x533 — the bathroom photograph closing Patient Rights.
 .media-band--tall {
-	--band-ratio: 18 / 5;
+	--band-ratio: 1933 / 533;
 }
 
-// Contact Us is the one closing photograph the artboard keeps inside the
-// container rather than running edge to edge.
+// Our Hospital and Contact Us both close on a photograph the artboard keeps
+// inside the container rather than running edge to edge: 1612x334.
 .media-band--boxed {
 	margin-top: var(--sp-xl);
 
 	.media-band__image {
-		// 4.9:1 in the artboard.
-		--band-ratio: 5 / 1;
+		--band-ratio: 1612 / 334;
+		border-radius: var(--radius);
 	}
 }
 
@@ -58,8 +61,10 @@
 	grid-template-columns: 1fr;
 
 	@include bp.from(lg) {
-		grid-template-columns: minmax(0, 0.55fr) minmax(0, 1fr);
-		gap: var(--sp-2xl);
+		// The photograph is 563x413 and starts 29px outside the container's left
+		// edge; the copy beside it runs on a 934 measure to the right edge.
+		grid-template-columns: minmax(0, 534fr) minmax(0, 934fr);
+		column-gap: 142px;
 		align-items: start;
 	}
 }
@@ -70,14 +75,21 @@
 	img {
 		width: 100%;
 		height: auto;
-		aspect-ratio: 3 / 2.6;
+		aspect-ratio: 563 / 413;
 		object-fit: cover;
+	}
+
+	@include bp.from(lg) {
+		margin-left: -29px;
+
+		img {
+			width: calc(100% + 29px);
+		}
 	}
 }
 
 .about-services__intro,
 .about-services__note {
-	max-width: 68ch;
 	margin-top: var(--sp-md);
 }
 
@@ -90,12 +102,17 @@
 	margin-top: var(--sp-lg);
 
 	@include bp.from(md) {
+		// 712 wide in the artboard — narrower than the copy above it.
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+		max-width: 712px;
 	}
 }
 
 .specialty-list__item {
 	padding-block: var(--sp-xs);
+	// Noto Sans Bold 17, as every sub-label in the design is.
+	font-size: var(--fs-label);
+	font-weight: 700;
 	border-bottom: 1px solid var(--c-rule);
 }
 
@@ -113,15 +130,20 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	border: 1px solid var(--c-rule);
+	border-radius: var(--radius);
 	background-color: var(--c-white);
 
 	@include bp.from(md) {
+		// Two 535-wide panels centred on a 1069 measure, not the full container.
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+		max-width: 1069px;
+		margin-inline: auto;
 	}
 }
 
 .facility-panel {
-	padding: var(--sp-lg);
+	padding: 40px;
+	min-height: 462px;
 
 	+ .facility-panel {
 		border-top: 1px solid var(--c-rule);
@@ -135,17 +157,17 @@
 	p + p,
 	p + ul,
 	ul + p {
-		margin-top: 1em;
+		margin-top: var(--sp-para);
 	}
 
 	ul {
-		margin: 0.5em 0 0;
+		margin: 0;
 		padding-left: 1.2em;
 		list-style: disc;
 	}
 
 	li + li {
-		margin-top: 0.3em;
+		margin-top: 0;
 	}
 }
 
@@ -158,8 +180,13 @@
 }
 
 .about-facilities__note {
+	// Sits under the panels and lines up with them, not with the container.
 	margin-top: var(--sp-md);
-	font-size: var(--fs-small);
+
+	@include bp.from(md) {
+		max-width: 1069px;
+		margin-inline: auto;
+	}
 }
 
 // --- Vision, Mission and Values ---------------------------------------------
@@ -170,15 +197,15 @@
 	grid-template-columns: 1fr;
 
 	@include bp.from(lg) {
-		grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr);
-		gap: var(--sp-2xl);
+		// The same 524 / 156 / 932 grid the home page's About band uses.
+		grid-template-columns: minmax(0, 524fr) minmax(0, 932fr);
+		column-gap: 156px;
 		align-items: start;
 	}
 }
 
 .about-vmv__text {
 	margin-top: var(--sp-md);
-	max-width: 46ch;
 }
 
 .statement-card__list {
@@ -191,11 +218,15 @@
 	}
 }
 
-// The Principles card runs 126px over the closing photograph in the artboard.
-// The section's own bottom padding has to be cancelled as well as the gap.
-.about-vmv + .media-band {
+// The Principles card runs 127px over the closing photograph in the artboard,
+// and the photograph finishes flush with the bottom of the white band.
+.about-vmv {
+	padding-bottom: 0;
+}
+
+.about-vmv + .media-band--boxed {
 	@include bp.from(lg) {
-		margin-top: -11.25rem;
+		margin-top: -127px;
 	}
 }
 

@@ -11,9 +11,11 @@
 
 :root {
 	// --- Brand palette (XD fill values, by frequency of use) ---
-	--c-green: #386c5f; // Headings, cards, buttons, map roads.
-	--c-brown: #483932; // Body copy.
-	--c-olive: #4d5b31; // Accents, eyebrows, icon strokes.
+	--c-green: #386c5f; // Headings, body copy, cards, buttons, map roads.
+	--c-brown: #483932; // Hairline rules only. The XD sets no text in this.
+	--c-olive: #4d5b31; // Footer copy, icon strokes.
+	--c-lime: #8aba31;  // The "ABOUT US" eyebrow on Our Hospital. Used once.
+	--c-lime-pale: #b4e6a4; // Hairlines inside the navigation dropdowns.
 	--c-cream: #f7fbea; // Alternating section background.
 	--c-mint: #eafbed;  // Footer band. Measurably greener than the cream.
 	--c-white: #ffffff;
@@ -27,11 +29,11 @@
 
 	// Semantic aliases — components reference these, never the raw names, so a
 	// palette change stays a one-line edit.
-	--c-text: var(--c-brown);
+	--c-text: var(--c-green);
 	--c-heading: var(--c-green);
 	--c-bg: var(--c-white);
 	--c-bg-alt: var(--c-cream);
-	--c-on-dark: var(--c-white);
+	--c-on-dark: var(--c-cream); // #f7fbea. The XD sets cream, not white, on green.
 	--c-focus: var(--c-olive);
 	--c-ornament: #e3e7d9; // Tree watermark over the cream bands.
 
@@ -39,20 +41,26 @@
 	--ff-heading: "Noto Serif", Georgia, "Times New Roman", serif;
 	--ff-body: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
-	// The XD canvas is 1920 wide with a 45px H1 — small for its canvas. We build
-	// to a 1440 container, so holding the absolute sizes keeps the proportion the
-	// designer intended rather than shrinking everything by 25%.
+	// Sizes are the XD's own, and at 1920 they resolve to it exactly. Below that
+	// they scale down rather than wrapping the artboard's line breaks early.
 	--fs-h1: clamp(2.125rem, 1.55rem + 1.9vw, 2.8125rem); // 34 → 45px
 	--fs-h2: clamp(1.875rem, 1.42rem + 1.5vw, 2.8125rem); // 30 → 45px
 	--fs-h3: clamp(1.375rem, 1.25rem + 0.4vw, 1.5625rem); // 22 → 25px
-	--fs-label: clamp(1rem, 0.96rem + 0.13vw, 1.0625rem); // 16 → 17px
-	--fs-body: clamp(0.9375rem, 0.91rem + 0.1vw, 1rem); // 15 → 16px
-	--fs-small: 0.9375rem; // 15px
-	--fs-eyebrow: 0.8125rem; // 13px, letterspaced.
+	// Body copy is 16px in the XD at every size it is used, and 16 on a 1.5 line
+	// gives every inline link a 24px target without padding it out.
+	--fs-label: 1.0625rem; // 17px
+	--fs-body: 1rem; // 16px
+	--fs-small: 0.9375rem; // 15px. Fine print only — 7 runs in the whole design.
+	--fs-eyebrow: 0.9375rem; // 15px bold: the hero's WELCOME TO… line.
+	--fs-eyebrow-sm: 0.75rem; // 12px bold: ABOUT US on Our Hospital.
 
-	--lh-heading: 1.22;
-	--lh-body: 1.65;
-	--ls-eyebrow: 0.08em;
+	// Measured off the XD's own line boxes: 45px type sets on 61px, 16px on 24px.
+	--lh-heading: 1.36;
+	--lh-body: 1.5;
+	--ls-eyebrow: 0.04em;
+
+	// paragraphAfterSpacing in the XD, wherever a block runs to two paragraphs.
+	--sp-para: 8px;
 
 	// --- Spacing ---
 	--sp-3xs: 0.25rem;
@@ -63,17 +71,19 @@
 	--sp-lg: 2.5rem;
 	--sp-xl: 4rem;
 	--sp-2xl: 6rem;
-	--sp-section: clamp(3.5rem, 2.4rem + 4.5vw, 7rem);
+	// The artboards open a band 90px above its first line at 1920, not the 112
+	// this was set to.
+	--sp-section: clamp(3.5rem, 2.6rem + 3.3vw, 5.625rem);
 
 	// --- Layout ---
 	// Measured from the artboard: the Home promo cards span x=154..1765 at 1920,
 	// so the design lays out on a 1610 container with 155px margins.
-	--container: 1610px;
+	--container: 1610px; // Content width, gutters sit outside it.
 	--container-narrow: 1100px;
 	--gutter: clamp(1.25rem, 0.6rem + 2.8vw, 5rem);
 
 	// --- Effects ---
-	--radius: 0;
+	--radius: 5px; // The XD rounds every card and photograph by 5.
 	--shadow-card: 0 2px 18px rgba(72, 57, 50, 0.08);
 	--transition: 0.3s ease-out; // Matches the XD dropdown interaction exactly.
 	--transition-fast: 0.18s ease-out;

@@ -78,7 +78,9 @@
 	text-align: center;
 
 	p {
-		max-width: 62ch;
+		// 934 on the artboard's Our Services intro, the widest centred lede in
+		// the design.
+		max-width: 934px;
 		margin-inline: auto;
 		margin-top: var(--sp-sm);
 	}

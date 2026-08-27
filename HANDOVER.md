@@ -31,6 +31,10 @@ neutral cream placeholder instead.
 
 - **A/Prof Dieter Gebauer** — Medical Director
 - **Jan Morskate** — Director of Nursing
+- **The Home page hero.** The artboard uses a daytime photograph of the
+  building, filed in the XD as `TPPH New.jpg`, which is not in the handover
+  folder. The site uses the supplied dusk photograph instead. Ask Edge Creative
+  for the original if the daytime shot is wanted.
 
 Portrait, roughly 3:4, on a plain background to match the other eight.
 
@@ -63,7 +67,7 @@ For Make a Payment there is a second option: the existing site has a page at
 it, the header button can point there instead — that is a one-field change on
 the Site Settings screen.
 
-## 5. Two errors in the design, reproduced as drawn
+## 5. Errors and oddities in the design, reproduced as drawn
 
 We have not silently corrected these. Please confirm the intent before we change
 anything.
@@ -74,6 +78,17 @@ anything.
 - **Home → Become an Accredited Practitioner** card ends mid-sentence:
   "…a supportive, well coordinated environment designed to complement". The
   artboard stops there.
+- **About → Our Hospital**, the `ABOUT US` eyebrow is drawn in a lime
+  `#8aba31` that appears nowhere else in the design and measures 2.0:1 against
+  the cream behind it — well under the 4.5:1 accessibility minimum. It is built
+  as drawn; say the word and it goes olive, which is what every other small
+  label on the site uses.
+- **Visitors**, two of the four column headings are typed in capitals in the
+  artboard (`DAY PATIENT VISITORS`, `INPATIENT / OVERNIGHT PATIENT VISITORS`)
+  and two are not. Reproduced as drawn.
+- **About → Our Team**, the banner reads "About", not "Our Team" — the artboard
+  puts the parent section's name in the banner on every child page. Same as the
+  three For Patients & Visitors children.
 
 ## 6. Needed from Webstein, not the client
 

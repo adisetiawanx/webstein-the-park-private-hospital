@@ -8,13 +8,16 @@
 // --- Careers ----------------------------------------------------------------
 
 .vacancy-cards {
-	@include m.grid(1, 2, 3, 3, var(--sp-md));
+	// 522 wide on a 23px gutter in the artboard.
+	@include m.grid(1, 2, 3, 3, 23px);
 }
 
 .vacancy-card {
 	display: flex;
 	flex-direction: column;
-	padding: var(--sp-lg);
+	// 522x402, copy inset 59 from the left and 51 from the top.
+	min-height: 402px;
+	padding: 51px 59px 45px;
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
 }
@@ -25,13 +28,11 @@
 }
 
 .vacancy-card__summary {
-	margin-bottom: var(--sp-md);
-	font-size: var(--fs-small);
+	margin-bottom: var(--sp-para);
 }
 
 .vacancy-card__points {
 	margin-bottom: var(--sp-lg);
-	font-size: var(--fs-small);
 
 	li {
 		padding-left: 0.9em;
@@ -44,7 +45,7 @@
 	}
 
 	li + li {
-		margin-top: 0.25em;
+		margin-top: 0;
 	}
 }
 
@@ -54,6 +55,10 @@
 }
 
 .careers-register__text {
+	// 1400 wide and centred in the artboard, wider than the shared narrow
+	// container.
+	max-width: 1400px;
+	margin-inline: auto;
 	text-align: center;
 
 	a {
@@ -69,8 +74,9 @@
 	grid-template-columns: 1fr;
 
 	@include bp.from(lg) {
-		grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-		gap: var(--sp-2xl);
+		// 756 of detail, a 100 gutter, then the 756 the map sits on.
+		grid-template-columns: minmax(0, 756fr) minmax(0, 756fr);
+		column-gap: 100px;
 		align-items: start;
 	}
 }
@@ -78,24 +84,26 @@
 .contact__details {
 	font-size: var(--fs-body);
 
-	// The artboard sets the phone/fax/mail/email lines tight against each other
-	// rather than as separate paragraphs.
+	// Every line of this block sits on the same 24px grid as the rest of the
+	// design; a blank line in the field is worth one row of it.
 	p + p {
-		margin-top: 0.35em;
+		margin-top: 0;
 	}
 
-	// A blank line in the field still opens a gap where the design has one.
-	p:first-child + p {
-		margin-top: 1em;
-	}
-
+	.is-spaced,
 	.sub-label {
-		margin-top: 1.6em;
+		margin-top: 1.5em;
 	}
 }
 
 .contact__map {
 	position: relative;
+
+	@include bp.from(lg) {
+		// The artboard drops the map 69px below the top of the details column,
+		// which is what leaves room for the address card above it.
+		margin-top: 69px;
+	}
 
 	// The map band is full-bleed on the homepage but boxed here, so the shared
 	// component is constrained rather than duplicated.
@@ -104,7 +112,8 @@
 	}
 
 	.map {
-		height: clamp(260px, 30vw, 420px);
+		// 756x423 in the artboard.
+		height: clamp(260px, 22vw, 423px);
 	}
 
 	// Inside the box the floating address card does the job, so the map's own
@@ -114,23 +123,41 @@
 	}
 }
 
-// Green card overlapping the top-right corner of the map, as drawn.
+// Green card overlapping the top-right corner of the map, as drawn: 294x138,
+// sitting 69px above the map's top edge and flush with its right.
 .contact__card {
 	position: absolute;
-	top: calc(var(--sp-lg) * -1);
+	top: -69px;
 	right: 0;
 	z-index: 3;
-	max-width: 20rem;
+	width: 294px;
+	min-height: 138px;
 	padding: var(--sp-md) var(--sp-lg);
 	background-color: var(--c-green);
 	color: var(--c-on-dark);
-	font-size: var(--fs-small);
-	line-height: 1.6;
+	font-size: var(--fs-body);
+	line-height: var(--lh-body);
 	text-align: right;
 
 	@include bp.upto(md) {
 		position: static;
 		max-width: none;
 		text-align: left;
+	}
+}
+
+// The closing photograph runs under the bottom of the map, and finishes flush
+// with the bottom of the white band.
+.contact {
+	// The map is drawn over the photograph in the artboard, so this band needs
+	// a stacking context of its own to sit above the one that follows it.
+	position: relative;
+	z-index: 1;
+	padding-bottom: 0;
+}
+
+.contact + .media-band--boxed {
+	@include bp.from(lg) {
+		margin-top: -91px;
 	}
 }
