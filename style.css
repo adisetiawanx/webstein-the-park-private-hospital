@@ -1026,16 +1026,16 @@ body.nav-open {
     grid-column: 1;
   }
 }
-.home-about__figure {
+.home-about > .home-about__figure {
   margin-top: var(--sp-xl);
 }
 @media (min-width: 768px) {
-  .home-about__figure {
+  .home-about > .home-about__figure {
     margin-top: -2.4rem;
   }
 }
 @media (min-width: 1024px) {
-  .home-about__figure {
+  .home-about > .home-about__figure {
     position: relative;
     z-index: 0;
     margin-bottom: calc(var(--overhang-figure) * -1);

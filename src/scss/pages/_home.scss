@@ -147,7 +147,11 @@
 	}
 }
 
-.home-about__figure {
+// Note the `.home-about >` — the figure also carries `.container`, so
+// `.section > .container` sets z-index 1 on it and outranks a bare class
+// selector. Without matching that specificity the photograph paints over the
+// Our Values card instead of behind it.
+.home-about > .home-about__figure {
 	margin-top: var(--sp-xl);
 
 	@include bp.from(md) {
