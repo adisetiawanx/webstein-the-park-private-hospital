@@ -3,10 +3,11 @@
 //
 // A facade until the visitor scrolls near it. The facade paints the same brand
 // colours the styled Google map uses — cream base, green roads — so the swap is
-// not jarring, and Get Directions works with or without an API key.
+// not jarring.
 // -----------------------------------------------------------------------------
 
 @use "../abstracts/breakpoints" as bp;
+@use "../abstracts/mixins" as m;
 
 .map-band {
 	position: relative;
@@ -60,29 +61,8 @@
 	inset: 0;
 }
 
-.map__directions {
-	position: absolute;
-	right: var(--gutter);
-	bottom: var(--sp-md);
-	z-index: 2;
-}
-
-// The address is announced to screen readers and to Google, but the visual is
-// carried by the map itself, as in the design.
+// The address is announced to screen readers and to Google, but the artboard
+// draws nothing over the map, so it carries no visual of its own.
 .map__address {
-	position: absolute;
-	left: var(--gutter);
-	bottom: var(--sp-md);
-	z-index: 2;
-	max-width: 22rem;
-	padding: var(--sp-2xs) var(--sp-sm);
-	background-color: var(--c-green);
-	color: var(--c-on-dark);
-	font-size: var(--fs-small);
-	line-height: 1.4;
-
-	@include bp.upto(sm) {
-		position: static;
-		max-width: none;
-	}
+	@include m.visually-hidden;
 }

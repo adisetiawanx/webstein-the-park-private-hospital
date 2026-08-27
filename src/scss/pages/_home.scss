@@ -159,8 +159,13 @@
 	@include bp.from(lg) {
 		// The cream band stops 160px short of the photograph's bottom edge, so
 		// the picture crosses onto the white band beneath it.
+		//
+		// z-index 0, below the container the cards sit in: the artboard runs the
+		// photograph *behind* the Our Values card, and a positioned sibling later
+		// in the document would otherwise paint over it whatever the card's own
+		// z-index is.
 		position: relative;
-		z-index: 1;
+		z-index: 0;
 		margin-bottom: calc(var(--overhang-figure) * -1);
 	}
 }

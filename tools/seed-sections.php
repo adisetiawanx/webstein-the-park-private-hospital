@@ -189,7 +189,7 @@ $pages['for-patients-visitors/patient-rights-responsibilities'] = array(
 
 $pages['for-doctors'] = array(
 	'hero_title' => 'For Doctors',
-	'hero_image' => tpph_media( '3-for-patients-visitors-header' ),
+	'hero_image' => tpph_media( '4-for-doctors-header' ),
 	'sections'   => array(
 		array(
 			'layout'     => 'text',

@@ -8,8 +8,7 @@
  * fold on both templates that use it.
  *
  * So: render a facade, and hydrate on IntersectionObserver when the visitor
- * scrolls near it. Get Directions works whether or not the API key is present,
- * which means the section is useful before the key arrives.
+ * scrolls near it.
  *
  * @package tpph
  */
@@ -28,8 +27,6 @@ $tpph_address = sprintf(
 	$tpph_contact['state'],
 	$tpph_contact['postcode']
 );
-
-$tpph_directions = 'https://www.google.com/maps/dir/?api=1&destination=' . rawurlencode( $tpph_contact['name'] . ', ' . $tpph_address );
 
 // Present only when the key has been defined in wp-config.php.
 $tpph_has_key = defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY;
@@ -52,10 +49,11 @@ if ( $tpph_has_key ) {
 	>
 		<div class="map__facade" aria-hidden="true"></div>
 
-		<a class="btn btn--sm map__directions" href="<?php echo esc_url( $tpph_directions ); ?>" target="_blank" rel="noopener">
-			<?php esc_html_e( 'Get Directions', 'tpph' ); ?>
-		</a>
-
+		<?php
+		// The artboard draws the map bare — no button and no address panel over
+		// it. The address stays in the markup for screen readers and for Google,
+		// and the map's own marker carries it visually.
+		?>
 		<p class="map__address">
 			<span class="screen-reader-text"><?php esc_html_e( 'Hospital address:', 'tpph' ); ?></span>
 			<?php echo esc_html( $tpph_contact['name'] . ', ' . $tpph_address ); ?>

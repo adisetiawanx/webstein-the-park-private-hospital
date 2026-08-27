@@ -35,6 +35,13 @@ neutral cream placeholder instead.
   building, filed in the XD as `TPPH New.jpg`, which is not in the handover
   folder. The site uses the supplied dusk photograph instead. Ask Edge Creative
   for the original if the daytime shot is wanted.
+- **The inner page banners.** Every inner artboard shows the same daytime
+  photograph, filed in the XD as `1-894x329.jpg`, which is also not in the
+  handover folder. Each page instead uses the header photograph supplied for its
+  own section, which is what the folders imply was intended.
+- **A banner for Safety and Quality.** The handover has a `Header.jpg` for every
+  top-level section except this one. It currently borrows the For Patients &
+  Visitors photograph.
 
 Portrait, roughly 3:4, on a plain background to match the other eight.
 

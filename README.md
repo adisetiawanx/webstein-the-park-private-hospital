@@ -240,7 +240,7 @@ The key goes in `wp-config.php` and never in this repository:
 define( 'TPPH_GOOGLE_MAPS_KEY', '...' );
 ```
 
-Until it is defined the site renders a styled static facade with a working Get Directions link. Restrict the key to the site's domains before it goes live.
+Until it is defined the site renders a styled static facade in the brand colours. The artboard draws the map bare — no button and no address panel over it — so there is nothing else in that band; the address stays in the markup for screen readers and for Google. Restrict the key to the site's domains before it goes live.
 
 ---
 
