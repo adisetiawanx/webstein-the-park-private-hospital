@@ -99,6 +99,30 @@ function tpph_maps_key() {
 add_filter( 'acf/settings/google_api_key', 'tpph_maps_key' );
 
 /**
+ * Say which of the two sources is actually in use, on the settings screen.
+ *
+ * wp-config.php silently overrides the field, which is correct but invisible:
+ * a constant holding the wrong value looks exactly like a field that will not
+ * save. Saying so on the screen is the difference between a five-minute fix and
+ * an afternoon.
+ *
+ * @param array $field The message field.
+ * @return array
+ */
+function tpph_maps_key_notice( $field ) {
+	if ( defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY ) {
+		$field['message'] = sprintf(
+			'<strong>%s</strong> %s',
+			esc_html__( 'A key defined in wp-config.php is in use, so the field above is ignored.', 'tpph' ),
+			esc_html__( 'Remove the TPPH_GOOGLE_MAPS_KEY constant to use this field instead.', 'tpph' )
+		);
+	}
+
+	return $field;
+}
+add_filter( 'acf/prepare_field/key=field_tpph_map_notice', 'tpph_maps_key_notice' );
+
+/**
  * Warn on the plugins screen if SCF is missing, rather than letting the site
  * quietly render empty sections.
  */
