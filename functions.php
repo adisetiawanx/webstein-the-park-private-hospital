@@ -10,7 +10,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'TPPH_VERSION', '1.0.0' );
+define( 'TPPH_VERSION', '1.0.1' );
 define( 'TPPH_DIR', get_template_directory() );
 define( 'TPPH_URI', get_template_directory_uri() );
 
