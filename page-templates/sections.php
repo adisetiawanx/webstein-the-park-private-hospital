@@ -158,7 +158,14 @@ while ( have_posts() ) :
 					$tpph_band_class .= ' media-band--tall';
 				}
 				?>
-				<div class="<?php echo esc_attr( $tpph_band_class ); ?>">
+				<?php
+				// Which part of the photograph survives the crop. Read off the
+				// artboard per band; 50 is dead centre, which most of them are.
+				$tpph_focus = $tpph_section['focus'] ?? '';
+				$tpph_focus = ( '' === $tpph_focus || null === $tpph_focus ) ? 50 : (float) $tpph_focus;
+				$tpph_style = 50.0 === $tpph_focus ? '' : sprintf( ' style="--band-focus:%s%%"', esc_attr( rtrim( rtrim( number_format( $tpph_focus, 2, '.', '' ), '0' ), '.' ) ) );
+				?>
+				<div class="<?php echo esc_attr( $tpph_band_class ); ?>"<?php echo $tpph_style; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
 					<?php
 					tpph_image(
 						$tpph_image,

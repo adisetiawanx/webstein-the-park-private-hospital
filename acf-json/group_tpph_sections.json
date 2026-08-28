@@ -386,6 +386,35 @@
                             }
                         ]
                     ]
+                },
+                {
+                    "key": "field_tpph_section_focus",
+                    "label": "Focal point",
+                    "name": "focus",
+                    "type": "number",
+                    "instructions": "Which part of the photograph to keep when it is cropped into the band: 0 is the top edge, 50 the middle, 100 the bottom. The artboards run these strips anywhere from 50 to 79.",
+                    "required": 0,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_tpph_section_layout",
+                                "operator": "==",
+                                "value": "media"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": 50,
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "prepend": "",
+                    "append": "%",
+                    "placeholder": ""
                 }
             ]
         }
@@ -416,5 +445,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1787000001
+    "modified": 1787000002
 }

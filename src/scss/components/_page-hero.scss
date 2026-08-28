@@ -57,9 +57,10 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
-	// Weighted upward. A 3:2 photograph centre-cropped into a 251px strip lands
-	// on the ground-level signage; the artboard shows the roofline.
-	object-position: center 34%;
+	// Centred, as the XD has it. Weighting this upward put the roof in the band;
+	// the artboard shows the facade — windows, doors and the verandah — which is
+	// what a centre crop of the supplied photograph gives.
+	object-position: center;
 }
 
 .page-hero__inner {

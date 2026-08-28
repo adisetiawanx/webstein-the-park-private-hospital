@@ -21,6 +21,10 @@
 	// to; the two that differ set --band-ratio for themselves.
 	aspect-ratio: var(--band-ratio, 1945 / 357);
 	object-fit: cover;
+	// Which part of the photograph survives the crop. The XD stores an offset
+	// per image; converted to a percentage these strips run 50 to 79, and a
+	// wrong one here is the difference between a roofline and a garden bed.
+	object-position: center var(--band-focus, 50%);
 
 	@include bp.upto(lg) {
 		aspect-ratio: 12 / 5;
@@ -35,11 +39,19 @@
 // white band above and the cream below.
 .media-band--short {
 	--band-ratio: 1920 / 200;
+	--band-focus: 60%;
 }
 
-// 1933x533 — the bathroom photograph closing Patient Rights.
+// 1933x533 — the bathroom photograph closing Patient Rights. The band carries
+// its own --band-focus, set on the section in the editor.
 .media-band--tall {
 	--band-ratio: 1933 / 533;
+}
+
+// Careers closes on a 1933x334 strip, weighted below centre.
+.careers-register + .media-band {
+	--band-ratio: 1933 / 334;
+	--band-focus: 63%;
 }
 
 // Our Hospital and Contact Us both close on a photograph the artboard keeps

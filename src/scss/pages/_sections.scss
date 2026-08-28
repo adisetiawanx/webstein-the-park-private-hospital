@@ -94,6 +94,23 @@
 	height: auto;
 }
 
+// The artboard crops a single photograph to a frame of its own rather than
+// letting it keep its native shape: 746x555 beside a half-width column, and a
+// tall 497x801 beside the narrow one. There are no mobile artboards, so below
+// lg — where the picture is full width and the crop would be severe — it keeps
+// its native shape instead.
+@include bp.from(lg) {
+	.text-band--media-w-half .text-band__media--single img {
+		aspect-ratio: 746 / 555;
+		object-fit: cover;
+	}
+
+	.text-band--media-w-third .text-band__media--single img {
+		aspect-ratio: 497 / 801;
+		object-fit: cover;
+	}
+}
+
 // The artboards stack three images as one tall on the left and two on the
 // right. Below lg they become a plain two-up so nothing gets postage-stamp
 // sized on a phone.
@@ -177,6 +194,21 @@
 	img {
 		width: 100%;
 		height: auto;
+		object-fit: cover;
+	}
+}
+
+// Both columns crop their photograph to a frame of the artboard's own: 766x484
+// on the left, and a shallower 776x339 on the right, weighted low enough to
+// keep the two people in it. Native shape below lg, as above.
+@include bp.from(lg) {
+	.split-band__col--left .split-band__figure img {
+		aspect-ratio: 766 / 484;
+	}
+
+	.split-band__col--right .split-band__figure img {
+		aspect-ratio: 776 / 339;
+		object-position: center 79%;
 	}
 }
 

@@ -58,6 +58,7 @@ $pages['for-patients-visitors'] = array(
 		array(
 			'layout' => 'media',
 			'image'  => tpph_media( '3-for-patients-visitors-visitors-visitors' ),
+			'focus'  => 72,
 		),
 	),
 );
@@ -181,6 +182,7 @@ $pages['for-patients-visitors/patient-rights-responsibilities'] = array(
 		array(
 			'layout' => 'media',
 			'image'  => tpph_media( '3-for-patients-visitors-rights-and-responsibilities-image-15' ),
+			'focus'  => 77,
 		),
 	),
 );

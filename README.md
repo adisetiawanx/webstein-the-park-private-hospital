@@ -107,6 +107,45 @@ Two measurements out of the XD's own line boxes drive the vertical rhythm, and g
 
 The container is **1610px of content**, measured rather than estimated: the Home promo cards run `x=154..1765` on the 1920 artboard, the header logo starts at 154 and the Make a Payment button ends at 1766. The gutter is added *outside* that width rather than eaten out of it — subtracting it instead inset every page by 63px a side.
 
+### Image crops
+
+Every image fill in the XD carries its own crop: `scaleBehavior: cover`, plus an
+`offsetX`/`offsetY` expressed as a fraction of the *scaled* image. That converts
+to CSS as
+
+```
+s        = max(frameW / imgW, frameH / imgH) * zoom
+overflow = imgH * s - frameH
+y%       = (overflow / 2 - offsetY * imgH * s) / overflow
+```
+
+which was checked against the export by matching the Home About photograph
+back to its source: the formula says 58.1%, the pixels say 57.9%.
+
+Most of them come out dead centre, which is the CSS default. The ones that do
+not are the wide strips, where only a fifth of the photograph survives the crop
+and the difference between 50% and 77% is a roofline or a garden bed:
+
+| Band | Frame | `object-position` |
+|---|---|---|
+| Home, About photograph | 1612x322 | `center 58%` |
+| Our Hospital, ward strip | 1920x200 | `center 60%` |
+| Visitors, closing | 1945x357 | `center 72%` |
+| Patient Rights, closing | 1933x533 | `center 77%` |
+| Careers, closing | 1933x334 | `center 63%` |
+| Preparing, going home | 776x339 | `center 79%` |
+
+Full-bleed bands read theirs from `--band-focus`, which the **Focal point**
+field on the section sets, so the client can re-frame a band after swapping the
+photograph without touching CSS.
+
+The **page banners are the exception**: the XD crops those from a wide
+pre-cropped file (`1-894x329.jpg`, 2.72:1) that is not in the handover, so its
+64% does not carry over to the supplied 3:2 photographs. Rendering the
+candidates against the artboard settles it — a centre crop of the supplied
+photograph gives the facade the artboard shows; weighting it up puts the roof
+in the band, and down puts the signage in it.
+
 ### Breakpoints
 
 `480 / 768 / 1024 / 1440`. There are **no mobile or tablet artboards** in the design, so all responsive behaviour is a development decision. The notable one: the overlapping Vision/Mission/Values cards unwind to a plain stack below 768, because the offset is decorative and only produces collisions on small screens.

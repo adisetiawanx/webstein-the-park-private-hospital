@@ -61,7 +61,9 @@
 		// 362x480 in the artboard, with the name bar overlapping its foot.
 		aspect-ratio: 362 / 480;
 		object-fit: cover;
-		object-position: top center;
+		// Centred, as the XD has it. The supplied portraits are already cropped
+		// to this frame, so there is nothing to weight toward.
+		object-position: center;
 	}
 }
 
