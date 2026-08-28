@@ -9,6 +9,13 @@
  * Idempotent: existing menus are left alone.
  */
 
+/*
+ * Run through wp-cli or `wp eval-file`, never over HTTP. A migration tool that
+ * copies wp-content verbatim will put this on a public server, where without
+ * this line it is a reachable endpoint that rewrites page content.
+ */
+defined( 'ABSPATH' ) || exit;
+
 function tpph_menu_page_id( $path ) {
 	$page = get_page_by_path( $path );
 	return $page ? $page->ID : 0;

@@ -10,6 +10,13 @@
  * page that has no content yet would be inventing it.
  */
 
+/*
+ * Run through wp-cli or `wp eval-file`, never over HTTP. A migration tool that
+ * copies wp-content verbatim will put this on a public server, where without
+ * this line it is a reachable endpoint that rewrites page content.
+ */
+defined( 'ABSPATH' ) || exit;
+
 $descriptions = array(
 	'home' => 'The Park Private Hospital is a boutique private hospital in Mount Lawley, Perth, offering oral and maxillofacial, plastic, cosmetic, general and podiatric surgery, and sleep studies.',
 	'about' => 'A fully licensed and accredited Class A private hospital in the Mount Lawley Heritage Precinct, with two operating theatres, a day procedure unit and a nine bed ward.',

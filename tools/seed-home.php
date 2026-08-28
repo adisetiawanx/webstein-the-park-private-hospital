@@ -7,6 +7,13 @@
  * it is flagged for the client rather than invented around.
  */
 
+/*
+ * Run through wp-cli or `wp eval-file`, never over HTTP. A migration tool that
+ * copies wp-content verbatim will put this on a public server, where without
+ * this line it is a reachable endpoint that rewrites page content.
+ */
+defined( 'ABSPATH' ) || exit;
+
 $media = get_option( 'tpph_media_map', array() );
 
 function tpph_media( $slug ) {

@@ -114,6 +114,24 @@ missing plugin. The theme prints a notice on the plugins screen to say so.
 The Maps key is the other environment-level setting: `TPPH_GOOGLE_MAPS_KEY` in
 `wp-config.php`, or Site Settings → Map. A database import carries neither.
 
+### All-in-One WP Migration is not a release tool
+
+It copies `wp-content` verbatim, which is the right behaviour for moving a site
+and the wrong one for shipping a theme: everything in `.distignore` rides along,
+so `src/`, `package.json` and `tools/` land on the server and are reachable over
+HTTP. That has already happened once on the dev site.
+
+So use each for what it is good at:
+
+- **Database and uploads** — All-in-One WP Migration.
+- **The theme** — the rsync line below, or a zip built the same way, so the
+  development files stay behind.
+
+Every script in this directory now begins with `defined( 'ABSPATH' ) || exit;`
+so that a copy which does end up on a server is inert rather than a public
+endpoint that rewrites page content. That is a backstop, not a reason to leave
+them there.
+
 `.distignore` in the theme root lists everything that is development-only. None
 of it is loaded at runtime — `functions.php` references neither `tools/` nor
 `src/`, and the compiled `style.css` is committed — so a live server needs only

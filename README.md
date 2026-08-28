@@ -303,7 +303,7 @@ Media Library files and SCF field *values* live in the database and the uploads 
 ## Deployment checklist
 
 1. **Install and activate Secure Custom Fields.** The theme has no content without it — every field falls back to empty and the pages render as bare banners. It warns on the plugins screen if it is missing.
-2. Migrate database and uploads with All-in-One WP Migration.
+2. Migrate **database and uploads** with All-in-One WP Migration — but not the theme. It copies `wp-content` verbatim, so `src/`, `tools/` and `package.json` ride along and end up readable over HTTP. Ship the theme with the rsync line in [tools/README.md](tools/README.md), which honours `.distignore`.
 3. Set the Maps key — `define( 'TPPH_GOOGLE_MAPS_KEY', ... )` in `wp-config.php`, or Site Settings → Map — and **restrict it to the live domain**. A Maps key is readable in the page source of every site that uses one; referrer restriction is the only thing that stops it being spent elsewhere.
 4. Set far-future `Cache-Control` on `/wp-content/uploads/`, `/wp-content/themes/` and the font directory. Lighthouse flags this on the LocalWP build; it is a hosting-layer setting, not a theme one.
 5. Confirm permalinks are `/%postname%/`.

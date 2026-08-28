@@ -11,6 +11,13 @@
  * unfinished.
  */
 
+/*
+ * Run through wp-cli or `wp eval-file`, never over HTTP. A migration tool that
+ * copies wp-content verbatim will put this on a public server, where without
+ * this line it is a reachable endpoint that rewrites page content.
+ */
+defined( 'ABSPATH' ) || exit;
+
 function tpph_media( $slug ) {
 	$map = get_option( 'tpph_media_map', array() );
 	return isset( $map[ $slug ] ) ? (int) $map[ $slug ] : 0;
