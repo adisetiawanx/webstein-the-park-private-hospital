@@ -103,6 +103,31 @@ for name, bg in (('tree-ornament.webp', (247, 251, 234)),
         'assets/theme/img/' + name, format='WEBP', quality=86, method=6)
 ```
 
+## Deploying
+
+`.distignore` in the theme root lists everything that is development-only. None
+of it is loaded at runtime — `functions.php` references neither `tools/` nor
+`src/`, and the compiled `style.css` is committed — so a live server needs only
+what is left.
+
+```bash
+rsync -avz --delete --exclude-from=.distignore   ./ user@host:/path/to/wp-content/themes/the-park-private-hospital/
+```
+
+`--delete` is what removes files already on the server that should not be there.
+Run it once with `--dry-run` first and read the list: on a first deploy against
+a directory that has had development files copied into it, that list is the
+answer to "what should not be here".
+
+Two things this does **not** move, because neither lives in the theme:
+
+- **Uploads.** `wp-content/uploads/` is its own tree. The Media Library rows in
+  the database point at it, so the two travel together or not at all.
+- **Content.** Every page's copy is ACF field values in the database. The
+  scripts here rebuild it from the design source on a fresh install; they are
+  not a substitute for a database export, and running them against a live
+  database would overwrite whatever is in it.
+
 ## Notes
 
 **`prepare-images.py`** needs Pillow (`pip install Pillow`). It reads

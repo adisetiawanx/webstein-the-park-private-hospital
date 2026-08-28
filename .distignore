@@ -1,0 +1,48 @@
+# Everything here is development-only and must not reach a live server.
+#
+# Nothing in this list is loaded at runtime: functions.php references neither
+# tools/ nor src/, and the compiled style.css is committed, so the SCSS is not
+# needed to serve the site.
+#
+# Used by `rsync --exclude-from=.distignore` — see tools/README.md.
+
+.git
+.gitignore
+.gitattributes
+.distignore
+
+# Sass source. style.css is compiled from it and is committed.
+src
+package.json
+package-lock.json
+node_modules
+
+# One-off content and image scripts, plus the audit harnesses. Not loaded by
+# the theme; running them against a live database would overwrite live content.
+tools
+
+# Raw design exports staged for the Media Library, and the design source.
+.upload-staging
+assets/exported design png
+assets/images
+assets/logos
+*.xd
+*.eps
+*.psd
+
+# Internal notes. These discuss the client's outstanding items, errors found in
+# the design and how the Maps key is handled — not for a public URL, and a .md
+# in a theme directory is served as plain text.
+README.md
+HANDOVER.md
+LIGHTHOUSE.md
+
+# Editor and OS litter
+.vscode
+.idea
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+*.css.map
+.sass-cache
