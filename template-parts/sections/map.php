@@ -28,8 +28,8 @@ $tpph_address = sprintf(
 	$tpph_contact['postcode']
 );
 
-// Present only when the key has been defined in wp-config.php.
-$tpph_has_key = defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY;
+// Present only once a key has been set, in wp-config.php or Site Settings.
+$tpph_has_key = (bool) tpph_maps_key();
 
 if ( $tpph_has_key ) {
 	wp_enqueue_script( 'tpph-map' );

@@ -63,11 +63,13 @@ function tpph_enqueue_assets() {
 		true
 	);
 
-	if ( defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY ) {
+	$tpph_key = function_exists( 'tpph_maps_key' ) ? tpph_maps_key() : '';
+
+	if ( $tpph_key ) {
 		wp_localize_script(
 			'tpph-map',
 			'tpphMap',
-			array( 'key' => TPPH_GOOGLE_MAPS_KEY )
+			array( 'key' => $tpph_key )
 		);
 	}
 }

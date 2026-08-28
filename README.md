@@ -273,13 +273,20 @@ The JSON-LD graph is written in `inc/schema.php` so it survives Yoast being deac
 
 The map in the design is custom styled — cream base, green roads — which only the Maps JavaScript API can produce. That is 200KB+ of third-party script for a section below the fold on both pages that use it, so it loads behind a facade and hydrates on IntersectionObserver.
 
-The key goes in `wp-config.php` and never in this repository:
+The key never goes in this repository. It can live in either of two places, and
+`wp-config.php` wins:
 
 ```php
 define( 'TPPH_GOOGLE_MAPS_KEY', '...' );
 ```
 
-Until it is defined the site renders a styled static facade in the brand colours. The artboard draws the map bare — no button and no address panel over it — so there is nothing else in that band; the address stays in the markup for screen readers and for Google. Restrict the key to the site's domains before it goes live.
+or **Site Settings → Map → Google Maps API key**, which exists so a staging or
+development site can be set up without shell access. `tpph_maps_key()` in
+`inc/fields.php` is the single place that resolves the two, and everything else
+— the enqueue, the band's decision to hydrate, and SCF's own map field — reads
+it from there.
+
+Until one of them is set the site renders a styled static facade in the brand colours. The artboard draws the map bare — no button and no address panel over it — so there is nothing else in that band; the address stays in the markup for screen readers and for Google. Restrict the key to the site's domains before it goes live.
 
 ---
 
@@ -295,9 +302,10 @@ Media Library files and SCF field *values* live in the database and the uploads 
 
 ## Deployment checklist
 
-1. Migrate database and uploads with All-in-One WP Migration.
-2. `define( 'TPPH_GOOGLE_MAPS_KEY', ... )` in `wp-config.php`, restricted to the live domain.
-3. Set far-future `Cache-Control` on `/wp-content/uploads/`, `/wp-content/themes/` and the font directory. Lighthouse flags this on the LocalWP build; it is a hosting-layer setting, not a theme one.
-4. Confirm permalinks are `/%postname%/`.
-5. Re-run `node tools/lighthouse.mjs` against the live URL.
+1. **Install and activate Secure Custom Fields.** The theme has no content without it — every field falls back to empty and the pages render as bare banners. It warns on the plugins screen if it is missing.
+2. Migrate database and uploads with All-in-One WP Migration.
+3. Set the Maps key — `define( 'TPPH_GOOGLE_MAPS_KEY', ... )` in `wp-config.php`, or Site Settings → Map — and **restrict it to the live domain**. A Maps key is readable in the page source of every site that uses one; referrer restriction is the only thing that stops it being spent elsewhere.
+4. Set far-future `Cache-Control` on `/wp-content/uploads/`, `/wp-content/themes/` and the font directory. Lighthouse flags this on the LocalWP build; it is a hosting-layer setting, not a theme one.
+5. Confirm permalinks are `/%postname%/`.
+6. Re-run `node tools/lighthouse.mjs` against the live URL.
 6. Check the four stub pages against [HANDOVER.md](HANDOVER.md) — some may have real content by then.

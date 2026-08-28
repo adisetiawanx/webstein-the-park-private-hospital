@@ -105,6 +105,15 @@ for name, bg in (('tree-ornament.webp', (247, 251, 234)),
 
 ## Deploying
 
+**Prerequisite: Secure Custom Fields must be installed and active.** Every
+piece of copy on this site is an SCF field value, and `tpph_field()` returns an
+empty fallback when the plugin is absent — so the site renders without erroring,
+as bare banners with no content, which reads as a broken deploy rather than a
+missing plugin. The theme prints a notice on the plugins screen to say so.
+
+The Maps key is the other environment-level setting: `TPPH_GOOGLE_MAPS_KEY` in
+`wp-config.php`, or Site Settings → Map. A database import carries neither.
+
 `.distignore` in the theme root lists everything that is development-only. None
 of it is loaded at runtime — `functions.php` references neither `tools/` nor
 `src/`, and the compiled `style.css` is committed — so a live server needs only

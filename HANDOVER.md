@@ -103,10 +103,16 @@ anything.
   `TPPH_GOOGLE_MAPS_KEY` in `wp-config.php`. The map now renders live on Home
   and Contact Us in the brand palette.
 
-  Two things still to do before launch: **add the same constant to the staging
-  and production `wp-config.php`**, and **restrict the key** to the site's
-  domains in the Google Cloud console. An unrestricted key can be lifted from
-  the page source and billed to the account.
+  The key can now be set in either place: `TPPH_GOOGLE_MAPS_KEY` in
+  `wp-config.php`, which wins, or **Site Settings → Map** for an environment
+  where editing files is awkward. That is what the dev site needed — an import
+  brings the database across but never `wp-config.php`, so the map fell back to
+  its facade there.
+
+  Still to do before launch: **restrict the key** to the site's domains in the
+  Google Cloud console. A Maps key is readable in the page source of every site
+  that uses one, so referrer restriction is the only thing standing between an
+  unrestricted key and someone else's bill.
 
 ## 7. Worth flagging, low priority
 

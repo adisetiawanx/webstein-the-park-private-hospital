@@ -70,17 +70,33 @@ function tpph_register_options_page() {
 add_action( 'acf/init', 'tpph_register_options_page' );
 
 /**
- * Point the SCF Google Map field at the key stored in wp-config.php.
+ * The Google Maps API key for this environment.
  *
- * The key never enters the repository. Define TPPH_GOOGLE_MAPS_KEY in
- * wp-config.php on each environment.
+ * wp-config.php wins, so production can keep the key out of the database and
+ * out of the reach of anyone with an admin login. The Site Settings field is
+ * the fallback, so a staging or development site can be set up without shell
+ * access — which is exactly what held the map back on the first deploy.
+ *
+ * The key never enters the repository either way.
+ *
+ * @return string
  */
-function tpph_acf_google_maps_key() {
+function tpph_maps_key() {
 	if ( defined( 'TPPH_GOOGLE_MAPS_KEY' ) && TPPH_GOOGLE_MAPS_KEY ) {
-		acf_update_setting( 'google_api_key', TPPH_GOOGLE_MAPS_KEY );
+		return (string) TPPH_GOOGLE_MAPS_KEY;
 	}
+
+	return (string) tpph_field( 'google_maps_key', 'option', '' );
 }
-add_action( 'acf/init', 'tpph_acf_google_maps_key' );
+
+/**
+ * Point the SCF Google Map field at the same key.
+ *
+ * A filter rather than acf_update_setting() on acf/init: the key may now come
+ * from an option, and the options page is registered on that same hook. The
+ * filter is read when SCF actually needs the key, by which time it is there.
+ */
+add_filter( 'acf/settings/google_api_key', 'tpph_maps_key' );
 
 /**
  * Warn on the plugins screen if SCF is missing, rather than letting the site
