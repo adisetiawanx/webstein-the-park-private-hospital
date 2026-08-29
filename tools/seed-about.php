@@ -34,7 +34,7 @@ $fields = array(
 	'hero_image'   => tpph_media( '2-about-our-hospital' ),
 	'hero_eyebrow' => 'About Us',
 	'hero_title'   => 'Our Hospital',
-	'hero_intro'   => "Located within the Mount Lawley Heritage Precinct, The Park Private Hospital brings together modern facilities, attentive staff and a calm, restorative atmosphere. From private rooms and fresh meals to coordinated admission and care processes, our purpose built hospital is designed to offer a boutique environment where patients feel supported, respected and well informed.\n\nOur team of experienced nurses, administrative and patient services staff, and credentialed practitioners share a commitment to personalised care, guided by our Vision, Mission and Values. Whether attending for a day procedure or an overnight stay, we aim to provide safe, well organised care that is centred around individual needs.",
+	'hero_intro'   => "Located within the Mount Lawley Heritage Precinct, The Park Private Hospital brings together modern facilities, attentive staff and a calm, restorative atmosphere. From private rooms and fresh meals to coordinated admission and care processes, our purpose built hospital is designed to offer a boutique environment where patients feel supported, respected and well informed.\n\nOur team of experienced nurses, administrative and patient services staff, and credentialed practitioners share a commitment to personalised care, guided by our Vision, Mission and Values. Whether attending for a day procedure or an overnight stay, we aim to provide safe, well organised care that is centred around individual well being.",
 
 	'services_image'   => tpph_media( '2-about-our-services' ),
 	'services_heading' => 'Our Services',

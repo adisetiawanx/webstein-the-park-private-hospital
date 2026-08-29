@@ -93,7 +93,7 @@ $fields = array(
 		),
 		array(
 			'title' => 'Become an Accredited Practitioner',
-			'text'  => 'The Executive Team is currently accepting applications for credentialing from healthcare professionals seeking admitting rights to The Park Private Hospital and Walcott Street Surgical Centre. We offer a supportive, well coordinated environment designed to complement',
+			'text'  => 'The Executive Team is currently accepting applications for credentialing from healthcare professionals seeking admitting rights to The Park Private Hospital and Walcott Street Surgical Centre. We offer a supportive, well coordinated environment designed to complement your clinical practice.',
 			'link'  => array( 'title' => 'Learn More', 'url' => home_url( '/for-doctors/' ), 'target' => '' ),
 		),
 		array(

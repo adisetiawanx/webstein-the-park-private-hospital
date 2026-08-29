@@ -9,6 +9,24 @@ one, never as a broken page.
 
 ---
 
+## 0. Corrected since the first review
+
+Three lines were transcribed from the PNG exports rather than the XD text
+layers, and the exports were clipping or altering them:
+
+| Where | Was | Now |
+|---|---|---|
+| **Home → Become an Accredited Practitioner** | ended at "designed to complement" | "…designed to complement your clinical practice." |
+| **About → Our Hospital** intro | "centred around individual needs" | "centred around individual well being" |
+| **Preparing for your Admission** | "arrive at the scheduled admission time" | "arrive by the scheduled admission time" |
+| **For Patients & Visitors** | "nearby cafes, all within" | "nearby cafés – all within" |
+
+The first was spotted by Mika: the artboard's text frame is a fixed height, so
+the last line of that card is clipped in the export while the XD text layer
+holds the full sentence. The other three came out of re-checking every block of
+copy on the site against the XD's own text, which is the only reliable source
+for wording.
+
 ## 1. Copy that is lorem ipsum in the design
 
 The artboards themselves carry placeholder text in these five places. We have
@@ -82,9 +100,10 @@ anything.
 - **About → Vision, Mission and Values → Principles**, third bullet reads
   "A commitment to being a financially **health** business." Presumably
   "healthy".
-- **Home → Become an Accredited Practitioner** card ends mid-sentence:
-  "…a supportive, well coordinated environment designed to complement". The
-  artboard stops there.
+- **Post Operative Care** opens "Please follow any specific instructions
+  **provide** to you by your surgeon". The artboard reads that way; we have set
+  it as "provided", which is the one place we corrected the design's grammar
+  rather than reproducing it. Say the word if you would rather it matched.
 - **About → Our Hospital**, the `ABOUT US` eyebrow is drawn in a lime
   `#8aba31` that appears nowhere else in the design and measures 2.0:1 against
   the cream behind it — well under the 4.5:1 accessibility minimum. It is built
