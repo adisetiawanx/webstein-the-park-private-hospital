@@ -11,21 +11,29 @@ one, never as a broken page.
 
 ## 0. Corrected since the first review
 
-Three lines were transcribed from the PNG exports rather than the XD text
-layers, and the exports were clipping or altering them:
+One line was changed, on Mika's note:
 
 | Where | Was | Now |
 |---|---|---|
 | **Home → Become an Accredited Practitioner** | ended at "designed to complement" | "…designed to complement your clinical practice." |
+
+The artboard's text frame is a fixed height, so the last line of that card is
+clipped in the PNG export while the XD text layer holds the full sentence. The
+copy had been transcribed from the export, so it inherited the clip.
+
+### Known wording differences, left as they are
+
+Re-checking every block of copy against the XD's own text turned up three more
+places where the site does not match the XD. They are **deliberately not
+changed** — the client's review covered only the card above, so these stay as
+built. Recorded here so nobody "fixes" them by accident, and so they are easy to
+apply if the client ever asks.
+
+| Where | On the site | In the XD |
+|---|---|---|
 | **About → Our Hospital** intro | "centred around individual needs" | "centred around individual well being" |
 | **Preparing for your Admission** | "arrive at the scheduled admission time" | "arrive by the scheduled admission time" |
 | **For Patients & Visitors** | "nearby cafes, all within" | "nearby cafés – all within" |
-
-The first was spotted by Mika: the artboard's text frame is a fixed height, so
-the last line of that card is clipped in the export while the XD text layer
-holds the full sentence. The other three came out of re-checking every block of
-copy on the site against the XD's own text, which is the only reliable source
-for wording.
 
 ## 1. Copy that is lorem ipsum in the design
 

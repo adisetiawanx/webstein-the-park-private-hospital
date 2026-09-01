@@ -2,9 +2,10 @@
 /**
  * Populate the home page from artboard `1. Home`.
  *
- * Copy is transcribed from the XD exactly, including the promo card that ends
- * mid-sentence ("designed to complement"). That truncation is in the design;
- * it is flagged for the client rather than invented around.
+ * Copy is transcribed from the XD exactly. The one deliberate departure is the
+ * "Become an Accredited Practitioner" promo card: the XD text layer stops
+ * mid-sentence at "designed to complement". The client supplied the ending
+ * ("your clinical practice."), so the card is completed rather than truncated.
  */
 
 /*
