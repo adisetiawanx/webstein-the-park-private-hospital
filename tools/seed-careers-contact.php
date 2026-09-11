@@ -1,10 +1,11 @@
 <?php
 /**
- * Populate Careers and Contact Us, and create the three placeholder vacancies
- * drawn in the artboard.
+ * Populate Careers and Contact Us, and create the vacancies.
  *
- * The Careers intro and all three vacancies are lorem ipsum and dummy titles in
- * the design. Reproduced as such.
+ * The Careers intro and the three vacancy cards were lorem ipsum in the design.
+ * The client supplied the real intro and three roles on 10 September 2026, so
+ * both are real copy now. The roles are advertised on Seek rather than filled
+ * in here, which is why they carry a link and no description.
  */
 
 /*
@@ -19,8 +20,6 @@ function tpph_media( $slug ) {
 	return isset( $map[ $slug ] ) ? (int) $map[ $slug ] : 0;
 }
 
-const TPPH_LOREM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.';
-
 /* ------------------------------------------------------------------ Careers */
 
 $careers = get_page_by_path( 'careers' );
@@ -32,7 +31,11 @@ if ( $careers ) {
 	update_field( 'hero_image', tpph_media( '5-careers-header' ), $careers->ID );
 
 	update_field( 'intro_heading', 'Join our team', $careers->ID );
-	update_field( 'intro_text', TPPH_LOREM . ' ' . TPPH_LOREM . "\n" . TPPH_LOREM, $careers->ID );
+	update_field(
+		'intro_text',
+		"At The Park Private Hospital, we believe outstanding patient care begins with outstanding people. Guided by our values of Authenticity, Respect, Excellence, Compassion, Hospitality and Sustainability, we are proud to foster a supportive and professional workplace where every team member contributes to the exceptional care we provide.\nWe are always interested in hearing from passionate healthcare professionals and support staff who share our commitment to delivering safe, personalised care in a welcoming boutique hospital environment.",
+		$careers->ID
+	);
 	update_field(
 		'intro_images',
 		array(
@@ -57,13 +60,43 @@ if ( $careers ) {
 
 /* --------------------------------------------------------------- Vacancies */
 
-$vacancies = array( 'Job One', 'Job Two', 'Job Three' );
+/*
+ * Titles are the ones Seek advertises, not the shorthand in the client's email,
+ * so the heading a candidate reads here matches the page they land on. No
+ * summary or detail lines came with them: the card degrades to title plus
+ * button, which is why those fields are cleared rather than left behind.
+ *
+ * CSSD is a draft. The client sent it knowing it had lapsed ("this isn't
+ * current, but can be used also"), and a live card whose Apply button lands on
+ * an expired Seek listing is worse than no card. Publishing it is one click
+ * when the role reopens.
+ */
+$vacancies = array(
+	array(
+		'title'  => 'Registered Nurse Night Duty',
+		'url'    => 'https://au.seek.com/job/94013790',
+		'type'   => 'PART_TIME',
+		'status' => 'publish',
+	),
+	array(
+		'title'  => 'Registered Nurse',
+		'url'    => 'https://au.seek.com/job/93832320',
+		'type'   => 'PART_TIME',
+		'status' => 'publish',
+	),
+	array(
+		'title'  => 'CSSD Permanent Part Time',
+		'url'    => 'https://au.seek.com/expiredjob/91528416',
+		'type'   => 'PART_TIME',
+		'status' => 'draft',
+	),
+);
 
-foreach ( $vacancies as $order => $title ) {
+foreach ( $vacancies as $order => $vacancy ) {
 	$existing = get_posts(
 		array(
 			'post_type'      => 'vacancy',
-			'title'          => $title,
+			'title'          => $vacancy['title'],
 			'posts_per_page' => 1,
 			'post_status'    => 'any',
 			'fields'         => 'ids',
@@ -75,32 +108,46 @@ foreach ( $vacancies as $order => $title ) {
 		: wp_insert_post(
 			array(
 				'post_type'   => 'vacancy',
-				'post_title'  => $title,
-				'post_status' => 'publish',
+				'post_title'  => $vacancy['title'],
+				'post_status' => $vacancy['status'],
 			)
 		);
 
 	wp_update_post(
 		array(
-			'ID'         => $id,
-			'menu_order' => $order + 1,
+			'ID'          => $id,
+			'menu_order'  => $order + 1,
+			'post_status' => $vacancy['status'],
 		)
 	);
 
-	update_field( 'summary', 'Short job description', $id );
-	update_field(
-		'points',
-		array(
-			array( 'text' => 'role entails' ),
-			array( 'text' => 'experience needed' ),
-			array( 'text' => 'hours per week' ),
-			array( 'text' => 'starting rate' ),
-		),
-		$id
-	);
-	update_field( 'employment_type', 'FULL_TIME', $id );
+	update_field( 'summary', '', $id );
+	update_field( 'points', array(), $id );
+	update_field( 'apply_url', $vacancy['url'], $id );
+	update_field( 'employment_type', $vacancy['type'], $id );
 
-	echo 'vacancy ' . ( $existing ? 'updated' : 'created' ) . ": {$title}\n";
+	echo 'vacancy ' . ( $existing ? 'updated' : 'created' ) . ": {$vacancy['title']} ({$vacancy['status']})\n";
+}
+
+/*
+ * Retire the artboard placeholders. Scoped to the three titles the seed itself
+ * created, so a vacancy the client adds by hand is never touched.
+ */
+foreach ( array( 'Job One', 'Job Two', 'Job Three' ) as $placeholder ) {
+	foreach (
+		get_posts(
+			array(
+				'post_type'      => 'vacancy',
+				'title'          => $placeholder,
+				'posts_per_page' => -1,
+				'post_status'    => 'any',
+				'fields'         => 'ids',
+			)
+		) as $stale
+	) {
+		wp_delete_post( $stale, true );
+		echo "vacancy removed: {$placeholder}\n";
+	}
 }
 
 /* --------------------------------------------------------------- Contact Us */

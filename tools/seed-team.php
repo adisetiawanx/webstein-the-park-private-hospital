@@ -4,10 +4,14 @@
  *
  * Four executives as a page repeater, eight doctors as posts.
  *
- * Four doctors have no qualifications line in the design — the artboard shows
- * magenta placeholder text where it should be — and two executives have no
- * photograph. Both gaps are left empty here and go on the client list. Guessing
- * at a surgeon's post-nominals is not something to do quietly.
+ * The artboard showed magenta placeholder text where four doctors' post-nominals
+ * belong. The client supplied them on 10 September 2026 and they are filled in
+ * below, reproduced exactly as the email wrote them. The punctuation across
+ * this list is inconsistent because the sources are; that is the client's to
+ * settle, not ours.
+ *
+ * Two executives still have no photograph, and those gaps stay on the client
+ * list.
  */
 
 /*
@@ -94,7 +98,7 @@ $doctors = array(
 	array(
 		'name'      => 'Dr Eric Tai',
 		'role'      => 'Specialist Anaesthetist',
-		'quals'     => '', // Missing in the design.
+		'quals'     => 'MBBS (UWA) FANZCA',
 		'specialty' => 'Anaesthetists',
 		'photo'     => '6-about-us-doctors-dr-eric-tai',
 		'bio'       => "Dr Eric Tai is a Specialist Anaesthetist who has been practising at The Park Private Hospital since its establishment over 12 years ago. Working regularly with multiple Maxillofacial Surgeons he has extensive experience providing anaesthesia for both major and minor maxillofacial surgery.\n\nDr Tai completed his medical and specialist anaesthesia training in Western Australia, working across Sir Charles Gairdner Hospital, Royal Perth Hospital, Perth Children's Hospital (formerly Princess Margaret Hospital), and Fremantle Hospital.\n\nHe also holds a public appointment as a Consultant Anaesthetist at Sir Charles Gairdner Hospital, where he continues to practise in a tertiary hospital environment managing a broad and complex case mix.",
@@ -110,7 +114,7 @@ $doctors = array(
 	array(
 		'name'      => 'Dr Nathan Vujcich',
 		'role'      => 'Oral and Maxillofacial Surgeon',
-		'quals'     => '', // Missing in the design.
+		'quals'     => 'MBBS FRACDS OMS',
 		'specialty' => 'Oral and Maxillofacial Surgeons',
 		'photo'     => '6-about-us-doctors-dr-nathan-vujcich',
 		'bio'       => "Dr Vujcich is an oral and maxillofacial surgeon who received his medical and dental degrees (both with Honours) from the University of Western Australia, before completing his advanced surgical training in Perth and Melbourne. He is currently a consultant at Royal Perth Hospital and Perth Children's Hospital, in addition to his private practice.\n\nDr Vujcich is heavily involved in training of the states Oral & Maxillofacial Surgery registrars, and examines for the national college. In addition to this, he is currently (2025-2027) the National president of ANZAOMS, the nations association for Oral & Maxillofacial Surgeons.\n\nHe has worked at The Park Private Hospital since its renovation and reopening over 10 years ago.",
@@ -118,7 +122,11 @@ $doctors = array(
 	array(
 		'name'      => 'DR ROB CHOA',
 		'role'      => 'Specialist Plastic Surgeon',
-		'quals'     => '', // Missing in the design.
+		// Reproduced exactly as the client sent it. "MCChB" is almost certainly
+		// a typo for MBChB, and his bio below also credits him FRCSEd(Plast),
+		// which this line omits. Both queried rather than corrected: a
+		// surgeon's qualifications are not ours to rewrite on a guess.
+		'quals'     => 'MCChB FRACS',
 		'specialty' => 'Plastic Surgeons',
 		'photo'     => '6-about-us-doctors-dr-rob-choa-jpg',
 		'bio'       => "Dr Rob Choa (MED0002049063) is Specialist Plastic Surgeon both in Australia (FRACS) and the UK (FRCSEd Plast), who has been working in Perth since 2016. He has gained significant exposure to all aspects of aesthetic plastic surgery and is a trusted name in breast, body and facial procedures.\n\nHe is accredited to undertake plastic surgery operations, both medical and cosmetic, at The Park Private Hospital.\n\nDr Choa attended Liverpool Medical School in the UK, graduating with honours in 2005. During his time at medical school, he undertook an additional degree in Anatomy, obtaining first class honours. Throughout his training he has worked at a number of prestigious hospitals, including the Queen Elizabeth Hospital Birmingham, Chelsea and Westminster Hospital in London and the Nuffield Orthopaedic Centre in Oxford.",
@@ -126,7 +134,7 @@ $doctors = array(
 	array(
 		'name'      => 'Dr Joseph Luo',
 		'role'      => 'Specialist Plastic Surgeon',
-		'quals'     => '', // Missing in the design.
+		'quals'     => 'MBBS FRACS',
 		'specialty' => 'Plastic Surgeons',
 		'photo'     => '6-about-us-doctors-dr-joseph-luo',
 		'bio'       => "Dr Joseph Luo (AHPRA MED0001673981) is a specialist plastic and reconstructive surgeon, having completed his medical degree at the University of Western Australia and advanced surgical training at leading plastic surgery centres in Perth and Sydney. He is a Fellow of the Royal Australasian College of Surgeons (RACS), recognised for his expertise and commitment to excellence in the field.\n\nDriven by a strong sense of global service, Dr Luo spent a year volunteering as a plastic surgeon in rural Africa, providing care for patients with complex craniofacial, body and limb conditions. He was awarded the College of Surgeons of East, Central and Southern Africa (COSECSA) by examination and received the prestigious Jimmy James Prize as the top candidate in Plastic Surgery.\n\nDr Luo went on to complete a one-year fellowship in craniomaxillofacial surgery at the internationally acclaimed Chang Gung Memorial Hospital in Taipei. During this time he was awarded the Chang Gung scholarship, then subsequently awarded a PFET (Post Fellowship Education and Training) subspecialty qualification in Craniomaxillofacial surgery. He has also pursued further training in Taiwan, Korea, Malaysia and Singapore, learning advanced techniques from masters in aesthetic surgery.",
