@@ -203,16 +203,31 @@ function tpph_schema_jobs() {
 			$description .= ' ' . implode( '. ', wp_list_pluck( $points, 'text' ) ) . '.';
 		}
 
+		$description = trim( $description );
+
+		/*
+		 * description is required. A role the client has only given us a title
+		 * and a job-board link for has none, and emitting the node anyway would
+		 * put invalid markup on the page for no gain. Skip it: the card still
+		 * renders, it just does not claim to be a Google Jobs posting.
+		 */
+		if ( '' === $description ) {
+			continue;
+		}
+
 		$closes = tpph_field( 'closes', $vacancy->ID );
+		$apply  = tpph_field( 'apply_url', $vacancy->ID, '' );
 
 		$node = array(
 			'@type'              => 'JobPosting',
 			'@id'                => get_permalink() . '#vacancy-' . $vacancy->post_name,
 			'title'              => get_the_title( $vacancy ),
-			'description'        => trim( $description ),
+			'description'        => $description,
 			'datePosted'         => get_the_date( 'Y-m-d', $vacancy ),
 			'employmentType'     => tpph_field( 'employment_type', $vacancy->ID, 'FULL_TIME' ),
-			'directApply'        => true,
+			// False once the application happens on a job board: the seeker has
+			// to sign in there, which is exactly what directApply denies.
+			'directApply'        => ! $apply,
 			'hiringOrganization' => array( '@id' => home_url( '/#organization' ) ),
 			'jobLocation'        => array(
 				'@type'   => 'Place',

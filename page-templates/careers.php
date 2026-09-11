@@ -66,6 +66,7 @@ while ( have_posts() ) :
 						foreach ( $tpph_vacancies as $tpph_vacancy ) :
 							$tpph_points = tpph_field( 'points', $tpph_vacancy->ID, array() );
 							$tpph_email  = tpph_field( 'apply_email', $tpph_vacancy->ID, $tpph_contact['careers'] );
+							$tpph_apply  = tpph_field( 'apply_url', $tpph_vacancy->ID, '' );
 							?>
 							<li class="vacancy-card">
 								<h3 class="vacancy-card__title"><?php echo esc_html( get_the_title( $tpph_vacancy ) ); ?></h3>
@@ -83,19 +84,32 @@ while ( have_posts() ) :
 								<?php endif; ?>
 
 								<?php
-								// mailto rather than a form: the design has no form anywhere, and
-								// the artboard names this address directly.
+								/*
+								 * Two ways to apply. When the role is advertised on a job board the
+								 * client gives us that link and it wins, because that is where they
+								 * actually collect applications. Otherwise fall back to email: the
+								 * design has no form anywhere, and the artboard names the address
+								 * directly.
+								 */
 								$tpph_subject = sprintf(
 									/* translators: %s: job title. */
 									__( 'Application: %s', 'tpph' ),
 									get_the_title( $tpph_vacancy )
 								);
+
+								$tpph_href = $tpph_apply
+									? $tpph_apply
+									: 'mailto:' . $tpph_email . '?subject=' . rawurlencode( $tpph_subject );
 								?>
 								<a
 									class="btn btn--ghost vacancy-card__cta"
-									href="mailto:<?php echo esc_attr( $tpph_email ); ?>?subject=<?php echo rawurlencode( $tpph_subject ); ?>"
+									href="<?php echo esc_url( $tpph_href ); ?>"
+									<?php echo $tpph_apply ? ' target="_blank" rel="noopener"' : ''; ?>
 								>
 									<?php esc_html_e( 'Apply Now', 'tpph' ); ?>
+									<?php if ( $tpph_apply ) : ?>
+										<span class="screen-reader-text"><?php esc_html_e( '(opens in a new tab)', 'tpph' ); ?></span>
+									<?php endif; ?>
 								</a>
 							</li>
 						<?php endforeach; ?>

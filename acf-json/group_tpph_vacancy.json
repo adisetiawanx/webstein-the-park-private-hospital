@@ -30,11 +30,19 @@
 			]
 		},
 		{
+			"key": "field_tpph_vacancy_apply_url",
+			"label": "Apply at",
+			"name": "apply_url",
+			"type": "url",
+			"instructions": "Link to the listing on Seek or another job board. When set, Apply Now opens this in a new tab and the email below is ignored.",
+			"required": 0
+		},
+		{
 			"key": "field_tpph_vacancy_apply_email",
 			"label": "Apply to",
 			"name": "apply_email",
 			"type": "email",
-			"instructions": "Leave empty to use careers@tpph.com.au.",
+			"instructions": "Used only when there is no link above. Leave empty for careers@tpph.com.au.",
 			"required": 0,
 			"wrapper": { "width": "50" }
 		},
