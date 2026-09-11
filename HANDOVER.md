@@ -37,17 +37,19 @@ apply if the client ever asks.
 
 ## 1. Copy that is lorem ipsum in the design
 
-The artboards themselves carry placeholder text in these five places. We have
-reproduced it exactly rather than writing our own, because inventing plausible
-copy about a hospital's accreditation or credentialing would be worse than
-leaving it obviously unfinished.
+The artboards carry placeholder text in these three places. We reproduce it
+exactly rather than writing our own, because inventing plausible copy about a
+hospital's accreditation or credentialing would be worse than leaving it
+obviously unfinished.
+
+The two Careers entries that used to sit in this table — the intro paragraphs
+and the three vacancies — were supplied by the client on 10 September 2026 and
+are live.
 
 | Where | What is needed |
 |---|---|
 | **For Doctors → Credentialing** | The whole page. Two body sections plus the "Evaluation of credentialing applications" sub-section |
 | **Safety and Quality → Accreditation and Licensing** | The whole page. Two body sections plus one sub-section |
-| **Careers → Join our team** | Two intro paragraphs |
-| **Careers → Current Vacancies** | Three real vacancies. Currently "Job One / Job Two / Job Three" with "Short job description" and four dummy lines, exactly as drawn |
 | **About → Our Team → Executive Team** | Four biographies — A/Prof Dieter Gebauer, Brendon Garton, Helen Robinson, Jan Morskate. Shown when a card is hovered |
 
 ## 2. Missing photographs
@@ -71,16 +73,27 @@ neutral cream placeholder instead.
 
 Portrait, roughly 3:4, on a plain background to match the other eight.
 
-## 3. Missing qualifications
+## 3. Qualifications — supplied, with three queries
 
-The artboard shows magenta placeholder text where the post-nominals should be
-for four doctors. These are left blank rather than guessed — inventing a
-surgeon's qualifications is not something to do quietly.
+The artboard showed magenta placeholder text where four doctors' post-nominals
+belong. The client sent them on 10 September 2026 and they are now on the site,
+reproduced exactly as written rather than tidied, because a surgeon's
+qualifications are not ours to rewrite on a guess.
 
-- **Dr Eric Tai** — Specialist Anaesthetist
-- **Dr Nathan Vujcich** — Oral and Maxillofacial Surgeon
-- **Dr Rob Choa** — Specialist Plastic Surgeon
-- **Dr Joseph Luo** — Specialist Plastic Surgeon
+| Doctor | On the site now |
+|---|---|
+| Dr Eric Tai | MBBS (UWA) FANZCA |
+| Dr Nathan Vujcich | MBBS FRACDS OMS |
+| Dr Rob Choa | MCChB FRACS |
+| Dr Joseph Luo | MBBS FRACS |
+
+Three things to put back to the client before this page goes live:
+
+1. **"MCChB" is almost certainly a typo for MBChB.** Published as sent.
+2. **Dr Choa's line omits FRCSEd(Plast)**, which his own biography on the same
+   page credits him with. Either the line or the biography is incomplete.
+3. **The email calls him Dr Robert Choa; the design and his biography say Rob.**
+   The card still reads DR ROB CHOA, in capitals, the way the artboard draws it.
 
 ## 4. Pages the design links to but never designs
 
